@@ -1,0 +1,11 @@
+recorro el archivo tomando los circulos hasta EOF
+
+compruebo interseccion con linea
+
+si intersecta con linea: almaceno en array
+si no intersecta: sigo con la siguiente linea
+
+ordeno array por radio descendente
+
+
+recorro hasta fin de linea
