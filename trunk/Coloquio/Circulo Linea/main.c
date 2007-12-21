@@ -30,6 +30,8 @@ int main(int argc, char** argv) {
 		colisiona = analize(fileManager,circle, pFrom, pTo);
 		if (colisiona==TRUE)
 			addCircle(circle);
+		free(circle->name);
+		free(circle);
 	}
 	
 	free(pFrom);
