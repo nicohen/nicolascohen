@@ -21,5 +21,11 @@
 	define('MENU_SERVICIOS', 'servicios');
 	define('MENU_INFO', 'info');
 	define('MNU_HOME', '');
+	
+	//Defino las constantes para la base de datos
+	define('DB_SERVER','localhost');
+	define('DB_USER','root');
+	define('DB_PASS','');
+	define('DB_NAME','cti');
 
 ?>
