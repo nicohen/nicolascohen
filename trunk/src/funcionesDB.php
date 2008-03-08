@@ -13,4 +13,14 @@ Function doSelect($query){
 	return mysql_query($query,getConnection());// or die ("Problemas en select".mysql_error());
 }
 
+Function doInsert($query){
+	mysql_query($query,getConnection());
+}
+
+Function doInsertAndGetLast($query){
+	$conn = getConnection();
+	mysql_query($query,$conn);
+	return mysql_insert_id($conn);
+}
+
 ?>
