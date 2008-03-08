@@ -27,5 +27,8 @@
 	define('DB_USER','root');
 	define('DB_PASS','');
 	define('DB_NAME','cti');
+	
+	//Defino constantes para encuesta
+	define('SAVE_ENC','save_encuesta');
 
 ?>
