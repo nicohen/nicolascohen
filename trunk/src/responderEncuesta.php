@@ -37,6 +37,8 @@ Título: <?php echo $title ?><br>
 		echo "<br>";	
 	}
 ?>
+<input type="hidden" name="cantPregs" id="cantPregs" value="<?php echo ($j-1) ?>">
+<input type="submit" value="Terminar">
 </form>
 </body>
 </html>

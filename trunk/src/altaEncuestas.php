@@ -69,7 +69,7 @@ function addRow(){
 Bienvenido al administrador de encuastas. <br>
 <form name="frmAlta" action="/cti/src/encuestas.php" method="post">
 <input type="hidden" name="act" id="act" value="<?php echo SAVE_ENC ?>">
-<input type="hidden" name="cantidad" id="cantidad" value="0";
+<input type="hidden" name="cantidad" id="cantidad" value="0">
 Título: <input type="text" id="titulo" name="titulo"><br>
 <table width="100%"  border="0" id="tblGral" cellspacing="0" cellpadding="0">
   <tr>
