@@ -31,5 +31,6 @@
 	//Defino constantes para encuesta
 	define('SAVE_ENC','save_encuesta');
 	define('DELETE_ENC','delete_encuesta');
+	define('SAVE_RTA','save_rta');
 
 ?>
