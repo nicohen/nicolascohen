@@ -19,7 +19,7 @@ Function doInsert($query){
 
 Function doInsertAndGetLast($query){
 	$conn = getConnection();
-	mysql_query($query,$conn);
+	mysql_query($query,$conn) or die ("Error en insert".mysql_error());
 	return mysql_insert_id($conn);
 }
 

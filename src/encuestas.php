@@ -42,7 +42,14 @@ a:visited {
 a:hover {
 
 }
+.tabla{
+	border-left-color:#000000;
+	border-right-color:#000000;
+	border-top-color:#000000;
+	border-bottom-color:#000000;
+/*	border-style:outset;*/
 
+}
 -->
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
@@ -66,10 +73,13 @@ if ( $act == SAVE_ENC){
 	doInsert($query);
 }
 ?>
-<table border="0" bordercolor="#FF9900" cellpadding="0" cellspacing="0" width="550">
+<table class="tabla" cellpadding="0" cellspacing="0" width="550">
 <tr bgcolor="#FF9900">
 	<td width="350">&nbsp;<span class="style1"> Título </span></td>
 	<td width="200" align="center"><span class="style1">  Acciones </span></td>
+</tr>
+<tr height="1" bgcolor="#000000">
+	<td colspan="2"></td>
 </tr>
 <?php 
 	$query = "select enc_id,titulo from encuestas where status = 'A'";
