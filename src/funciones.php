@@ -58,7 +58,7 @@ Function do_content($lang,$lbl) {
 
 //Footer comun de la pagina
 Function do_footer($lang) {
-	$hand=fopen(TEXT.$lang."_footer.txt",READ) or die("Problemas en la creacion");
+	$hand=fopen("text/footer.txt",READ) or die("Problemas en la creacion");
 	leer_archivo($hand);
 	cerrar_archivo($hand);
 }
@@ -89,6 +89,14 @@ Function leer_directorio() {
 		}
 	}
 	closedir($dir);
+}
+
+Function addCookie($name, $value) {
+	setcookie($name,$value,date(), "cookies");
+}
+
+Function check_login($usr, $pwd) {
+	$query = "select 1 from usuarios where nickname=".$usr." and pwd=".$pwd."";
 }
 
 ?>

@@ -23,4 +23,8 @@ Function doInsertAndGetLast($query){
 	return mysql_insert_id($conn);
 }
 
+Function closeConnection() {
+	mysql_close($db);
+}
+
 ?>
