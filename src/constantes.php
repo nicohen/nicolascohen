@@ -32,5 +32,8 @@
 	define('SAVE_ENC','save_encuesta');
 	define('DELETE_ENC','delete_encuesta');
 	define('SAVE_RTA','save_rta');
+	
+	//Defino un año de vida para la cookie en el cliente
+	define('COOKIE_TIME',time()+60*60*24*365);
 
 ?>
