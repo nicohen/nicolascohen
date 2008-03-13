@@ -7,7 +7,11 @@ require("funcionesDB.php");
 do_header("Administrador de Claro");
 
 if ($_REQUEST['login']==true) {
-	check_login($_REQUEST['usr'], $_REQUEST['pwd']);
+	$login = check_login($_REQUEST['usr'], $_REQUEST['pwd']);
+	if ($login) {
+		echo "usuario logueado ok";
+	} else
+		echo "usuario logueado mal";
 }
 
 ?>
@@ -21,6 +25,10 @@ if ($_REQUEST['login']==true) {
 .contenido {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #0904A6; }
 -->
 </style>
+<?php
+		if (isset($_COOKIE['usuario']))
+			echo "nombre de usuario: ".$_COOKIE[usuario];
+?>
 	<table align="center" border="0" width="768" cellpadding="0" cellspacing="10">
 		<tr>
 			<td valign="top">

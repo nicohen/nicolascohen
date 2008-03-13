@@ -96,7 +96,12 @@ Function addCookie($name, $value) {
 }
 
 Function check_login($usr, $pwd) {
-	$query = "select 1 from usuarios where nickname=".$usr." and pwd=".$pwd."";
+	$query = "select name, last_name, super, status, ins_dt from usuarios where nickname='".$usr."' and pwd='".$pwd."'";
+	$result = doSelect($query) or die("Error en select ".mysql_error());
+	if ($res = mysql_fetch_array($result)) {
+		//setcookie("usuario", $res['name'], time()+60*60*24*365,"/");
+		return true;
+	} else
+		return false;
 }
-
 ?>
