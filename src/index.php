@@ -7,6 +7,7 @@ ob_start();
 //Arma el encabezado de la pagina
 do_header("Administrador de Claro");
 
+$label = $_REQUEST['lbl'];
 if ($_REQUEST['login']==true) {
 	$login = check_login($_REQUEST['usr'], $_REQUEST['pwd']);
 	if ($login) {
@@ -14,6 +15,8 @@ if ($_REQUEST['login']==true) {
 	} else {
 		echo "usuario ya logueado o inexistente<br>";
 	}
+} else {
+	$login = $_COOKIE['user_ids'] != NULL;
 }
 
 ?>
@@ -35,7 +38,6 @@ if (isset($_COOKIE['user_ids']))
 
 //setcookie("user_ids", "", time()-1000,"/");
 ?>
-
 
 	<table align="center" border="0" width="768" cellpadding="0" cellspacing="10">
 		<tr>
@@ -69,7 +71,8 @@ if (isset($_COOKIE['user_ids']))
 									<?php if ($_COOKIE['user_ids']!='') { ?>
 										<table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
 											<tr><td>Celulares</td></tr>
-											<tr><td>Encuestas</td></tr>
+											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a></td></tr>
+											<?php addEncOptions($label,1) ?>
 											<tr><td>Servicios</td></tr>
 											<tr><td>Informacion</td></tr>
 											<tr><td>Otros</td></tr>
