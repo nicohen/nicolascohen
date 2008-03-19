@@ -1,6 +1,9 @@
 <?php
 
-include("constantes.php");
+if (DB_USER == NULL || DB_USER == '' || DB_USER == 'DB_USER'){
+//	print_r("agrege");
+	include("constantes.php");
+}
 
 Function getConnection(){
 	//Por ahora no uso password para conectarme a la base.
