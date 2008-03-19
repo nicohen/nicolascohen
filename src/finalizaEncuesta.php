@@ -2,6 +2,7 @@
 //Funciones para operar con DB y otros
 require("funcionesDB.php"); 
 
+
 $qryIns = "insert into encuestas_realizadas (enc_id,vendedor,timestamp) values (".$_REQUEST['enc_id'].",0,sysdate())";
 $resp_id = doInsertAndGetLast($qryIns);
 //print_r($_REQUEST['cantPregs']);

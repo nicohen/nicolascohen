@@ -1,6 +1,6 @@
 <?php 
 //Funciones para operar con DB y otros
-require("funcionesDB.php"); 
+//Esta en la clase padre require("funcionesDB.php"); 
 $query="select * from tipos_respuestas_desc";
 $registros = doSelect($query) or die ("Problemas en select".mysql_error());
 $num_rows = mysql_num_rows($registros);
@@ -36,18 +36,19 @@ function appendRtas(combo){
 }
 
 function addRow(){
-	++cantPregs;
+	cantPregs++;
 	var table = document.getElementById("tblGral");
 	var row = document.createElement("TR");
+	row.id = "row" + cantPregs;
 	var col1 = document.createElement("TD");
 	var text = document.createTextNode(cantPregs+": ");
 	var input = document.createElement("INPUT");
 	input.type = "text";
 	input.name = "pregunta" + cantPregs;
 	input.id = "pregunta" + cantPregs;
-	input.size = "100";
-	input.class = "input";
-	col1.class = "txt01";
+	input.size = "70";
+	input.className = "input";
+	col1.className = "txt01";
 	col1.appendChild(text); 
 	col1.appendChild(input);
 	var col2 = document.createElement("TD");
@@ -55,6 +56,7 @@ function addRow(){
 	var combito = document.createElement("SELECT");
 	combito.name = "respuesta" + cantPregs;
 	combito.id = "respuesta" + cantPregs;
+	combito.className = "input";
 	appendRtas(combito);
 	col2.appendChild(combito);
 	var col3 = document.createElement("TD");
@@ -64,37 +66,48 @@ function addRow(){
 	table.appendChild(row);
 	document.getElementById("cantidad").value = cantPregs;
 }
+
+function borrarPregunta(){
+	if (cantPregs > 1){
+		var row = document.getElementById("row"+cantPregs);
+		document.getElementById("tblGral").removeChild(row);
+		cantPregs--;
+		document.getElementById("cantidad").value = cantPregs;
+	} else {
+		alert("La encuesta no puede tener menos de 1 pregunta.");
+	}
+}
 </script>
 <link href="styles/styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<table class="txt07" width="100%"  border="0" cellspacing="0" cellpadding="0">
+<table class="txt07" border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 		<td align="center">Bienvenido al administrador de encuestas.</td>
 	</tr>
 </table>
-<form name="frmAlta" action="/cti/src/encuestas.php" method="post">
+<form name="frmAlta" action="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>" method="post">
 <input type="hidden" name="act" id="act" value="<?php echo SAVE_ENC ?>">
 <input type="hidden" name="cantidad" id="cantidad" value="0">
-<font class="txt07">Título: </font><input class="input" type="text" id="titulo" name="titulo"><br>
-<table width="100%" border="1" bordercolor="#003399" cellspacing="0" cellpadding="0"><tr><td>
-<table width="100%" border="0" id="tblGral" cellspacing="0" cellpadding="0">
+<font class="txt07">Título: </font><input class="input" type="text" id="titulo" name="titulo" size="70"><br>
+<table border="1" bordercolor="#003399" cellspacing="0" cellpadding="0"><tr><td>
+<table border="0" id="tblGral" cellspacing="0" cellpadding="0">
 	<tr class="txt16">
 		<td> &nbsp;&nbsp;&nbsp; Preguntas </td>
 		<td> Tipo de respuesta:  </td>
 		<td><a href="javascript:addRow();">Agregar pregunta</a> </td>
 	</tr>
-  <tr>
-    <td class="txt01" width="75%"> 1: <input class="input" type="text" name="pregunta1" size="100" id="pregunta1"></td>
-    <td width="16%"><select class="input" name="respuesta1" id="respuesta1"></select></td>
-	<td width="9%">&nbsp; </td>
+  <tr id="row1">
+    <td class="txt01"> 1: <input class="input" type="text" name="pregunta1" size="70" id="pregunta1"></td>
+    <td ><select class="input" name="respuesta1" id="respuesta1"></select></td>
+	<td>&nbsp; </td>
   </tr>
 </table>
 </td></tr></table>
 <table width="100%">
 	<tr>
-		<td align="center"> <input type="submit" value="Guardar"></td>
+		<td align="center"> <input type="button" class="boton" value="Borrar ultima pregunta" onClick="javascript: borrarPregunta();"> <input class="boton" type="submit" value="Guardar"></td>
 	</tr>
 </table>
 </form>

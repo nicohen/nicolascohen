@@ -8,7 +8,7 @@ $title = $encResult['titulo'];
 ?>
 <html>
 <head>
-<title>Responder encuesta</title>
+<title>Responder encuesta: <?php echo $title ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 
