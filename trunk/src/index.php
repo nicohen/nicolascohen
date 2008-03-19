@@ -66,7 +66,7 @@ if (isset($_COOKIE['user_ids']))
 							<table width="100%" border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td width="140">
-									<?php if ($login) { ?>
+									<?php if ($_COOKIE['user_ids']!='') { ?>
 										<table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
 											<tr><td>Celulares</td></tr>
 											<tr><td>Encuestas</td></tr>

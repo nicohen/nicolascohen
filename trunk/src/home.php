@@ -8,7 +8,6 @@
 					<tr>
 						<td>Usuario:</td>
 						<td><input type="text" name="usr" value="" /></td>
-						<td><a href="">soy nuevo usuario</a></td>
 					</tr>
 					<tr>
 						<td>Contraseña:</td>
