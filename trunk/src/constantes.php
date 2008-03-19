@@ -35,5 +35,7 @@
 	
 	//Defino un año de vida para la cookie en el cliente
 	define('COOKIE_TIME',time()+60*60*24*365);
+	
+	define('LOGOUT',2);
 
 ?>
