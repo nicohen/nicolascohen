@@ -1,6 +1,6 @@
 <?php
 
-//include("constantes.php");
+include("constantes.php");
 
 Function get_label($label) {
 	//Si el label no es ninguno, setea MENU_FILTROS por default
@@ -38,6 +38,7 @@ Function cerrar_archivo($handler) {
 }
 
 Function do_content($lang,$lbl) {
+	//print_r($lbl);
 	if($lbl==MENU_FILTROS)
 		include("filtros.php");
 	else if($lbl==MENU_BIGLIST)
@@ -48,6 +49,10 @@ Function do_content($lang,$lbl) {
 		include("vpp.php");
 	else if($lbl==MENU_ENCUESTAS)
 		include("encuestas.php");
+	else if($lbl==MENU_ALTA_ENCUESTAS)
+		include("altaEncuestas.php");
+	else if($lbl==MENU_RESPUESTAS)
+		include("ABMRespuestas.php");
 	else if($lbl==MENU_SERVICIOS)
 		include("servicios.php");
 	else if($lbl==MENU_INFO)
@@ -145,6 +150,28 @@ Function check_login($usr, $pwd) {
 		}
 }
 	
+function isEncuestasSubSection($label){
+	if ($label == MENU_ALTA_ENCUESTAS)
+		return true;
+	else if ($label == MENU_RESPUESTAS)
+		return true;
+		
+	return false;
+}
+	
+function appendEncRow($valor, $texto){
+	echo "<tr><td> <li><a href=\"/cti/src/index.php?lbl=".$valor."\">". $texto ."</a></li></td></tr>";
+}
+	
+	
+function addEncOptions($label,$user_id){
+	if ($_COOKIE['user_super_'.$user_id] == USER_SUPERVISOR){
+		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
+			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta una encuesta");
+			appendEncRow(MENU_RESPUESTAS, "Ver respuestas posibles");
+		}
+	}
+}
 	
 	/*
 		$posicion = strrpos($_COOKIE['user_ids'], $res['user_id']);
