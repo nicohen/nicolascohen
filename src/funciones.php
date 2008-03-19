@@ -102,10 +102,16 @@ Function setear_cookies_usuario($res) {
 	setcookie("user_status_".$res['user_id'], $res['status'], time()+60*60*24*365, "/");
 	setcookie("user_ins_dt_".$res['user_id'], $res['ins_dt'], time()+60*60*24*365, "/");
 	setcookie("user_log_dt_".$res['user_id'], time(), time()+60*60*24*365, "/");
-	if (isset($_COOKIE['user_ids']))
-		setcookie("user_ids", $_COOKIE['user_ids'].",".$res['user_id'], time()+60*60*24*365, "/");
-	else
+	if (!isset($_COOKIE['user_ids']))
 		setcookie("user_ids", $res['user_id'], time()+60*60*24*365, "/");
+	else {
+		if ($_COOKIE['user_ids']=='')
+			setcookie("user_ids", $res['user_id'], time()+60*60*24*365, "/");
+		else
+			setcookie("user_ids", $_COOKIE['user_ids'].",".$res['user_id'], time()+60*60*24*365, "/");
+	}
+	//else
+		//setcookie("user_ids", $res['user_id'], time()+60*60*24*365, "/");
 	
 }
 
