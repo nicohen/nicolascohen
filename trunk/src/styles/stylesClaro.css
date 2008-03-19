@@ -1,0 +1,1463 @@
+body	{
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color : #555a60;
+	margin: 0px;
+	text-align: center;
+	background: #fff url(../imgs/bg.gif) repeat-x;
+}
+
+.bg_image	{
+	background: #fff url(../imgs/bg_auto.gif) repeat-x;
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color : #555a60;
+}
+
+h1 {
+	color: #c21111;
+	font: bold 15px/17px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+}
+
+h3 {
+	color: #c21111;
+	font: bold 13px/15px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+}
+
+h4 {
+	color: #c21111;
+	font: bold 12px/14px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+}
+
+input {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	background-color: #fff;
+	border: 1px solid #9b9c9f;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+select {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	background-color: #fff;
+	border: 1px solid #9b9c9f;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+textarea {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	background-color: #fff;
+	border: 1px solid #9b9c9f;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+/* CONTENEDOR GENERAL */
+
+.contenedor_gral {
+	text-align: left;
+	width: 753px;
+	margin: auto;
+}
+
+/* ESTRUCTURA HOME */
+
+#flash_home {
+	text-align: center;
+	width: 753px;
+	height: 542px;
+	margin: auto;
+}
+
+.cont_contenido_home {
+	text-align: center;
+	width: 379px;
+	margin: 0 auto auto;
+	float: left;
+}
+
+.contenido_home {
+	text-align: left;
+	width: 351px;
+	margin: 0 auto auto;
+	background: #ebebeb url(../imgs/bg_contenido.gif) no-repeat 0 bottom;
+	color: #555a60;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	padding: 2px 9px 15px;
+}
+
+.contenido_home a {
+	color: #4b5055;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: none;
+}
+
+.contenido_home a:hover {
+	color: #c21111;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: underline;
+}
+
+#mensajes_texto {
+	text-align: center;
+	background: #fff url(../imgs/titulos/mensajes_texto.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 68px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#tit_bienvenido {
+	text-align: left;
+	background: url(../imgs/titulos/bienvenido.gif) no-repeat 10px 0;
+	width: 349px;
+	margin: 10px auto auto;
+	padding-top: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#bienvenido {
+	text-align: left;
+	background: url(../imgs/bg_bienvenido.jpg) no-repeat 0 bottom;
+	width: 261px;
+	margin: auto;
+	padding-right: 98px;
+	padding-left: 10px;
+	padding-bottom: 6px;
+}
+
+#bienvenido a {
+	color: #c21111;
+	font: bold 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: none;
+}
+
+#bienvenido a:hover {
+	color: #c21111;
+	font: bold 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: underline;
+}
+
+#promos_centrales {
+	text-align: center;
+	width: 369px;
+	margin: 10px auto 1px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#promos_centrales .primera_promo {
+	text-align: center;
+	width: 184px;
+	margin: auto;
+	float: left;
+}
+
+#promos_centrales .segunda_promo {
+	text-align: center;
+	width: 184px;
+	margin: auto;
+	float: right;
+}
+
+#novedades {
+	text-align: center;
+	background: #fff url(../imgs/titulos/novedades.gif) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 44px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.promos_pie {
+	text-align: center;
+	width: 379px;
+	margin: 10px auto auto;
+}
+
+#links_home {
+	color: #5d6267;
+	font: 11px/14px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: center;
+	width: 379px;
+	margin: auto;
+	padding-bottom: 10px;
+}
+
+#links_home a {
+	color: #5d6267;
+	font: 11px/14px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: none;
+}
+
+#links_home a:hover {
+	color: #c21111;
+	font: 11px/14px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: underline;
+}
+
+/* ESTRUCTURA INTERIOR */
+
+.cabezal_int {
+	text-align: left;
+	width: 753px;
+	height: 98px;
+	margin: 0;
+	float: left;
+}
+
+.logo_int {
+	width: 566px;
+	height: 98px;
+	float: left;
+}
+
+.top_derecha {
+	width: 187px;
+	height: 98px;
+	float: right;
+}
+
+.columna_izq_home {
+	text-align: left;
+	width: 187px;
+	margin: 0 auto auto;
+	float: left;
+}
+
+.columna_izq_quiero {
+	text-align: left;
+	width: 187px;
+	margin-top: 0;
+	float: left;
+	background: url(../imgs/quiero/img_quiero.gif) no-repeat;
+	padding-top: 256px;
+}
+
+.columna_izq_tengo {
+	text-align: left;
+	width: 187px;
+	margin-top: 0;
+	float: left;
+	background: url(../imgs/tengo/img_tengo.gif) no-repeat;
+	padding-top: 256px;
+}
+
+.columna_izq_empresas {
+	text-align: left;
+	width: 187px;
+	margin-top: 0;
+	float: left;
+	background: url(../imgs/soluc/img_soluc.gif) no-repeat;
+	padding-top: 256px;
+}
+
+.columna_izq_instituc {
+	text-align: left;
+	width: 187px;
+	margin-top: 0;
+	float: left;
+	background: url(../imgs/instituc/img_instituc.gif) no-repeat;
+	padding-top: 256px;
+}
+
+.columna_menu_cont {
+	text-align: left;
+	width: 566px;
+	margin-top: 0;
+	float: right;
+}
+
+.contenido_int {
+	text-align: left;
+	width: 351px;
+	margin: 0 auto auto;
+	background: #ebebeb url(../imgs/bg_contenido.gif) no-repeat 0 bottom;
+	color: #555a60;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	padding-left: 9px;
+	padding-right: 9px;
+	padding-bottom: 15px;
+}
+
+.contenido_int_ficha {
+	text-align: left;
+	width: 351px;
+	margin: -2px auto auto;
+	background: #ebebeb url(../imgs/bg_contenido.gif) no-repeat 0 bottom;
+	color: #555a60;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	padding: 1px 9px 15px;
+}
+
+.contenido_int a {
+	color: #c21111;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: underline;
+}
+
+.contenido_int a:hover {
+	color: #4b5055;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: underline;
+}
+
+.contenido_int .cajita {
+	background-color: #dfe0e1;
+	width: 339px;
+	border: 1px solid #c4c6c8;
+	padding-right: 6px;
+	padding-left: 6px;
+}
+
+.contenido_int_equipos {
+	text-align: left;
+	width: 351px;
+	margin: 0 auto auto;
+	background: #F4F4F5 url(../imgs/bg_cont_equipos.gif) no-repeat 0 bottom;
+	color: #555a60;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	padding-left: 9px;
+	padding-right: 9px;
+	padding-bottom: 15px;
+}
+
+.columna_der_int {
+	text-align: left;
+	width: 187px;
+	margin: 0 auto auto;
+	float: right;
+}
+
+.contenido_int_gr {
+	text-align: left;
+	width: 538px;
+	margin: 0 auto auto;
+	padding-right: 9px;
+	padding-left: 9px;
+	padding-bottom: 15px;
+	background: #eeeff2 url(../imgs/bg_contenido_gr.gif) no-repeat 0 bottom;
+	color: #555a60;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+}
+
+/* MENU INTERIOR */
+
+.menu {
+	text-align: left;
+	width: 566px;
+	height: 53px;
+	margin: 0 auto auto;
+}
+
+.nav {
+	margin: 0;
+	padding: 0;
+}
+
+.nav li {
+	text-align: left;
+	margin: 0;
+	list-style: none;
+	z-index: 100;
+	float: left;
+}
+
+.nav a.quiero,
+.nav a.tengo,
+.nav a.empresas,
+.nav a.institucional {
+	display: block;
+	background: url(../imgs/menu/quiero.gif) no-repeat 0 0;
+	width: 141px;
+	height: 53px;
+	text-indent: -9000px;
+	float: left;
+}
+
+.nav a.tengo {
+	background: url(../imgs/menu/tengo.gif) no-repeat;
+	width: 141px;
+	height: 53px;
+}
+
+.nav a.empresas {
+	background: url(../imgs/menu/empresas.gif) no-repeat;
+	width: 141px;
+	height: 53px;
+}
+
+.nav a.institucional {
+	background: url(../imgs/menu/institucional.gif) no-repeat;
+	width: 143px;
+	height: 53px;
+}
+
+.nav a.tengo:hover,
+.nav a.quiero:hover,
+.nav a.empresas:hover,
+.nav a.institucional:hover,
+.nav a.selected {
+	background-position: 0 -53px;
+}
+
+/* SUBMENU */
+
+.submenu {
+	text-align: center;
+	width: 178px;
+	margin: 34px auto auto;
+}
+
+.sub_nav {
+	margin: 0;
+	padding: 0;
+}
+
+.sub_nav li {
+	text-align: left;
+	margin: auto auto 1px;
+	list-style: none;
+	display: block;
+	clear: both;
+}
+
+.sub_nav a {
+	color: #fff;
+	text-decoration: none;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-transform: uppercase;
+	background: url(../imgs/menu/submenu.gif) no-repeat 0 0;
+	width: 170px;
+	height: 14px;
+	padding-left: 8px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	float: left;
+	margin-bottom: 1px;
+}
+
+.sub_nav a:hover,
+.sub_nav a.selected {
+	background: url(../imgs/menu/submenu.gif) 0 -20px;
+}
+
+.sub_nav .flechita {
+	color: #c21111;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.sub_sub_nav {
+	color: #fff;
+	font: 11px/20px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+	background-color: #d14c4c;
+	width: 165px;
+	padding: 4px 4px 4px 9px;
+}
+
+.sub_sub_nav a {
+	color: #fff;
+	font: 11px/20px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+
+.sub_sub_nav a:hover {
+	color: #fff;
+	font: 11px/20px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+	text-decoration: underline;
+}
+
+.sub_sub_nav .flechita {
+	color: #8d0000;
+	font: 11px/20px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.sub_sub_nav .underline {
+	color: #fff;
+	font: 11px/20px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+	text-decoration: underline;
+}
+
+/* QUIERO */
+
+#buscar_equipo {
+	width: 170px;
+	float: left;
+}
+
+#boton_buscar {
+	padding-left: 180px;
+}
+
+.tit_comparar_columna {
+	background: url(../imgs/titulos/comparar_columna.gif) no-repeat;
+	width: 169px;
+	padding-top: 110px;
+	padding-left: 6px;
+	margin-top: 15px;
+}
+
+.comparar_flecha {
+	background: url(../imgs/flechita.gif) no-repeat 2px 11px;
+	padding-left: 14px;
+	padding-top: 5px;
+	padding-bottom: 4px;
+}
+
+#bot_comparar {
+	width: 140px;
+	height: 18px;
+	margin: auto auto 30px;
+	text-align: center;
+}
+
+#bot_comparar input {
+	border-style: none;
+}
+
+#bot_comparar_volver {
+	text-align: right;
+	width: 132px;
+	padding-right: 9px;
+	float: right;
+}
+
+
+/* QUIERO (Destacados) */
+
+#quiero_equipos {
+	text-align: center;
+	background: #fff url(../imgs/quiero/destac/equipos2.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#quiero_fichas {
+	text-align: center;
+	width: 379px;
+	margin: auto auto auto 0;
+	float: left;
+	background: #fff url(../imgs/bg_fichas.jpg) repeat-x;
+}
+
+#quiero_comparar {
+	text-align: center;
+	background: #fff url(../imgs/quiero/destac/comparar.jpg) no-repeat;
+	width: 556px;
+	margin: 0 auto auto;
+	padding-top: 228px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#quiero_planes {
+	text-align: center;
+	background: #fff url(../imgs/quiero/destac/planes.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#quiero_kit {
+	text-align: center;
+	background: #fff url(../imgs/quiero/destac/kit.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#quiero_beneficios {
+	text-align: center;
+	background: #fff url(../imgs/quiero/destac/beneficios.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+/* TENGO (Destacados) */
+
+#tengo_mi_cuenta {
+	text-align: center;
+	background: #fff url(../imgs/tengo/destac/mi_cuenta.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#tengo_planes {
+	text-align: center;
+	background: #fff url(../imgs/tengo/destac/planes.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#tengo_beneficios {
+	text-align: center;
+	background: #fff url(../imgs/tengo/destac/beneficios.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#tengo_servicios {
+	text-align: center;
+	background: #fff url(../imgs/tengo/destac/servicios.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#tengo_cobertura {
+	text-align: center;
+	background: #fff url(../imgs/tengo/destac/cobertura.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#tengo_contacto {
+	text-align: center;
+	background: #fff url(../imgs/tengo/destac/contacto.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+/* EMPRESAS (Destacados) */
+
+#emp_soluc_corp {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/soluc_corp.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_planes_emp {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/planes_emp.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_servicios_emp {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/servicios_emp.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_directo {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/directo.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_rpv {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/rpv.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_of_movil {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/of_movil.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_integradores {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/integradores.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#emp_contacto {
+	text-align: center;
+	background: #fff url(../imgs/soluc/destac/contacto.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+/* INSTITUCIONAL (Destacados) */
+
+#inst_compania {
+	text-align: center;
+	background: #fff url(../imgs/instituc/destac/compania.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+#inst_contacto {
+	text-align: center;
+	background: #fff url(../imgs/instituc/destac/contacto.jpg) no-repeat;
+	width: 369px;
+	margin: 0 auto auto;
+	padding-top: 220px;
+	padding-right: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+/* TITULOS */
+
+.fact_fija {
+	text-align: left;
+	background: url(../imgs/titulos/fact_fija.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.abono_libre {
+	text-align: left;
+	background: url(../imgs/titulos/abono.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.kit_amigo {
+	text-align: left;
+	background: url(../imgs/titulos/kit.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.tip {
+	text-align: left;
+	background: url(../imgs/titulos/tip.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.poc {
+	text-align: left;
+	background: url(../imgs/titulos/poc.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.beneficios {
+	text-align: left;
+	background: url(../imgs/titulos/beneficios.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.servicios {
+	text-align: left;
+	background: url(../imgs/titulos/servicios.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.roaming {
+	text-align: left;
+	background: #ebebeb url(../imgs/titulos/roaming.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 208px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.sms_int {
+	text-align: left;
+	background: url(../imgs/titulos/sms_int.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.portal_movil {
+	text-align: left;
+	background: url(../imgs/titulos/portal_movil.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.backup {
+	text-align: left;
+	background: url(../imgs/titulos/backup.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.cobertura {
+	text-align: left;
+	background: url(../imgs/titulos/cobertura.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.empresas_titulo {
+	text-align: left;
+	background: url(../imgs/titulos/empresas.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.tec_servicios {
+	text-align: left;
+	background: url(../imgs/titulos/tec_servicios.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.ventajas {
+	text-align: left;
+	background: url(../imgs/titulos/mund_ventajas.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.voz_datos {
+	text-align: left;
+	background: url(../imgs/titulos/voz_datos.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.planes_disp {
+	text-align: left;
+	background: url(../imgs/titulos/planes_disp.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.mensajeria {
+	text-align: left;
+	background: url(../imgs/titulos/mensajeria.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.control_gastos {
+	text-align: left;
+	background: url(../imgs/titulos/control_gastos.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.geolocalizacion {
+	text-align: left;
+	background: url(../imgs/titulos/geolocaliz.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.directo {
+	text-align: left;
+	background: url(../imgs/titulos/directo.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.cobertura_nac {
+	text-align: left;
+	background: url(../imgs/titulos/cobertura_nac.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.dir_global {
+	text-align: left;
+	background: url(../imgs/titulos/dir_global.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.tipos_mod {
+	text-align: left;
+	background: url(../imgs/titulos/tipos_mod.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.presencia {
+	text-align: left;
+	background: url(../imgs/titulos/presencia.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.rpv {
+	text-align: left;
+	background: url(../imgs/titulos/rpv.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.adm_web {
+	text-align: left;
+	background: url(../imgs/titulos/adm_web.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.numer_priv {
+	text-align: left;
+	background: url(../imgs/titulos/numer_priv.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.cont_llamados {
+	text-align: left;
+	background: url(../imgs/titulos/cont_llamados.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.stop {
+	text-align: left;
+	background: url(../imgs/titulos/stop.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.estadisticas {
+	text-align: left;
+	background: url(../imgs/titulos/estadisticas.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.of_movil {
+	text-align: left;
+	background: url(../imgs/titulos/of_movil.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.tipo_serv {
+	text-align: left;
+	background: url(../imgs/titulos/tipo_serv.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.equip_disp {
+	text-align: left;
+	background: url(../imgs/titulos/equip_disp.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.integracion {
+	text-align: left;
+	background: url(../imgs/titulos/integracion.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.integracion_01 {
+	text-align: left;
+	background: url(../imgs/titulos/integracion_01.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.compania {
+	text-align: left;
+	background: url(../imgs/titulos/compania.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.valores {
+	text-align: left;
+	background: url(../imgs/titulos/nuest_valores.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.rrhh {
+	text-align: left;
+	background: url(../imgs/titulos/rrhh.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.comunidad {
+	text-align: left;
+	background: url(../imgs/titulos/comunidad.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.prensa {
+	text-align: left;
+	background: url(../imgs/titulos/prensa.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.marco_reg {
+	text-align: left;
+	background: url(../imgs/titulos/marco_reg.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.at_cliente {
+	text-align: left;
+	background: url(../imgs/titulos/at_cliente.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.serv_tec {
+	text-align: left;
+	background: url(../imgs/titulos/serv_tec.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.busq_equipos {
+	text-align: left;
+	background: url(../imgs/titulos/busq_equipos.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.esp_tec {
+	text-align: left;
+	background: url(../imgs/titulos/esp_tec.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.comparar {
+	text-align: left;
+	background: url(../imgs/titulos/comparar.gif) no-repeat 9px 0;
+	width: 406px;
+	height: 30px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+	float: left;
+}
+
+.contacto {
+	text-align: left;
+	background: url(../imgs/titulos/contacto.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.contacto {
+	text-align: left;
+	background: url(../imgs/titulos/contacto.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+.compra_movil {
+	text-align: left;
+	background: url(../imgs/titulos/compra_movil.gif) no-repeat 9px 0;
+	width: 351px;
+	height: 30px;
+	padding-right: 9px;
+	padding-left: 9px;
+	margin: 0 auto auto;
+}
+
+/* PIE */
+
+.pie {
+	color: #fff;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+	background-color: #a7aaae;
+	width: 731px;
+	height: 20px;
+	margin: 30px auto;
+	padding-left: 12px;
+	padding-right: 10px;
+	padding-top: 5px;
+}
+
+.pie a {
+	color: #fff;
+	font: bold 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.pie a:hover {
+	color: #fff;
+	font: bold 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+
+.abz {
+	width: 66px;
+	height: 13px;
+	float: right;
+	margin-top: -12px;
+}
+
+/* PROMOS COLUMNAS */
+
+.promo_columna {
+	color: #555a60;
+	font: 11px/12px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: left;
+	background: url(../imgs/pt.gif) repeat-x 0 bottom;
+	width: 187px;
+	padding-bottom: 1px;
+	margin: 15px auto auto;
+}
+
+.promo_sin_pt {
+	color: #555a60;
+	font: 11px/12px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	width: 187px;
+}
+
+/* DIVISORES */
+
+.divisor {
+	text-align: center;
+	background-color: #fff;
+	width: 351px;
+	height: 1px;
+	margin: 10px auto;
+	border-top: 1px solid #bfbfc1;
+	font-size: 1px;
+	line-height: 1px;
+}
+
+.divisor_pt_col {
+	font-size: 1px;
+	line-height: 1px;
+	text-align: center;
+	background: url(../imgs/pt.gif) repeat-x;
+	width: 175px;
+	height: 1px;
+	margin: auto auto 5px;
+}
+
+/* ESTILOS VARIOS */
+
+.cuerpo10 {
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 10px;
+	line-height: 12px;
+	color : #555a60;
+}
+
+.tit_tabla {
+	color: #c21111;
+	font: bold 12px/14px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.legales {
+	color: #c21111;
+	font: 10px/13px Arial, Helvetica, Tahoma, Verdana, Sans-serif;
+}
+
+.provincias {
+	color: #c21111;
+	font: 11px/16px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.tabla_resultado {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+}
+
+.tabla_resultado .texto {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: right;
+	padding-right: 5px;
+	vertical-align: top;
+	padding-top: 10px;
+}
+
+.tabla_resultado h3 {
+	color: #c21111;
+	font: bold 13px/15px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: center;
+}
+
+.tabla_resultado .caract {
+	color: #595959;
+	font: bold 10px/12px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: right;
+	padding-right: 5px;
+}
+
+.tabla_resultado .fila_osc {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: center;
+	padding: 3px 10px;
+	background-color: #d9d9de;
+}
+
+.tabla_resultado .fila_cla {
+	color: #555a60;
+	font: 11px/13px Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	text-align: center;
+	padding: 3px 10px;
+}
+
+.txt	{
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color : #555a60;
+}
+
+.txt a	{
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color : #555a60;
+	text-decoration: none;
+}
+
+.txt a:hover	{
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color :#c21111;
+	text-decoration: underline;
+}
+
+.txt_rojo	{
+	font-family: Tahoma, Verdana, Helvetica, Arial, Sans-serif;
+	font-size: 11px;
+	line-height: 16px;
+	color : #c21111;
+}
