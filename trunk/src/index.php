@@ -17,6 +17,8 @@ if ($_REQUEST['login']=='Y') {
 	header("Location: index.php");
 }
 
+$label=get_label($_REQUEST['lbl']);
+
 ?>
 
 <body bgcolor="#F0F0F0">
@@ -27,7 +29,7 @@ if ($_REQUEST['login']=='Y') {
 				<table align="center" width="100%" border="1" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="center" height="70">
-							<h2>Administrador de Consultas para Claro</h2>
+							<h1>Administrador de Consultas para Claro</h1>
 						</td>
 					</tr>
 					<tr>
@@ -37,9 +39,12 @@ if ($_REQUEST['login']=='Y') {
 									<?php 
 										$tok = strtok ($_COOKIE['user_ids'], ",");
 										while ($tok !== false) {
-											if ($_COOKIE['user_active']==$tok)
-												echo '<td><b>'.$_COOKIE['user_name_'.$tok].'</b> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
-											else
+											if ($_COOKIE['user_active']==$tok) {?>
+												<td><table border="1" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC"><tr><td>
+												<?php echo '<b>'.$_COOKIE['user_name_'.$tok].'</b> (<a href="logout.php?user_id='.$tok.'">Salir</a>)'; ?>
+												</td></tr></table></td>
+												<?php
+											} else
 												echo '<td><a href="index.php?switch_user='.$tok.'">'.$_COOKIE['user_name_'.$tok].'</a> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
 											$tok = strtok(" \n\t");
 										}
@@ -55,20 +60,21 @@ if ($_REQUEST['login']=='Y') {
 							<table width="100%" border="0" cellpadding="0" cellspacing="3">
 								<tr>
 									<?php if ($_COOKIE['user_active']!='' && !$_REQUEST['login']=='Y') { ?>
-									<td width="140">
+									<td width="140" valign="middle">
 										<table width="100%" border="0" align="center" cellpadding="0" cellspacing="3">
 											<tr><td>Celulares</td></tr>
+											<tr><td>Servicios</td></tr>
 											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a></td></tr>
 											<?php addEncOptions($label,1) ?>
-											<tr><td>Servicios</td></tr>
-											<tr><td>Informacion</td></tr>
 											<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
+											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a></td></tr>
 											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a></td></tr>
+											<?php addUserOptions($label,1) ?>
 											<?php } ?>
 										</table>
 									</td>
 									<?php }?>
-									<td height="400">
+									<td height="400" valign="top">
 										<?php do_content($language,$label); ?>
 									</td>
 								</tr>
