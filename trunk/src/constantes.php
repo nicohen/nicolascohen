@@ -30,6 +30,7 @@
 	define('MENU_REGISTROS', 'registros');
 	define('MENU_USUARIOS', 'usuarios');
 	define('MENU_USUARIOS_ALTA', 'usuariosAgregar');
+	define('MENU_USUARIOS_MODIFICAR', 'usuariosModificar');
 	define('MNU_HOME', '');
 		
 	//Defino las constantes para la base de datos
