@@ -74,6 +74,8 @@ Function do_content($lang,$lbl) {
 		include("usuarios.php");
 	else if($lbl==MENU_USUARIOS_ALTA)
 		include("usuariosAgregar.php");
+	else if($lbl==MENU_USUARIOS_MODIFICAR)
+		include("usuariosModificar.php");
 	else
 		include("home.php");
 }

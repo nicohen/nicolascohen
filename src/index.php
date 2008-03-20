@@ -41,11 +41,11 @@ $label=get_label($_REQUEST['lbl']);
 										while ($tok !== false) {
 											if ($_COOKIE['user_active']==$tok) {?>
 												<td><table border="1" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC"><tr><td>
-												<?php echo '<b>'.$_COOKIE['user_name_'.$tok].'</b> (<a href="logout.php?user_id='.$tok.'">Salir</a>)'; ?>
+												<?php echo '<b>'.$_COOKIE['user_nickname_'.$tok].'</b> (<a href="logout.php?user_id='.$tok.'">Salir</a>)'; ?>
 												</td></tr></table></td>
 												<?php
 											} else
-												echo '<td><a href="index.php?switch_user='.$tok.'">'.$_COOKIE['user_name_'.$tok].'</a> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
+												echo '<td><a href="index.php?switch_user='.$tok.'">'.$_COOKIE['user_nickname_'.$tok].'</a> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
 											$tok = strtok(" \n\t");
 										}
 										if ($_COOKIE['user_ids']!='')

@@ -2,9 +2,10 @@
 
 require("funcionesDB.php");
 
-Function setear_cookies_usuario($res) {
+Function setear_cookies_usuario($res,$usr) {
 	setcookie("user_name_".$res['user_id'], $res['name'], time()+60*60*24*365, "/");
 	setcookie("user_last_name_".$res['user_id'], $res['last_name'], time()+60*60*24*365, "/");
+	setcookie("user_nickname_".$res['user_id'], $usr, time()+60*60*24*365, "/");
 	setcookie("user_super_".$res['user_id'], $res['super'], time()+60*60*24*365, "/");
 	setcookie("user_status_".$res['user_id'], $res['status'], time()+60*60*24*365, "/");
 	setcookie("user_ins_dt_".$res['user_id'], $res['ins_dt'], time()+60*60*24*365, "/");
@@ -41,7 +42,7 @@ Function check_login($usr, $pwd) {
 		$result = doSelect($query) or die("Error en select ".mysql_error());
 		if ($res = mysql_fetch_array($result)) {
 			if (!esta_logueado($res) && $res['status']=='A') {
-				setear_cookies_usuario($res);
+				setear_cookies_usuario($res,$usr);
 				store_action($res['user_id'],LOGIN,'',$_SERVER['REQUEST_URI']);
 				return true;
 			} else {
@@ -54,10 +55,10 @@ Function check_login($usr, $pwd) {
 
 $login = check_login($_REQUEST['usr'], $_REQUEST['pwd']);
 
-if ($login) {
+//if ($login) {
 	header( 'Location: index.php' );
-} else {
-	header( 'Location: index.php' );
-}
+//} else {
+//	header( 'Location: index.php' );
+//}
 
 ?>
