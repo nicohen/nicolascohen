@@ -9,7 +9,7 @@ Function get_label($label) {
 
 Function do_header($titulo) {
 	echo "<html><head><title>".$titulo."</title>";
-	include("javascript.php");
+	
 	?>
 	<!-- estilos -->
 	<style type="text/css"> 
@@ -60,6 +60,10 @@ Function do_content($lang,$lbl) {
 		include("encuestas.php");
 	else if($lbl==MENU_ALTA_ENCUESTAS)
 		include("altaEncuestas.php");
+	else if($lbl==MENU_RES_ENCUESTAS)
+		include("resultadosEncuestas.php");
+	else if($lbl==MENU_RES_RESULTADOS)
+		include("resEncuesta.php");
 	else if($lbl==MENU_RESPUESTAS)
 		include("ABMRespuestas.php");
 	else if($lbl==MENU_SERVICIOS)
@@ -118,6 +122,11 @@ function isEncuestasSubSection($label){
 		return true;
 	else if ($label == MENU_RESPUESTAS)
 		return true;
+	else if ($label == MENU_RES_ENCUESTAS)
+		return true;
+	else if ($label == MENU_RES_RESULTADOS)
+		return true;
+
 		
 	return false;
 }
@@ -125,19 +134,23 @@ function isEncuestasSubSection($label){
 function appendEncRow($valor, $texto){
 	echo "<tr><td> <li><a href=\"/cti/src/index.php?lbl=".$valor."\">". $texto ."</a></li></td></tr>";
 }
-	
+
+function isSupervisor($user_id){
+	return $_COOKIE['user_super_'.$user_id] == USER_SUPERVISOR;
+}	
 	
 function addEncOptions($label,$user_id){
-	if ($_COOKIE['user_super_'.$user_id] == USER_SUPERVISOR){
+	if (isSupervisor($user_id)){
 		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
-			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta una encuesta");
-			appendEncRow(MENU_RESPUESTAS, "Ver respuestas posibles");
+			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta");
+			appendEncRow(MENU_RESPUESTAS, "Ver respuestas");
+			appendEncRow(MENU_RES_ENCUESTAS,"Ver resultados");
 		}
 	}
 }
 
 function addUserOptions($label,$user_id){
-	if ($_COOKIE['user_super_'.$user_id] == USER_SUPERVISOR){
+	if (isSupervisor($user_id)){
 		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
 			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta una encuesta");
 			appendEncRow(MENU_RESPUESTAS, "Ver respuestas posibles");

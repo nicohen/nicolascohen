@@ -23,6 +23,8 @@
 	define('MENU_VPP', 'vpp');
 	define('MENU_ENCUESTAS', 'encuestas');
 	define('MENU_ALTA_ENCUESTAS','altaEncuestas');
+	define('MENU_RES_ENCUESTAS','resultadosEncuestas');
+	define('MENU_RES_RESULTADOS','resEncuesta');
 	define('MENU_RESPUESTAS','abmRespuestas');
 	define('MENU_SERVICIOS', 'servicios');
 	define('MENU_REGISTROS', 'registros');
