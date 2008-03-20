@@ -21,7 +21,7 @@ $label=get_label($_REQUEST['lbl']);
 
 ?>
 
-<body bgcolor="#F0F0F0">
+<body background="imgs/bg.gif" style="background-repeat:repeat-x">
 <br>
 	<table align="center" border="0" width="768" cellpadding="0" cellspacing="10">
 		<tr>
@@ -38,9 +38,11 @@ $label=get_label($_REQUEST['lbl']);
 								<tr>
 									<?php 
 										$tok = strtok ($_COOKIE['user_ids'], ",");
+										if ($tok !== false)
+											echo "<td>Usuarios:<td>";
 										while ($tok !== false) {
 											if ($_COOKIE['user_active']==$tok) {?>
-												<td><table border="1" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC"><tr><td>
+												<td><table border="1" cellpadding="2" cellspacing="0" bordercolor="#666666" style="border-collapse:collapse;border-style:inset"><tr><td>
 												<?php echo '<b>'.$_COOKIE['user_nickname_'.$tok].'</b> (<a href="logout.php?user_id='.$tok.'">Salir</a>)'; ?>
 												</td></tr></table></td>
 												<?php
@@ -56,24 +58,36 @@ $label=get_label($_REQUEST['lbl']);
 						</td>
 					</tr>
 					<tr>
+						<?php if ($_COOKIE['user_active']!='' && !$_REQUEST['login']=='Y') { ?>
+						<td width="140" valign="middle">
+							<table width="100%" border="0" align="center" cellpadding="0" cellspacing="3">
+								<tr align="center">
+									<td>Celulares</td>
+									<td>Servicios</td>
+									<td><a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a></td>
+									
+									<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
+									<td><a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a></td>
+									<td><table border="1" style="border-collapse:collapse;border-style:inset"><tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a></td></tr></table></td>
+									<?php } ?>
+								</tr>
+							</table>
+						</td>
+						<?php }?>
+					</tr>
+					<tr>
+						<td>
+							<table width="100%" border="0" cellpadding="0" cellspacing="3">
+								<tr align="center">
+									<?php addEncOptions($label,$_COOKIE['user_active']) ?>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
 						<td>
 							<table width="100%" border="0" cellpadding="0" cellspacing="3">
 								<tr>
-									<?php if ($_COOKIE['user_active']!='' && !$_REQUEST['login']=='Y') { ?>
-									<td width="140" valign="middle">
-										<table width="100%" border="0" align="center" cellpadding="0" cellspacing="3">
-											<tr><td>Celulares</td></tr>
-											<tr><td>Servicios</td></tr>
-											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a></td></tr>
-											<?php addEncOptions($label,$_COOKIE['user_active']) ?>
-											<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
-											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a></td></tr>
-											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a></td></tr>
-											<?php addUserOptions($label,$_COOKIE['user_active']) ?>
-											<?php } ?>
-										</table>
-									</td>
-									<?php }?>
 									<td height="400" valign="top">
 										<?php do_content($language,$label); ?>
 									</td>
