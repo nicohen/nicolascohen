@@ -42,9 +42,7 @@ $label=get_label($_REQUEST['lbl']);
 											echo "<td>Usuarios:<td>";
 										while ($tok !== false) {
 											if ($_COOKIE['user_active']==$tok) {?>
-												<td><table border="1" cellpadding="2" cellspacing="0" bordercolor="#666666" style="border-collapse:collapse;border-style:inset"><tr><td>
-												<?php echo '<b>'.$_COOKIE['user_nickname_'.$tok].'</b> (<a href="logout.php?user_id='.$tok.'">Salir</a>)'; ?>
-												</td></tr></table></td>
+												<td><b><?php echo $_COOKIE['user_nickname_'.$tok]; ?> </b> (<a href="logout.php?user_id='<?php echo $tok; ?>'">Salir</a>)</td>
 												<?php
 											} else
 												echo '<td><a href="index.php?switch_user='.$tok.'">'.$_COOKIE['user_nickname_'.$tok].'</a> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
@@ -64,11 +62,22 @@ $label=get_label($_REQUEST['lbl']);
 								<tr align="center">
 									<td>Celulares</td>
 									<td>Servicios</td>
-									<td><a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a></td>
-									
+									<td>
+										<?php if($label==MENU_ENCUESTAS) { ?>
+											<b>Encuestas</b>
+										<?php } else { ?>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a>
+										<?php } ?>
+									</td>
 									<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
 									<td><a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a></td>
-									<td><table border="1" style="border-collapse:collapse;border-style:inset"><tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a></td></tr></table></td>
+									<td>
+										<?php if($label==MENU_USUARIOS || $label==MENU_USUARIOS_ALTA || $label==MENU_USUARIOS_MODIFICAR) { ?>
+											<b>Usuarios</b>
+   										<?php } else { ?>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a>
+										<?php } ?>
+									</td>
 									<?php } ?>
 								</tr>
 							</table>
