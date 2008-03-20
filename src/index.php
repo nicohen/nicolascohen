@@ -23,7 +23,7 @@ $label=get_label($_REQUEST['lbl']);
 
 <body background="imgs/bg.gif" style="background-repeat:repeat-x">
 <br>
-	<table align="center" border="0" width="768" cellpadding="0" cellspacing="10">
+	<table align="center" border="0" width="768" cellpadding="0" cellspacing="0">
 		<tr>
 			<td valign="top">
 				<table align="center" width="100%" border="1" cellpadding="0" cellspacing="0">
