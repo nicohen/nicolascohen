@@ -12,6 +12,11 @@ if ($_REQUEST['switch_user']!='') {
 	header("Location: index.php");
 }
 
+if ($_REQUEST['login']=='Y') {
+	setcookie("user_active", '', time()+60*60*24*365, "/");
+	header("Location: index.php");
+}
+
 ?>
 
 <body bgcolor="#F0F0F0">
@@ -38,6 +43,8 @@ if ($_REQUEST['switch_user']!='') {
 												echo '<td><a href="index.php?switch_user='.$tok.'">'.$_COOKIE['user_name_'.$tok].'</a> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
 											$tok = strtok(" \n\t");
 										}
+										if ($_COOKIE['user_ids']!='')
+											echo "<td><a href='index.php?login=Y'>Soy otro usuario</a></td>";
 									?>
 								</tr>
 							</table>
@@ -47,7 +54,7 @@ if ($_REQUEST['switch_user']!='') {
 						<td>
 							<table width="100%" border="0" cellpadding="0" cellspacing="3">
 								<tr>
-									<?php if ($_COOKIE['user_ids']!='') { ?>
+									<?php if ($_COOKIE['user_active']!='' && !$_REQUEST['login']=='Y') { ?>
 									<td width="140">
 										<table width="100%" border="0" align="center" cellpadding="0" cellspacing="3">
 											<tr><td>Celulares</td></tr>
@@ -55,7 +62,9 @@ if ($_REQUEST['switch_user']!='') {
 											<?php addEncOptions($label,1) ?>
 											<tr><td>Servicios</td></tr>
 											<tr><td>Informacion</td></tr>
-											<tr><td>Otros</td></tr>
+											<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
+											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a></td></tr>
+											<?php } ?>
 										</table>
 									</td>
 									<?php }?>

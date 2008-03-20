@@ -69,6 +69,8 @@ Function do_content($lang,$lbl) {
 		include("servicios.php");
 	else if($lbl==MENU_INFO)
 		include("info.php");
+	else if($lbl==MENU_USUARIOS)
+		include("usuarios.php");
 	else
 		include("home.php");
 }

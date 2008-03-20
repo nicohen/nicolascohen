@@ -26,6 +26,7 @@
 	define('MENU_RESPUESTAS','abmRespuestas');
 	define('MENU_SERVICIOS', 'servicios');
 	define('MENU_INFO', 'info');
+	define('MENU_USUARIOS', 'usuarios');
 	define('MNU_HOME', '');
 		
 	//Defino las constantes para la base de datos
