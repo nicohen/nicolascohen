@@ -41,6 +41,7 @@ if ($_REQUEST['actUser']=='Y') {
 if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==USER_SUPERVISOR) { ?>
 <br>
 <form action="index.php" method="post">
+	<center><h4>Administrador de Usuarios</h4></center>
 	<table border="1" cellpadding="3" cellspacing="0" align="center" style="border-collapse:collapse;border-color:gray">
 		<tr bgcolor="#FFCC99">
 			<td align='center'>Usuario</td>

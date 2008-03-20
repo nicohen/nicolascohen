@@ -134,7 +134,7 @@ function isEncuestasSubSection($label){
 }
 	
 function appendEncRow($valor, $texto){
-	echo "<tr><td> <li><a href=\"/cti/src/index.php?lbl=".$valor."\">". $texto ."</a></li></td></tr>";
+	echo "<td> <a href=\"/cti/src/index.php?lbl=".$valor."\">". $texto ."</a></td>";
 }
 
 function isSupervisor($user_id){
@@ -150,15 +150,5 @@ function addEncOptions($label,$user_id){
 		}
 	}
 }
-
-function addUserOptions($label,$user_id){
-	if (isSupervisor($user_id)){
-		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
-			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta una encuesta");
-			appendEncRow(MENU_RESPUESTAS, "Ver respuestas posibles");
-		}
-	}
-}
-
 
 ?>
