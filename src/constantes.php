@@ -31,6 +31,8 @@
 	define('MENU_USUARIOS', 'usuarios');
 	define('MENU_USUARIOS_ALTA', 'usuariosAgregar');
 	define('MENU_USUARIOS_MODIFICAR', 'usuariosModificar');
+	define('MENU_ABM_ATRIBUTOS','atributos');
+	define('MENU_USUARIOS_MODIFICAR', 'usuariosModificar');
 	define('MNU_HOME', '');
 		
 	//Defino las constantes para la base de datos
@@ -46,6 +48,18 @@
 	
 	//Defino un año de vida para la cookie en el cliente
 	define('COOKIE_TIME',time()+60*60*24*365);
+	
+	//Constantes de los tipos de atributos
+	define('ATTR_TYPE_TEXT','T');
+	define('ATTR_TYPE_SELECT','S');
+	define('ATTR_TYPE_NUMBER','N');
+	define('ATTR_TYPE_CHECKBOX','CH');	
+	
+	//Constatntes para acciones de atributos
+	define('SAVE_ATTR','save_attr');
+	define('DELETE_ATTR','delete_attr');
+	define('ACTIVATE_ATTR','activate_attr');
+	define('MODIF_ATTR','modif_attr');
 	
 	define('LOGIN',1);
 	define('LOGOUT',2);

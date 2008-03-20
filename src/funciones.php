@@ -76,6 +76,10 @@ Function do_content($lang,$lbl) {
 		include("usuariosAgregar.php");
 	else if($lbl==MENU_USUARIOS_MODIFICAR)
 		include("usuariosModificar.php");
+	else if ($lbl==MENU_ABM_ATRIBUTOS)
+		include("abmAtributos.php");
+	else if($lbl==MENU_USUARIOS_MODIFICAR)
+		include("usuariosModificar.php");
 	else
 		include("home.php");
 }
