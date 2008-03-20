@@ -24,7 +24,7 @@ function validarCampos() {
 
 <form action="index.php?lbl=<?php echo MENU_USUARIOS; ?>&modifUser=Y&user_id=<?php echo $_REQUEST['user_id']; ?>" method="post" name="modifUsuario">
 	<br><br>
-	<center><u>NUEVO USUARIO</u></center>
+	<center><u>MODIFICAR USUARIO</u></center>
 	<br>
 	<table border="0" cellpadding="3" cellspacing="5" align="center">
 		<tr>
