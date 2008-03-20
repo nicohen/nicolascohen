@@ -48,8 +48,8 @@ Function cerrar_archivo($handler) {
 
 Function do_content($lang,$lbl) {
 	//print_r($lbl);
-	if($lbl==MENU_FILTROS)
-		include("filtros.php");
+	if($lbl==MENU_CELULARES)
+		include("celulares.php");
 	else if($lbl==MENU_BIGLIST)
 		include("biglist.php");
 	else if($lbl==MENU_MINILIST)
@@ -86,21 +86,14 @@ Function do_content($lang,$lbl) {
 
 //Footer comun de la pagina
 Function do_footer($lang) {
-	$hand=fopen("text/footer.txt",READ) or die("Problemas en la creacion");
+	$hand=fopen("text/footer.txt",READ) or die("Problemas en el footer");
 	leer_archivo($hand);
 	cerrar_archivo($hand);
 }
 
-Function cargar_imagen($folder, $language, $ruta) {
-	if ($language==ESPAÑOL) {
-		$path = $folder."sp_".$ruta;
-		if (file_exists($path))
-			return $path;
-	} else {
-		$path = $folder."en_".$ruta;
-		if (file_exists($path))
-			return $path;
-	}
+Function cargar_imagen($folder, $ruta) {
+	if (file_exists($path))
+		return $path;
 	return $folder.$ruta;
 }
 

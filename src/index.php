@@ -60,8 +60,20 @@ $label=get_label($_REQUEST['lbl']);
 						<td width="140" valign="middle">
 							<table width="100%" border="0" align="center" cellpadding="0" cellspacing="3">
 								<tr align="center">
-									<td>Celulares</td>
-									<td>Servicios</td>
+									<td>
+										<?php if($label==MENU_CELULARES) { ?>
+											<b>Celulares</b>
+										<?php } else { ?>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_CELULARES ?>">Celulares</a>
+										<?php } ?>
+									</td>
+									<td>
+										<?php if($label==MENU_SERVICIOS) { ?>
+											<b>Servicios</b>
+										<?php } else { ?>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_SERVICIOS ?>">Servicios</a>
+										<?php } ?>
+									</td>
 									<td>
 										<?php if($label==MENU_ENCUESTAS) { ?>
 											<b>Encuestas</b>
@@ -70,7 +82,13 @@ $label=get_label($_REQUEST['lbl']);
 										<?php } ?>
 									</td>
 									<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
-									<td><a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a></td>
+									<td>
+										<?php if($label==MENU_REGISTROS) { ?>
+											<b>Registros</b>
+										<?php } else { ?>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a>
+										<?php } ?>
+									</td>
 									<td>
 										<?php if($label==MENU_USUARIOS || $label==MENU_USUARIOS_ALTA || $label==MENU_USUARIOS_MODIFICAR) { ?>
 											<b>Usuarios</b>
