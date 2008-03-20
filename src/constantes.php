@@ -25,7 +25,7 @@
 	define('MENU_ALTA_ENCUESTAS','altaEncuestas');
 	define('MENU_RESPUESTAS','abmRespuestas');
 	define('MENU_SERVICIOS', 'servicios');
-	define('MENU_INFO', 'info');
+	define('MENU_REGISTROS', 'registros');
 	define('MENU_USUARIOS', 'usuarios');
 	define('MNU_HOME', '');
 		
@@ -43,6 +43,7 @@
 	//Defino un año de vida para la cookie en el cliente
 	define('COOKIE_TIME',time()+60*60*24*365);
 	
+	define('LOGIN',1);
 	define('LOGOUT',2);
 
 ?>

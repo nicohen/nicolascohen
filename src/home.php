@@ -1,8 +1,7 @@
 <?php 
 if ($_COOKIE['user_active']=='' || $_REQUEST['login']=='Y') { 
-	//setcookie("user_active", '', time()+60*60*24*365, "/");	
 ?>
-<br>
+<br><br><br><br><br><br>
 <form action="login.php" method="post">
 	<table border="1" cellpadding="0" cellspacing="0" align="center">
 		<tr>

@@ -2,11 +2,6 @@
 
 require("funcionesDB.php");
 
-Function store_action($usrid,$act,$desc,$url) {
-		$query = "insert into logs (user_id, ins_dt, act, descr, url) values (".$usrid.",sysdate(),".$act.",'".$desc."','".$url."')";
-		doInsert($query);
-}
-
 Function delete_from_users_cookie($userId) {
 	$othertok = '';
 	$firstToken = true;

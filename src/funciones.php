@@ -4,10 +4,7 @@ include("constantes.php");
 
 Function get_label($label) {
 	//Si el label no es ninguno, setea MENU_FILTROS por default
-	if ($label!='') 
-		return $label;
-	else
-		return '';
+	return ($label!='') ? $label:'';
 }
 
 Function do_header($titulo) {
@@ -136,17 +133,15 @@ function addEncOptions($label,$user_id){
 		}
 	}
 }
-	
-	/*
-		$posicion = strrpos($_COOKIE['user_ids'], $res['user_id']);
-			if ($posicion === false) {
-				setear_cookies_usuario($res);
-				return true;
-			} else {
-				return false;
-			}
+
+function addUserOptions($label,$user_id){
+	if ($_COOKIE['user_super_'.$user_id] == USER_SUPERVISOR){
+		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
+			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta una encuesta");
+			appendEncRow(MENU_RESPUESTAS, "Ver respuestas posibles");
 		}
-			
-	} else
-		return false;*/
+	}
+}
+
+
 ?>

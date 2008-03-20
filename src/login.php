@@ -40,8 +40,9 @@ Function check_login($usr, $pwd) {
 		$query = "select user_id, name, last_name, super, status, ins_dt from usuarios where nickname='".$usr."' and pwd='".$pwd."'";
 		$result = doSelect($query) or die("Error en select ".mysql_error());
 		if ($res = mysql_fetch_array($result)) {
-			if (!esta_logueado($res)) {
+			if (!esta_logueado($res) && $res['status']=='A') {
 				setear_cookies_usuario($res);
+				store_action($res['user_id'],LOGIN,'',$_SERVER['REQUEST_URI']);
 				return true;
 			} else {
 				return false;
