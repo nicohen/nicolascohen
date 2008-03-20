@@ -65,11 +65,11 @@ $label=get_label($_REQUEST['lbl']);
 											<tr><td>Celulares</td></tr>
 											<tr><td>Servicios</td></tr>
 											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a></td></tr>
-											<?php addEncOptions($label,1) ?>
+											<?php addEncOptions($label,$_COOKIE['user_active']) ?>
 											<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
 											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_REGISTROS ?>">Registros</a></td></tr>
 											<tr><td><a href="/cti/src/index.php?lbl=<?php echo MENU_USUARIOS ?>">Usuarios</a></td></tr>
-											<?php addUserOptions($label,1) ?>
+											<?php addUserOptions($label,$_COOKIE['user_active']) ?>
 											<?php } ?>
 										</table>
 									</td>
