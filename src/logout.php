@@ -32,6 +32,7 @@ Function delete_from_users_cookie($userId) {
 	}
 
 	setcookie("user_ids",$othertok,time()+60*60*24*365, "/");
+	setcookie("user_active",'',time()+60*60*24*365, "/");
 }
 
 Function logout() {

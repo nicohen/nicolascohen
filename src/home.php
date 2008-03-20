@@ -1,7 +1,9 @@
-<?php if (!$login) { ?>
+<?php 
+if ($_COOKIE['user_active']=='') { 
+?>
 <br>
-<form action="index.php?login=Y" method="post">
-	<table border="0" cellpadding="0" cellspacing="0" align="center">
+<form action="login.php" method="post">
+	<table border="1" cellpadding="0" cellspacing="0" align="center">
 		<tr>
 			<td>
 				<table border="0" cellpadding="0" cellspacing="4">
