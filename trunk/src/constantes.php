@@ -58,9 +58,11 @@
 	
 	//Constatntes para acciones de atributos
 	define('SAVE_ATTR','save_attr');
+	define('INACTIVATE_ATTR','inactivate_attr');
 	define('DELETE_ATTR','delete_attr');
 	define('ACTIVATE_ATTR','activate_attr');
 	define('MODIF_ATTR','modif_attr');
+	define('UPDATE_ATTR','update_attr');
 	
 	define('LOGIN',1);
 	define('LOGOUT',2);
