@@ -26,8 +26,8 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	if (esMultiple($_REQUEST['type'])){
 		insertAtributosValores($attrID);
 	}
-} else if ($_REQUEST['act'] == INACTIVATE_ATTR){
-	$qryDel = "update atributos set status = 'I' where atr_id = ".$_REQUEST['atr_id'];
+} else if ($_REQUEST['act'] == INACTIVATE_ATTR || $_REQUEST['act'] == ACTIVATE_ATTR){
+	$qryDel = "update atributos set status = '".($_REQUEST['act'] == INACTIVATE_ATTR?"I":"A")."' where atr_id = ".$_REQUEST['atr_id'];
 	doInsert($qryDel);
 } else if ($_REQUEST['act'] == DELETE_ATTR){
 	$qryDel = "delete from atributos where atr_id = ".$_REQUEST['atr_id'];
