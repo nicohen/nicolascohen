@@ -5,10 +5,10 @@
 	Seleccione el usuario: 
 	<select name="usuarios" onChange="window.location.href=this.value">
 		<?php 
-			$query = "select user_id, nickname, super, status from usuarios order by status, nickname";
+			$query = "select user_id, nickname, super, status from usuarios order by status, super, nickname";
 			$result = doSelect($query);
 			while ($res = mysql_fetch_array($result)) {
-				echo "<option value='index.php?lbl=".MENU_REGISTROS."&user_id=".$res['user_id']."'".(($res['user_id']==$_REQUEST['user_id'])?"selected":"").">".$res['nickname']." (".(($res['super']=='1')?'Supervisor':'Empleado')." ".(($res['status']=='A')?'Activo':'Inactivo').")</option>";
+				echo "<option value='index.php?lbl=".MENU_REGISTROS."&user_id=".$res['user_id']."'".(($res['user_id']==$_REQUEST['user_id'])?"selected":"").">".$res['nickname']." (".(($res['super']=='1')?'Supervisor':'Vendedor')." ".(($res['status']=='A')?'Activo':'Inactivo').")</option>";
 			}
 		?>
 	</select>

@@ -60,10 +60,10 @@ $label=get_label($_REQUEST['lbl']);
 							<table width="100%" border="0" cellpadding="0" cellspacing="3">
 								<tr align="center">
 									<td width="20%">
-										<?php if($label==MENU_CELULARES) { ?>
+										<?php if($label==MENU_CELULARES_FILTROS) { ?>
 											<b>Celulares</b>
 										<?php } else { ?>
-											<a href="/cti/src/index.php?lbl=<?php echo MENU_CELULARES ?>">Celulares</a>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_CELULARES_FILTROS ?>">Celulares</a>
 										<?php } ?>
 									</td>
 									<td width="20%">
