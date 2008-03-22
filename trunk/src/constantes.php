@@ -36,6 +36,8 @@
 	define('MENU_CELULARES_FILTROS','celularesFiltros');
 	define('MENU_CELULARES_LISTADO','celularesListado');
 	define('MENU_REGISTROS','registros');
+	define('MENU_ALTA_CELULARES','altaCelulares');
+	define('MENU_ABM_CELULARES','abmCelulares');
 		
 	//Defino las constantes para la base de datos
 	define('DB_SERVER','localhost');
@@ -66,6 +68,11 @@
 	define('ACTIVATE_ATTR','activate_attr');
 	define('MODIF_ATTR','modif_attr');
 	define('UPDATE_ATTR','update_attr');
+	
+	//Constantes para acciones con celulares
+	define('SAVE_CEL','save_cel');
+	define('MODIF_CEL','modif_cel');
+	define('UPDATE_CEL','update_cel');
 	
 	define('LOGIN',1);
 	define('LOGOUT',2);
