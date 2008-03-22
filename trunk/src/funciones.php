@@ -85,6 +85,11 @@ Function do_content($lang,$lbl) {
 			include("usuariosModificar.php");
 		else if($lbl==MENU_REGISTROS)
 			include("registros.php");
+		else if($lbl==MENU_ALTA_CELULARES)
+			include("altaCelulares.php");
+		else if($lbl==MANU_ABM_CELULARES)
+			include("abmCelulares.php");
+
 		else
 			include("home.php");
 	} else {
