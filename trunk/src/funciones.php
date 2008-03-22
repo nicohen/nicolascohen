@@ -48,8 +48,10 @@ Function cerrar_archivo($handler) {
 
 Function do_content($lang,$lbl) {
 	//print_r($lbl);
-	if($lbl==MENU_CELULARES)
-		include("celulares.php");
+	if($lbl==MENU_CELULARES_FILTROS)
+		include("celularesFiltros.php");
+	else if($lbl==MENU_CELULARES_FILTROS)
+		include("celularesListado.php");
 	else if($lbl==MENU_BIGLIST)
 		include("biglist.php");
 	else if($lbl==MENU_MINILIST)
@@ -76,7 +78,7 @@ Function do_content($lang,$lbl) {
 		include("usuariosAgregar.php");
 	else if($lbl==MENU_USUARIOS_MODIFICAR)
 		include("usuariosModificar.php");
-	else if ($lbl==MENU_ABM_ATRIBUTOS)
+	else if($lbl==MENU_ABM_ATRIBUTOS)
 		include("abmAtributos.php");
 	else if($lbl==MENU_USUARIOS_MODIFICAR)
 		include("usuariosModificar.php");

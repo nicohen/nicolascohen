@@ -32,9 +32,9 @@
 	define('MENU_USUARIOS_ALTA', 'usuariosAgregar');
 	define('MENU_USUARIOS_MODIFICAR', 'usuariosModificar');
 	define('MENU_ABM_ATRIBUTOS','atributos');
-	define('MENU_USUARIOS_MODIFICAR', 'usuariosModificar');
 	define('MNU_HOME', '');
-	define('MENU_CELULARES','celulares');
+	define('MENU_CELULARES_FILTROS','celularesFiltros');
+	define('MENU_CELULARES_LISTADO','celularesListado');
 	define('MENU_REGISTROS','registros');
 		
 	//Defino las constantes para la base de datos
