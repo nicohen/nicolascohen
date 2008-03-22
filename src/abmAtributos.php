@@ -1,4 +1,21 @@
 <?php 
+function deleteAtributosValores(){
+	$qryDelValores = "delete from atributos_values where atr_id = ".$_REQUEST['atr_id'];
+	doInsert($qryDelValores);
+}
+
+function insertAtributosValores($attrID){
+	$valores = explode(",",$_REQUEST['values']);
+		
+	for ($i = 0 ; $i < count($valores); $i++){
+		$query = "insert into atributos_values (atr_id, valor) values (".$attrID.",'".trim($valores[$i])."')";
+		doInsert($query);
+	}
+}
+
+function esMultiple($type){
+	return $type == ATTR_TYPE_SELECT || $type == ATTR_TYPE_MULTIPLE;
+}
 
 if ($_REQUEST['act'] == SAVE_ATTR){
 	$insAttr = "insert into atributos (name, filter, tipo".(($_REQUEST['largo'] != '')?", largo)":")").
@@ -6,13 +23,8 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	//print_r($insAttr);
 	$attrID = doInsertAndGetLast($insAttr);
 
-	if ($_REQUEST['type'] == ATTR_TYPE_SELECT){
-		$valores = explode(",",$_REQUEST['values']);
-		
-		for ($i = 0 ; $i < count($valores); $i++){
-			$query = "insert into atributos_values (atr_id, valor) values (".$attrID.",'".$valores[$i]."')";
-			doInsert($query);
-		}
+	if (esMultiple($_REQUEST['type'])){
+		insertAtributosValores($attrID);
 	}
 } else if ($_REQUEST['act'] == INACTIVATE_ATTR){
 	$qryDel = "update atributos set status = 'I' where atr_id = ".$_REQUEST['atr_id'];
@@ -24,11 +36,35 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	$qryDelCelus = "delete from celulares_atributos where atr_id = ".$_REQUEST['atr_id'];
 	doInsert($qryDelCelus);
 	
-	$qryDelValores = "delete from atributos_values where atr_id = ".$_REQUEST['atr_id'];
-	doInsert($qryDelValores);
+	deleteAtributosValores();
+	
 } else if ($_REQUEST['act'] == MODIF_ATTR){
-	$qrtSel = "select name, filter, type, largo from atributos where atr_id = ".$_REQUEST['atr_id'];
-	//do
+	$qrySel = "select name, filter, tipo, largo from atributos where atr_id = ".$_REQUEST['atr_id'];
+	$resSel = doSelect($qrySel);
+	$atributo = mysql_fetch_array($resSel);
+	$commaValores = "";
+	if (esMultiple($atributo['tipo'])){
+		$qryValores = "select valor from atributos_values where atr_id = ".$_REQUEST['atr_id'];
+		$resValores = doSelect($qryValores) or die("error en select ".mysql_error());
+		while ($valor = mysql_fetch_array($resValores)){
+			if ($commaValores != ""){
+				$commaValores = $commaValores.", ";
+			}
+			$commaValores = $commaValores.$valor['valor'];
+		} 
+	}
+} else if ($_REQUEST['act'] == UPDATE_ATTR){
+	$qryUpd = "update atributos 
+			   set name=".$_REQUEST['atr_name'].", filter=".($_REQUEST['filter']?1:0).", tipo=".$_REQUEST['type'].
+			   ($_REQUEST['largo']==NULL?"":", largo=".$_REQUEST['largo']).
+			   " where atr_id = ".$_REQUEST['atr_id'];
+	print_r($qryUpd);
+	doInsert($qryUpd);
+	
+	if (esMultiple($_REQUEST['type'])){
+		deleteAtributosValores();
+		insertAtributosValores($_REQUEST['atr_id']);
+	}
 }
 
 
@@ -37,7 +73,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 
 <script language="javascript">
 	function cambiar(combo){
-		if (combo.options[combo.selectedIndex].value == 'S'){
+		if (combo.options[combo.selectedIndex].value == 'S' || combo.options[combo.selectedIndex].value == 'SM' ){
 			document.getElementById("divVal").style.display="";
 		} else {
 			document.getElementById("values").value = "";
@@ -50,9 +86,18 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 				window.location.href = lnk;
 			}
 	}
+	
+	function enviar(){
+		if (document.getElementById("atr_name").value == ''){
+			alert('El nombre no puede estar vacío');
+			return;
+		}
+		document.frmMain.submit();
+	}
 </script>
 
-<form name="frmMain" action="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS ?>&act=<?php echo SAVE_ATTR ?>" method="post">
+<form name="frmMain" action="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS ?>" method="post">
+<input type="hidden" id="act" name="act" value="<?php echo ($_REQUEST['act'] != MODIF_ATTR)?SAVE_ATTR:UPDATE_ATTR ?>"
 <?php if ($_REQUEST['act'] != MODIF_ATTR){ ?>
 <table width="100%" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
 <tr bgcolor="#FFCC99">
@@ -84,25 +129,38 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 <?php } ?>
 <table width="80%" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
 <tr bgcolor="#FFCC99">
-	<td colspan="2" align="center"> Nuevo atributo </td>
+	<td colspan="2" align="center"> <?php  echo ($_REQUEST['act'] == MODIF_ATTR)? "Modificar atributo":"Nuevo atributo" ?> </td>
 </tr>
 <tr>
-	<td colspan="2"> Nombre: <input type="text" name="atr_name" id="atr_name" value=""></td></tr>
+	<td colspan="2"> Nombre: 
+		<input type="text" size="60" name="atr_name" id="atr_name" value="<?php  if ($_REQUEST['act'] == MODIF_ATTR) echo $atributo['name']?>">
+	</td>
+</tr>
 <tr>
-	<td colspan="2"> <input type="checkbox" name="filter" value="1"> Filtro</td></tr>
+	<td colspan="2"> 
+		<input type="checkbox" name="filter" value="1" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['filter']) echo "checked" ?> > Filtro
+	</td>
+</tr>
 <tr>
 	<td colspan="2"> Tipo de atributo: <select id="type" name="type" onChange="javascript:cambiar(this);">
-						<option value="<?php echo ATTR_TYPE_TEXT ?>"> Texto </option>
-						<option value="<?php echo ATTR_TYPE_SELECT ?>"> Combo </option>
-						<option value="<?php echo ATTR_TYPE_NUMBER ?>"> Número </option>
-						<option value="<?php echo ATTR_TYPE_CHECKBOX ?>"> Check </option>
+						<option value="<?php echo ATTR_TYPE_TEXT ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_TEXT) echo "selected" ?> > Texto </option>
+						<option value="<?php echo ATTR_TYPE_SELECT ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_SELECT) echo "selected" ?> > Combo </option>
+						<option value="<?php echo ATTR_TYPE_NUMBER ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_TEXT) echo "selected" ?> > Número </option>
+						<option value="<?php echo ATTR_TYPE_CHECKBOX ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_CHECKBOX) echo "selected" ?>> Check </option>
+						<option value="<?php echo ATTR_TYPE_IMAGE ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_IMAGE) echo "selected" ?>> Imagen </option>
+						<option value="<?php echo ATTR_TYPE_MULTIPLE ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_MULTIPLE) echo "selected" ?>> Multiple </option>
 					</select> 
-					<div style="display:none" id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" value=""> </div></td>
+					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div></td>
 </tr>
 <tr>
-	<td colspan="2"> Largo (opcional): <input type="text" name="largo" value=""></td></tr>
+	<td colspan="2"> Largo (opcional): <input type="text" name="largo" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributos['largo'] ?>"></td></tr>
 <tr>
-	<td colspan="2"> <input type="submit" value="agregar"> </td>
+	<td colspan="2" align="center"> <input type="button" onClick="javascript:enviar();" value="<?php echo ($_REQUEST['act'] == MODIF_ATTR)?"Grabar":"Agregar" ?>"> 
+					<?php if ($_REQUEST['act'] == MODIF_ATTR){ ?>
+						<input type="button" value="Cancelar" onClick="javascript:location.href = 'index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS ?>'">
+						<input type="hidden" id="atr_id" name="atr_id" value="<?php echo $_REQUEST['atr_id'] ?>">
+					<?php } ?>
+	</td>
 </tr>
 </table>
 </form>
