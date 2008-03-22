@@ -14,7 +14,15 @@
 				echo "<tr><td align='right'>".$res['name'].":</td><td align='left'><select name='atr".$res['atr_id']."' multiple>";
 				$isCombo=true;
 			}
-			echo "<option value='".$res['value']."'>".$res['value']."</option>";
+			if ($res['tipo']==ATTR_TYPE_MULTIPLE) {
+				$tok = strtok($res['value'], ",");
+				while ($tok !== false) {
+					echo "<option value='".$tok."'>".$tok."</option>";
+					$tok = strtok(" \n\t");
+				}
+			} else {
+				echo "<option value='".$res['value']."'>".$res['value']."</option>";
+			}
 		//Este $nextType vale 2
 		} else if ($res['tipo']==ATTR_TYPE_CHECKBOX) {
 			if ($isCombo) {

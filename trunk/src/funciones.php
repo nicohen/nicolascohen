@@ -48,44 +48,48 @@ Function cerrar_archivo($handler) {
 
 Function do_content($lang,$lbl) {
 	//print_r($lbl);
-	if($lbl==MENU_CELULARES_FILTROS)
-		include("celularesFiltros.php");
-	else if($lbl==MENU_CELULARES_FILTROS)
-		include("celularesListado.php");
-	else if($lbl==MENU_BIGLIST)
-		include("biglist.php");
-	else if($lbl==MENU_MINILIST)
-		include("minilist.php");
-	else if($lbl==MENU_VPP)
-		include("vpp.php");
-	else if($lbl==MENU_ENCUESTAS)
-		include("encuestas.php");
-	else if($lbl==MENU_ALTA_ENCUESTAS)
-		include("altaEncuestas.php");
-	else if($lbl==MENU_RES_ENCUESTAS)
-		include("resultadosEncuestas.php");
-	else if($lbl==MENU_RES_RESULTADOS)
-		include("resEncuesta.php");
-	else if($lbl==MENU_RESPUESTAS)
-		include("ABMRespuestas.php");
-	else if($lbl==MENU_SERVICIOS)
-		include("servicios.php");
-	else if($lbl==MENU_INFO)
-		include("info.php");
-	else if($lbl==MENU_USUARIOS)
-		include("usuarios.php");
-	else if($lbl==MENU_USUARIOS_ALTA)
-		include("usuariosAgregar.php");
-	else if($lbl==MENU_USUARIOS_MODIFICAR)
-		include("usuariosModificar.php");
-	else if($lbl==MENU_ABM_ATRIBUTOS)
-		include("abmAtributos.php");
-	else if($lbl==MENU_USUARIOS_MODIFICAR)
-		include("usuariosModificar.php");
-	else if($lbl==MENU_REGISTROS)
-		include("registros.php");
-	else
-		include("home.php");
+	if ($_COOKIE['user_active']!='' || $lbl=='') {
+		if($lbl==MENU_CELULARES_FILTROS)
+			include("celularesFiltros.php");
+		else if($lbl==MENU_CELULARES_FILTROS)
+			include("celularesListado.php");
+		else if($lbl==MENU_BIGLIST)
+			include("biglist.php");
+		else if($lbl==MENU_MINILIST)
+			include("minilist.php");
+		else if($lbl==MENU_VPP)
+			include("vpp.php");
+		else if($lbl==MENU_ENCUESTAS)
+			include("encuestas.php");
+		else if($lbl==MENU_ALTA_ENCUESTAS)
+			include("altaEncuestas.php");
+		else if($lbl==MENU_RES_ENCUESTAS)
+			include("resultadosEncuestas.php");
+		else if($lbl==MENU_RES_RESULTADOS)
+			include("resEncuesta.php");
+		else if($lbl==MENU_RESPUESTAS)
+			include("ABMRespuestas.php");
+		else if($lbl==MENU_SERVICIOS)
+			include("servicios.php");
+		else if($lbl==MENU_INFO)
+			include("info.php");
+		else if($lbl==MENU_USUARIOS)
+			include("usuarios.php");
+		else if($lbl==MENU_USUARIOS_ALTA)
+			include("usuariosAgregar.php");
+		else if($lbl==MENU_USUARIOS_MODIFICAR)
+			include("usuariosModificar.php");
+		else if($lbl==MENU_ABM_ATRIBUTOS)
+			include("abmAtributos.php");
+		else if($lbl==MENU_USUARIOS_MODIFICAR)
+			include("usuariosModificar.php");
+		else if($lbl==MENU_REGISTROS)
+			include("registros.php");
+		else
+			include("home.php");
+	} else {
+		echo "<br><br><center><b>Acceso denegado.</b><br><br><a href='index.php'>Continuar</a></center>";
+	}
 }
 
 //Footer comun de la pagina
@@ -117,7 +121,7 @@ Function leer_directorio() {
 }
 
 Function addCookie($name, $value) {
-	setcookie($name,$value,date(), "cookies");
+	setcookie($name,$value,time()+60*60*10,"/");
 }
 
 function isEncuestasSubSection($label){

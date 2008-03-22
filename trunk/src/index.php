@@ -8,16 +8,23 @@ ob_start();
 do_header("Administrador de Claro");
 
 if ($_REQUEST['switch_user']!='') {
-	setcookie("user_active", $_REQUEST['switch_user'], time()+60*60*24*365, "/");	
+	addCookie("user_active", $_REQUEST['switch_user']);
 	header("Location: index.php");
 }
 
 if ($_REQUEST['login']=='Y') {
-	setcookie("user_active", '', time()+60*60*24*365, "/");
+	addCookie("user_active", '');
 	header("Location: index.php");
 }
 
 $label=get_label($_REQUEST['lbl']);
+
+/*try {
+    $error = 'La sesión expiró, vuelva a loguearse nuevamente, muchas gracias.';
+    throw new Exception($error);
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}*/
 
 ?>
 
