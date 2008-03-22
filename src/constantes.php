@@ -35,6 +35,7 @@
 	define('MENU_USUARIOS_MODIFICAR', 'usuariosModificar');
 	define('MNU_HOME', '');
 	define('MENU_CELULARES','celulares');
+	define('MENU_REGISTROS','registros');
 		
 	//Defino las constantes para la base de datos
 	define('DB_SERVER','localhost');
