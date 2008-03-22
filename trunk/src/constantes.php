@@ -60,6 +60,10 @@
 	define('ATTR_TYPE_CHECKBOX','CH');	
 	define('ATTR_TYPE_IMAGE','I');
 	define('ATTR_TYPE_MULTIPLE','SM');
+	define('ATTR_TYPE_MONEY','M');
+	
+	//Valor de configuración
+	define('ATTR_TYPE_TECNOLOGIA',0);
 	
 	//Constatntes para acciones de atributos
 	define('SAVE_ATTR','save_attr');
@@ -73,6 +77,10 @@
 	define('SAVE_CEL','save_cel');
 	define('MODIF_CEL','modif_cel');
 	define('UPDATE_CEL','update_cel');
+	define('INACTIVE_CEL','inactive_cel');
+	define('ACTIVE_CEL','active_cel');
+	define('DELETE_IMG_CEL','delete_img');
+	define('DELETE_CEL','delete_cel');
 	
 	define('LOGIN',1);
 	define('LOGOUT',2);

@@ -1,13 +1,5 @@
 <?php 
-
-if ($_REQUEST['act'] == SAVE_CEL){
-	$qryInsCel = "insert into celulares (marca, modelo, last_mod_dt,last_mod_user,create_dt,status) 
-				  values ('".$_REQUEST['marca']."','".$_REQUEST['modelo']."',sysdate(),".$_COOKIE['user_active'].
-				 ",sysdate(),'A')";
-	//print_r($qryInsCel."<br>");
-	$celuID = doInsertAndGetLast($qryInsCel);	
-	//$celuID = 0;
-	
+function insertAttr($celuID){
 	for ($i = 1; $i <= $_REQUEST['cantAtrib']; $i++){
 		$tipo = $_REQUEST['atrType'.$i];
 		$atrID = $_REQUEST['atrName'.$i];
@@ -57,6 +49,49 @@ if ($_REQUEST['act'] == SAVE_CEL){
 		//print_r($qryInsAtr."<br>");
 		doInsert($qryInsAtr);
 	}
+
+}
+
+function deleteAtribs(){
+	$qryDelAtribs = "delete from celulares_atributos where celu_id = ".$_REQUEST['celu_id'];
+	doInsert($qryDelAtribs);
+}
+
+if ($_REQUEST['act'] == SAVE_CEL){
+	$qryInsCel = "insert into celulares (marca, modelo, tecnologia, precio_prepago, precio_postpago, last_mod_dt,last_mod_user,create_dt,status) 
+				  values ('".$_REQUEST['marca']."','".$_REQUEST['modelo']."',
+				  '".$_REQUEST['tecnologia']."',".$_REQUEST['precio_prepago'].",".$_REQUEST['precio_postpago'].",
+				  sysdate(),".$_COOKIE['user_active'].
+				 ",sysdate(),'A')";
+	//print_r($qryInsCel."<br>");
+	$celuID = doInsertAndGetLast($qryInsCel);	
+	//$celuID = 0;
+	insertAttr($celuID);
+	
+} else if ($_REQUEST['act'] == INACTIVE_CEL || $_REQUEST['act'] == ACTIVE_CEL){
+	$qryUpd = "update celulares set status = '".($_REQUEST['act'] == INACTIVE_CEL?"I":"A")."' where celu_id = ".$_REQUEST['celu_id'];
+	doInsert($qryUpd);
+} else if ($_REQUEST['act'] == UPDATE_CEL){
+	$qryUpd = "update celulares 
+			   set marca = '".$_REQUEST['marca']."', 
+			   modelo = '".$_REQUEST['modelo']."',
+			   tecnologia = '".$_REQUEST['tecnologia']."',
+			   precio_prepago = ".$_REQUEST['precio_prepago'].",
+			   precio_postpago = ".$_REQUEST['precio_postpago'].", 
+			   last_mod_dt = sysdate(), 
+			   last_mod_user = ".$_COOKIE['user_active']." 
+			   where celu_id = ".$_REQUEST['celu_id'];
+	doInsert($qryUpd);
+	
+	deleteAtribs();
+	
+	insertAttr($_REQUEST['celu_id']);
+
+} else if ($_REQUEST['act'] == DELETE_CEL){
+//print_r("estoy borrando");
+	$qryDel = "delete from celulares where celu_id = ".$_REQUEST['celu_id'];
+	doInsert($qryDel);
+	deleteAtribs();
 }
 ?>
 <table width="100%" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
@@ -69,8 +104,16 @@ if ($_REQUEST['act'] == SAVE_CEL){
 	while ($celu = mysql_fetch_array($resCelus)){
 		?>
 		<tr>
-			<td><?php echo $celu['marca']." ".$celu['modelo'] ?></td>
-			<td> Acciones para <?php echo $celu['celu_id'] ?> </td>
+			<td width="50%"><?php echo $celu['marca']." ".$celu['modelo'] ?></td>
+			<td>
+				<?php if($celu['status'] == 'A'){ ?>
+				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo INACTIVE_CEL ?>&celu_id=<?php echo $celu['celu_id'] ?>">Inactivar</a>
+				<?php } else { ?>
+				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo ACTIVE_CEL ?>&celu_id=<?php echo $celu['celu_id'] ?>">Activar</a>
+				<?php } ?>
+				<a href="index.php?lbl=<?php echo MENU_ALTA_CELULARES ?>&act=<?php echo MODIF_CEL?>&celu_id=<?php echo $celu['celu_id']?>">Editar</a>
+				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo DELETE_CEL?>&celu_id=<?php echo $celu['celu_id']?>">Borrar</a>
+			</td>
 		</tr>
 		<?php
 	}
