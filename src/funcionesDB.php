@@ -13,7 +13,10 @@ Function getConnection(){
 }
 
 Function doSelect($query){
-	return mysql_query($query,getConnection());// or die ("Problemas en select".mysql_error());
+	$conection = getConnection();
+	$returnSelect = mysql_query($query,$conection);// or die ("Problemas en select".mysql_error());
+	closeConnection($conection);
+	return $returnSelect;
 }
 
 Function doInsert($query){
@@ -26,8 +29,8 @@ Function doInsertAndGetLast($query){
 	return mysql_insert_id($conn);
 }
 
-Function closeConnection() {
-	mysql_close($db);
+Function closeConnection($conn) {
+	mysql_close($conn);
 }
 
 Function store_action($usrid,$act,$desc,$url) {

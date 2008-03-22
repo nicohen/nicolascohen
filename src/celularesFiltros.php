@@ -1,6 +1,6 @@
 <center><h4><u>Consulta de celulares</u></h4></center>
 <form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO; ?>" method="post">
-	<table border="1" align="center" cellpadding="3" cellspacing="0">
+	<table border="0" align="center" cellpadding="3" cellspacing="0">
 	<?php
 	$query = "select distinct ca.atr_id,a.name,a.tipo,ca.value from atributos a, celulares_atributos ca where a.atr_id=ca.atr_id and filter=1 order by a.name";
 	$result = doSelect($query);
