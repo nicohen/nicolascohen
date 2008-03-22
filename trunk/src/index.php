@@ -22,7 +22,7 @@ $label=get_label($_REQUEST['lbl']);
 ?>
 
 <body background="imgs/bg.gif" style="background-repeat:repeat-x">
-<br>
+<br><br>
 	<table align="center" border="0" width="768" cellpadding="0" cellspacing="0">
 		<tr>
 			<td valign="top">
@@ -41,11 +41,10 @@ $label=get_label($_REQUEST['lbl']);
 										if ($tok !== false)
 											echo "<td>Usuarios:<td>";
 										while ($tok !== false) {
-											if ($_COOKIE['user_active']==$tok) {?>
-												<td><b><?php echo $_COOKIE['user_nickname_'.$tok]; ?> </b> (<a href="logout.php?user_id='<?php echo $tok; ?>'">Salir</a>)</td>
-												<?php
+											if ($_COOKIE['user_active']==$tok) {
+												echo "<td><b>".$_COOKIE['user_nickname_'.$tok]."</b> (<a href='logout.php?user_id=".$tok."'>Salir</a>)</td>";
 											} else
-												echo '<td><a href="index.php?switch_user='.$tok.'">'.$_COOKIE['user_nickname_'.$tok].'</a> (<a href="logout.php?user_id='.$tok.'">Salir</a>)</td>';
+												echo "<td><a href='index.php?switch_user=".$tok."'>".$_COOKIE['user_nickname_'.$tok]."</a> (<a href='logout.php?user_id=".$tok."'>Salir</a>)</td>";
 											$tok = strtok(" \n\t");
 										}
 										if ($_COOKIE['user_ids']!='')

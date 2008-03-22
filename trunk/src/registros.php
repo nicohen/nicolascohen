@@ -14,14 +14,14 @@
 	</select>
 	<br><br>
 	<?php if ($_REQUEST['user_id']!='') {?>
-	<table border="1" align="center" cellpadding="2" cellspacing="0">
-		<tr>
+	<table border="1" align="center" cellpadding="2" cellspacing="0" style="border-collapse:collapse;border-color:gray">
+		<tr bgcolor="#FFCC99">
 			<td align="center">Fecha</td>
 			<td align="center">Detalle 1</td>
 			<td align="center">Detalle 2</td>
 		</tr>
 		<?php 
-			$query = "select l.ins_dt as fecha,a.descr as desc1,l.descr as desc2 from logs as l,acciones as a, usuarios as u where l.act_id=a.act_id and l.user_id=u.user_id and l.user_id=".$_REQUEST['user_id'];
+			$query = "select l.ins_dt as fecha,a.descr as desc1,l.descr as desc2 from logs as l,acciones as a, usuarios as u where l.act_id=a.act_id and l.user_id=u.user_id and l.user_id=".$_REQUEST['user_id']." order by fecha desc";
 			$result = doSelect($query);
 			while ($res = mysql_fetch_array($result)) {
 				echo "<tr>";
