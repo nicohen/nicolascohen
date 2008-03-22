@@ -87,7 +87,7 @@ Function do_content($lang,$lbl) {
 			include("registros.php");
 		else if($lbl==MENU_ALTA_CELULARES)
 			include("altaCelulares.php");
-		else if($lbl==MANU_ABM_CELULARES)
+		else if($lbl==MENU_ABM_CELULARES)
 			include("abmCelulares.php");
 		else
 			include("home.php");
@@ -160,6 +160,27 @@ function addEncOptions($label,$user_id){
 			echo "</tr></table></td></tr>";
 		}
 	}
+}
+
+function isCelularesSubSection($label){
+	if ($label == MENU_ALTA_CELULARES)
+		return true;
+	else if ($label == MENU_ABM_CELULARES)
+		return true;
+	else if ($label == MENU_ABM_ATRIBUTOS)
+		return true;
+		
+	return false;
+}
+
+function addCelularesOptions($label){	
+	if ($label == MENU_CELULARES_FILTROS || isCelularesSubSection($label)){
+		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
+		appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
+		appendEncRow(MENU_ABM_CELULARES, "Administrar");
+		appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
+		echo "</tr></table></td></tr>";
+	}	
 }
 
 ?>
