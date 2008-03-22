@@ -56,6 +56,8 @@
 	define('ATTR_TYPE_SELECT','S');
 	define('ATTR_TYPE_NUMBER','N');
 	define('ATTR_TYPE_CHECKBOX','CH');	
+	define('ATTR_TYPE_IMAGE','I');
+	define('ATTR_TYPE_MULTIPLE','SM');
 	
 	//Constatntes para acciones de atributos
 	define('SAVE_ATTR','save_attr');
