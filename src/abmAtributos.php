@@ -55,7 +55,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	}
 } else if ($_REQUEST['act'] == UPDATE_ATTR){
 	$qryUpd = "update atributos 
-			   set name=".$_REQUEST['atr_name'].", filter=".($_REQUEST['filter']?1:0).", tipo=".$_REQUEST['type'].
+			   set name='".$_REQUEST['atr_name']."', filter=".($_REQUEST['filter']?1:0).", tipo='".$_REQUEST['type']."'".
 			   ($_REQUEST['largo']==NULL?"":", largo=".$_REQUEST['largo']).
 			   " where atr_id = ".$_REQUEST['atr_id'];
 	print_r($qryUpd);
@@ -97,7 +97,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 </script>
 
 <form name="frmMain" action="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS ?>" method="post">
-<input type="hidden" id="act" name="act" value="<?php echo ($_REQUEST['act'] != MODIF_ATTR)?SAVE_ATTR:UPDATE_ATTR ?>"
+<input type="hidden" id="act" name="act" value="<?php echo ($_REQUEST['act'] != MODIF_ATTR)?SAVE_ATTR:UPDATE_ATTR ?>">
 <?php if ($_REQUEST['act'] != MODIF_ATTR){ ?>
 <table width="100%" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
 <tr bgcolor="#FFCC99">
