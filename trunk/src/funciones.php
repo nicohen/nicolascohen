@@ -51,7 +51,7 @@ Function do_content($lang,$lbl) {
 	if ($_COOKIE['user_active']!='' || $lbl=='') {
 		if($lbl==MENU_CELULARES_FILTROS)
 			include("celularesFiltros.php");
-		else if($lbl==MENU_CELULARES_FILTROS)
+		else if($lbl==MENU_CELULARES_LISTADO)
 			include("celularesListado.php");
 		else if($lbl==MENU_BIGLIST)
 			include("biglist.php");
@@ -89,7 +89,6 @@ Function do_content($lang,$lbl) {
 			include("altaCelulares.php");
 		else if($lbl==MANU_ABM_CELULARES)
 			include("abmCelulares.php");
-
 		else
 			include("home.php");
 	} else {
