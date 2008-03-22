@@ -2,7 +2,7 @@
 
 function mostrarValor($texto, $porc){
 	//echo $firstValor?"true":"false";	 
-	echo "<b>".$texto."</b> <font style=\"font-style:italic\">".$porc."</font>% "."<br> &nbsp;&nbsp;&nbsp"; 
+	echo "<b>".$texto."</b> <i>".$porc."</i>% "."<br> &nbsp;&nbsp;&nbsp"; 
 	$firstValor = false;
 }
 
@@ -29,7 +29,7 @@ Resumen de la encuesta: <?php echo getEncTitle() ?>
 <?php 
 $where = " AND e.enc_id =".$_REQUEST['enc_id'];
 if ($_REQUEST['vend_id'] != NULL && $_REQUEST['vend_id'] != '' && $_REQUEST['vend_id'] != 0){
-	$where = $where." AND vend_id = ".$_REQUEST['vend_id'];
+	$where = $where." AND vendedor = ".$_REQUEST['vend_id'];
 }
 
 if ($_REQUEST['dia'] != NULL && $_REQUEST['dia'] != ''){
@@ -52,7 +52,9 @@ $resRtas = doSelect($qryRtas) or die ("Error en select 2".mysql_error());
 $resValores = NULL;
 $preg = NULL;
 $firstValor = false;
+$hasResult = false;
 while ($rta = mysql_fetch_array($resRtas)){
+	$hasResult = true;
 	if ($rta['prg_id'] != $lastPreg){
 		//Completo el resto
 		completeValores($valores,$resValores);
@@ -86,6 +88,11 @@ completeValores($valores,$resValores);
 
 ?>
 </td></tr>
+<?php if (!$hasResult){ ?>
+	<tr>
+		<td align="center"> La consulta que está haciendo no trajo resultados </td>
+	</tr>
+<?php } ?>
 </table>
 <table width="100%">
 <tr>
