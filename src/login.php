@@ -1,24 +1,23 @@
 <?php
 
 require("funcionesDB.php");
+require("funciones.php");
 
 Function setear_cookies_usuario($res,$usr) {
-	setcookie("user_name_".$res['user_id'], $res['name'], time()+60*60*24*365, "/");
-	setcookie("user_last_name_".$res['user_id'], $res['last_name'], time()+60*60*24*365, "/");
-	setcookie("user_nickname_".$res['user_id'], $usr, time()+60*60*24*365, "/");
-	setcookie("user_super_".$res['user_id'], $res['super'], time()+60*60*24*365, "/");
-	setcookie("user_status_".$res['user_id'], $res['status'], time()+60*60*24*365, "/");
-	setcookie("user_ins_dt_".$res['user_id'], $res['ins_dt'], time()+60*60*24*365, "/");
-	setcookie("user_log_dt_".$res['user_id'], time(), time()+60*60*24*365, "/");
+	addCookie("user_name_".$res['user_id'], $res['name']);
+	addCookie("user_last_name_".$res['user_id'], $res['last_name']);
+	addCookie("user_nickname_".$res['user_id'], $usr);
+	addCookie("user_super_".$res['user_id'], $res['super']);
+	addCookie("user_status_".$res['user_id'], $res['status']);
 	if (!isset($_COOKIE['user_ids']))
-		setcookie("user_ids", $res['user_id'], time()+60*60*24*365, "/");
+		addCookie("user_ids", $res['user_id']);
 	else {
 		if ($_COOKIE['user_ids']=='')
-			setcookie("user_ids", $res['user_id'], time()+60*60*24*365, "/");
+			addCookie("user_ids", $res['user_id']);
 		else
-			setcookie("user_ids", $_COOKIE['user_ids'].",".$res['user_id'], time()+60*60*24*365, "/");
+			addCookie("user_ids", $_COOKIE['user_ids'].",".$res['user_id']);
 	}
-	setcookie("user_active", $res['user_id'], time()+60*60*24*365, "/");
+	addCookie("user_active", $res['user_id']);
 	
 }
 
@@ -55,10 +54,6 @@ Function check_login($usr, $pwd) {
 
 $login = check_login($_REQUEST['usr'], $_REQUEST['pwd']);
 
-//if ($login) {
-	header( 'Location: index.php' );
-//} else {
-//	header( 'Location: index.php' );
-//}
+header( 'Location: index.php' );
 
 ?>

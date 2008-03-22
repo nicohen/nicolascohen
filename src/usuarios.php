@@ -89,4 +89,4 @@ if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==USER_SUPERVISOR) { ?>
 	<br>
 	<center><a href="index.php?lbl=usuariosAgregar">Agregar nuevo usuario</a></center>
 </form>
-<?php } else echo "<br><br><center><b>Acceso denegado</b></center>";?>
+<?php } else echo "<br><br><center><b>Acceso denegado.</b><br><br><a href='index.php'>Continuar</a></center>"; ?>

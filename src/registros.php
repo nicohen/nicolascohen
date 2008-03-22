@@ -34,4 +34,4 @@
 	</table>
 	<?php } ?>
 </center>
-<?php } else echo "<br><br><center><b>Acceso denegado</b></center>";?>
+<?php } else echo "<br><br><center><b>Acceso denegado.</b><br><br><a href='index.php'>Continuar</a></center>";?>
