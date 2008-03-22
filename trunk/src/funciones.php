@@ -80,6 +80,8 @@ Function do_content($lang,$lbl) {
 		include("abmAtributos.php");
 	else if($lbl==MENU_USUARIOS_MODIFICAR)
 		include("usuariosModificar.php");
+	else if($lbl==MENU_REGISTROS)
+		include("registros.php");
 	else
 		include("home.php");
 }
@@ -141,9 +143,11 @@ function isSupervisor($user_id){
 function addEncOptions($label,$user_id){
 	if (isSupervisor($user_id)){
 		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
+			echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
 			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta");
 			appendEncRow(MENU_RESPUESTAS, "Ver respuestas");
 			appendEncRow(MENU_RES_ENCUESTAS,"Ver resultados");
+			echo "</tr></table></td></tr>";
 		}
 	}
 }
