@@ -149,6 +149,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 						<option value="<?php echo ATTR_TYPE_CHECKBOX ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_CHECKBOX) echo "selected" ?>> Check </option>
 						<option value="<?php echo ATTR_TYPE_IMAGE ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_IMAGE) echo "selected" ?>> Imagen </option>
 						<option value="<?php echo ATTR_TYPE_MULTIPLE ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_MULTIPLE) echo "selected" ?>> Multiple </option>
+						<option value="<?php echo ATTR_TYPE_MONEY ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_MONEY) echo "selected" ?>> Moneda </option>
 					</select> 
 					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div></td>
 </tr>

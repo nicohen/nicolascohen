@@ -108,7 +108,8 @@ $label=get_label($_REQUEST['lbl']);
 						</td>
 					</tr>
 					<?php }
-					addEncOptions($label,$_COOKIE['user_active']) ?>
+					addEncOptions($label,$_COOKIE['user_active']);
+					addCelularesOptions($label); ?>
 					<tr>
 						<td>
 							<table width="100%" border="0" cellpadding="0" cellspacing="3">
