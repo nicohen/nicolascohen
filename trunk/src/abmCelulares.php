@@ -41,7 +41,7 @@ function insertAttr($celuID){
 			//print_r("pase el movimiento");
 			//copy($tmpFoto,$fileTo);
 			$valor = $celuID."_".$fotoID.$ext;
-			print_r($valor);
+			//print_r($valor);
 			
 			if ($_REQUEST['act']==UPDATE_CEL){
 				$qryUpdImg = "update celulares_atributos set value = '".$valor."'

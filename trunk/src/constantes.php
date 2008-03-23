@@ -64,6 +64,7 @@
 	
 	//Valor de configuración
 	define('ATTR_TYPE_TECNOLOGIA',0);
+	define('CONST_MAX_PESO',1000);
 	
 	//Constatntes para acciones de atributos
 	define('SAVE_ATTR','save_attr');

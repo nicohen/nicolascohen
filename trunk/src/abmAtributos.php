@@ -22,7 +22,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 				"values ('".$_REQUEST['atr_name']."',
 				".($_REQUEST['filter']?1:0).",
 				'".$_REQUEST['type']."',
-				".($_REQUEST['peso'] == '' ? 1000 : $_REQUEST['peso']).",
+				".($_REQUEST['peso'] == '' ? CONST_MAX_PESO : $_REQUEST['peso']).",
 				".($_REQUEST['comparable']?1:0).($_REQUEST['largo']==''?"":",".$_REQUEST['largo']).")";
 	//print_r($insAttr);
 	$attrID = doInsertAndGetLast($insAttr);
@@ -59,10 +59,14 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	}
 } else if ($_REQUEST['act'] == UPDATE_ATTR){
 	$qryUpd = "update atributos 
-			   set name='".$_REQUEST['atr_name']."', filter=".($_REQUEST['filter']?1:0).", tipo='".$_REQUEST['type']."'".
+			   set name='".$_REQUEST['atr_name']."', 
+			   filter=".($_REQUEST['filter']?1:0).", 
+			   tipo='".$_REQUEST['type']."',
+			   peso=".($_REQUEST['peso']==''? CONST_MAX_PESO : $_REQUEST['peso']).",
+			   comparable=".($_REQUEST['comparable']?1:0).
 			   ($_REQUEST['largo']==NULL?"":", largo=".$_REQUEST['largo']).
 			   " where atr_id = ".$_REQUEST['atr_id'];
-	print_r($qryUpd);
+	//print_r($qryUpd);
 	doInsert($qryUpd);
 	
 	if (esMultiple($_REQUEST['type'])){
