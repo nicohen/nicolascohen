@@ -18,8 +18,12 @@ function esMultiple($type){
 }
 
 if ($_REQUEST['act'] == SAVE_ATTR){
-	$insAttr = "insert into atributos (name, filter, tipo".(($_REQUEST['largo'] != '')?", largo)":")").
-				"values ('".$_REQUEST['atr_name']."',".($_REQUEST['filter']?1:0).",'".$_REQUEST['type']."'".($_REQUEST['largo']==''?"":",".$_REQUEST['largo']).")";
+	$insAttr = "insert into atributos (name, filter, tipo, peso, comparable".(($_REQUEST['largo'] != '')?", largo)":")").
+				"values ('".$_REQUEST['atr_name']."',
+				".($_REQUEST['filter']?1:0).",
+				'".$_REQUEST['type']."',
+				".($_REQUEST['peso'] == '' ? 1000 : $_REQUEST['peso']).",
+				".($_REQUEST['comparable']?1:0).($_REQUEST['largo']==''?"":",".$_REQUEST['largo']).")";
 	//print_r($insAttr);
 	$attrID = doInsertAndGetLast($insAttr);
 
@@ -104,7 +108,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	<td colspan="2" align="center"> Atributos disponibles </td>
 </tr>
 <?php
-	$qryAttr = "select atr_id, name, status from atributos";
+	$qryAttr = "select atr_id, name, status from atributos order by name";
 	$resAttr = doSelect($qryAttr);
 	while ($attr = mysql_fetch_array($resAttr)){
 	?>
@@ -137,8 +141,10 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	</td>
 </tr>
 <tr>
-	<td colspan="2"> 
+	<td> 
 		<input type="checkbox" name="filter" value="1" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['filter']) echo "checked" ?> > Filtro
+	</td><td>
+		<input type="checkbox" name="comparable" value="1"> Comparable
 	</td>
 </tr>
 <tr>
@@ -153,6 +159,8 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 					</select> 
 					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div></td>
 </tr>
+<tr>
+	<td colspan="2"> Peso: <input type="text" name="peso" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributos['peso'] ?>"></td></tr>
 <tr>
 	<td colspan="2"> Largo (opcional): <input type="text" name="largo" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributos['largo'] ?>"></td></tr>
 <tr>

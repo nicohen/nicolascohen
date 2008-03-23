@@ -42,7 +42,7 @@ function grabar(){
 <?php 
 $modifing = ($_REQUEST['act'] == MODIF_CEL);
 if ($modifing){
-	$qryCelu = "select marca, modelo from celulares where celu_id = ".$_REQUEST['celu_id'];
+	$qryCelu = "select marca, modelo, tecnologia, precio_prepago, precio_postpago from celulares where celu_id = ".$_REQUEST['celu_id'];
 	$resCelu = doSelect($qryCelu);
 	$celu = mysql_fetch_array($resCelu);
 }
@@ -69,7 +69,7 @@ if ($modifing){
 				$resTecno = doSelect($qryTecno);
 				while ($tecno = mysql_fetch_array($resTecno)){
 					?>
-					<option value="<?php echo $tecno['valor']?>"> <?php echo $tecno['valor'] ?></option>
+					<option value="<?php echo $tecno['valor']?>" <?php if ($modifing && $tecno['valor'] == $celu['tecnologia']) echo "selected"?>> <?php echo $tecno['valor'] ?></option>
 					<?php
 				}
 			?>
@@ -77,14 +77,14 @@ if ($modifing){
 	</tr>
 	<tr>
 		<td> Precio Pre-Pago (*) </td>
-		<td> $ <input type="text" value="" id="precio_prepago" name="precio_prepago" onKeyDown="checkForInt(event)"> </td>
+		<td> $ <input type="text" value="<?php if ($modifing) echo $celu['precio_prepago'] ?>" id="precio_prepago" name="precio_prepago" onKeyDown="checkForInt(event)"> </td>
 	</tr>
 	<tr>
 		<td> Precio Post-Pago (*) </td>
-		<td> $ <input type="text" value="" id="precio_prepago" name="precio_postpago" onKeyDown="checkForInt(event)"> </td>
+		<td> $ <input type="text" value="<?php if ($modifing) echo $celu['precio_postpago'] ?>" id="precio_prepago" name="precio_postpago" onKeyDown="checkForInt(event)"> </td>
 	</tr>
 <?php
-$qryAtribs = "select atr_id,name,tipo,largo from atributos where status = 'A'";
+$qryAtribs = "select atr_id,name,tipo,largo from atributos where status = 'A' order by name";
 $resAtribs = doSelect($qryAtribs);
 $i = 0;
 while ($atrib = mysql_fetch_array($resAtribs)){
