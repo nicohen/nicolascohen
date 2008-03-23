@@ -117,7 +117,7 @@ if ($_REQUEST['act'] == SAVE_CEL){
 	while ($celu = mysql_fetch_array($resCelus)){
 		?>
 		<tr>
-			<td width="50%"><a target="_blank" href="index.php?lbl=<?php echo MENU_VPP ?>&celu_id=<?php echo $celu['celu_id'] ?>"><?php echo $celu['marca']." ".$celu['modelo'] ?></a></td>
+			<td width="50%"><a target="_blank" href="vpp.php?celu_id=<?php echo $celu['celu_id'] ?>"><?php echo $celu['marca']." ".$celu['modelo'] ?></a></td>
 			<td>
 				<?php if($celu['status'] == 'A'){ ?>
 				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo INACTIVE_CEL ?>&celu_id=<?php echo $celu['celu_id'] ?>">Inactivar</a>

@@ -1,9 +1,26 @@
 <?php 
+//Funciones para operar con archivos y otros
+require_once("funciones.php"); 
+require_once("funcionesDB.php");
+
 	$qryCel = "select marca,modelo,tecnologia,precio_prepago,precio_postpago from celulares where celu_id = ".$_REQUEST['celu_id'];
 	$resCel = doSelect($qryCel);
 	$celular = mysql_fetch_array($resCel);// or die  ("El celular que esta buscando no existe");
+	
+	do_header($celular['marca']." ".$celular['modelo']);
 ?>
-<table width="100%" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
+<body>
+<script language="javascript">
+	function imprimirCelu(){
+		document.getElementById("divButtons").style.display = "none";
+		window.print();
+		setInterval('100000');
+		document.getElementById("divButtons").style.display = "";
+	}
+</script>
+<br>
+<br>
+<table width="768" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
 	<tr bgcolor="#FFCC99">
 		<td colspan="2" align="center"> <?php echo $celular['marca']." ".$celular['modelo'] ?> </td>
 	</tr>
@@ -63,3 +80,17 @@
 					  
 	?>
 </table>
+<div id="divButtons">
+	<table width="768" align="center">
+		<tr>
+			<td align="center"> 
+				<input type="button" value="Imprimir" onClick="imprimirCelu()">
+				<input type="button" value="Cerrar" onClick="window.close()">
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+<?php
+close_html();
+?>
