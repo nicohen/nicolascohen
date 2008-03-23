@@ -36,6 +36,14 @@ Function closeConnection($conn) {
 	mysql_close($conn);
 }
 
+Function doExecuteAndGetCount($query){
+	$conn = getConnection();
+	mysql_query($query,$conn) or die ("Error en execute ".mysql_error());
+	$cant = mysql_affected_rows($conn);
+	closeConnection($conn);
+	return $cant;
+}
+
 Function store_action($usrid,$act,$desc,$url) {
 	$query = "insert into logs (user_id, ins_dt, act, descr, url) values (".$usrid.",sysdate(),".$act.",'".$desc."','".$url."')";
 	doInsert($query);

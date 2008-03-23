@@ -1,4 +1,5 @@
 <?php 
+$fotoID = 0;
 function insertAttr($celuID){
 	for ($i = 1; $i <= $_REQUEST['cantAtrib']; $i++){
 		$tipo = $_REQUEST['atrType'.$i];
@@ -12,16 +13,14 @@ function insertAttr($celuID){
 			} 
 		} else if ($tipo == ATTR_TYPE_CHECKBOX){
 			$valor = ($_REQUEST['atrValue'.$i]?"1":"0");
-		} else if ($tipo == ATTR_TYPE_IMAGE){
+		} else if ($tipo == ATTR_TYPE_IMAGE && $_FILES['atrValue'.$i]['name'] != ''){
+			//print_r($_FILES['atrValue'.$i]['name']);
+			$fotoID++;
 			
 			$tmpFoto = $_FILES['atrValue'.$i]['tmp_name'];
 			//$dirBase = "";
 			$dirTo = "img\\".$celuID."_";
-			$fotoID = 1;
-			while (file_exists($dirTo.$fotoID)){
-				$fotoID++;
-			}
-			
+						
 			//mkdir(dirname($dirTo),0755,true);
 			//recur_mkdirs($dirTo);
 			
@@ -30,17 +29,28 @@ function insertAttr($celuID){
 			
 			$fileTo = $dirTo.$fotoID.$ext;
 			
-			//print_r($origFile);
-			//print_r($tmpFoto."->".$fileTo);
-			if (move_uploaded_file($tmpFoto,$fileTo)){
-				//NO hago nada
+			while (file_exists($fileTo)){
+				$fotoID++;
+				$fileTo = $dirTo.$fotoID.$ext;
 			}
 			
-			
-			
-			
+			//print_r($fileTo);			
+			//print_r($origFile);
+			//print_r($tmpFoto."->".$fileTo);
+			move_uploaded_file($tmpFoto,$fileTo);			
+			//print_r("pase el movimiento");
 			//copy($tmpFoto,$fileTo);
 			$valor = $celuID."_".$fotoID.$ext;
+			print_r($valor);
+			
+			if ($_REQUEST['act']==UPDATE_CEL){
+				$qryUpdImg = "update celulares_atributos set value = '".$valor."'
+							  where celu_id = ".$_REQUEST['celu_id']."
+							  and atr_id = ".$atrID;
+				if (doExecuteAndGetCount($qryUpdImg) > 0){
+					continue;
+				}
+			}
 		} else {
 			$valor = $_REQUEST['atrValue'.$i];
 		}
@@ -53,7 +63,10 @@ function insertAttr($celuID){
 }
 
 function deleteAtribs(){
-	$qryDelAtribs = "delete from celulares_atributos where celu_id = ".$_REQUEST['celu_id'];
+	$qryDelAtribs = "delete from celulares_atributos c where celu_id = ".$_REQUEST['celu_id'];
+	if ($_REQUEST['act']== UPDATE_CEL){
+		$qryDelAtribs = $qryDelAtribs." and (select tipo from atributos where atr_id = c.atr_id) = '".ATTR_TYPE_IMAGE."'";
+	}
 	doInsert($qryDelAtribs);
 }
 
@@ -104,7 +117,7 @@ if ($_REQUEST['act'] == SAVE_CEL){
 	while ($celu = mysql_fetch_array($resCelus)){
 		?>
 		<tr>
-			<td width="50%"><?php echo $celu['marca']." ".$celu['modelo'] ?></td>
+			<td width="50%"><a target="_blank" href="index.php?lbl=<?php echo MENU_VPP ?>&celu_id=<?php echo $celu['celu_id'] ?>"><?php echo $celu['marca']." ".$celu['modelo'] ?></a></td>
 			<td>
 				<?php if($celu['status'] == 'A'){ ?>
 				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo INACTIVE_CEL ?>&celu_id=<?php echo $celu['celu_id'] ?>">Inactivar</a>
