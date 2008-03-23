@@ -18,12 +18,13 @@ function esMultiple($type){
 }
 
 if ($_REQUEST['act'] == SAVE_ATTR){
-	$insAttr = "insert into atributos (name, filter, tipo, peso, comparable".(($_REQUEST['largo'] != '')?", largo)":")").
+	$insAttr = "insert into atributos (name, filter, tipo, peso, comparable, publico".(($_REQUEST['largo'] != '')?", largo)":")").
 				"values ('".$_REQUEST['atr_name']."',
 				".($_REQUEST['filter']?1:0).",
 				'".$_REQUEST['type']."',
 				".($_REQUEST['peso'] == '' ? CONST_MAX_PESO : $_REQUEST['peso']).",
-				".($_REQUEST['comparable']?1:0).($_REQUEST['largo']==''?"":",".$_REQUEST['largo']).")";
+				".($_REQUEST['comparable']?1:0).",
+				".($_REQUEST['publico']?1:0).($_REQUEST['largo']==''?"":",".$_REQUEST['largo']).")";
 	//print_r($insAttr);
 	$attrID = doInsertAndGetLast($insAttr);
 
@@ -43,7 +44,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	deleteAtributosValores();
 	
 } else if ($_REQUEST['act'] == MODIF_ATTR){
-	$qrySel = "select name, filter, tipo, largo from atributos where atr_id = ".$_REQUEST['atr_id'];
+	$qrySel = "select name, filter, tipo, largo, comparable, peso, publico from atributos where atr_id = ".$_REQUEST['atr_id'];
 	$resSel = doSelect($qrySel);
 	$atributo = mysql_fetch_array($resSel);
 	$commaValores = "";
@@ -63,7 +64,8 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 			   filter=".($_REQUEST['filter']?1:0).", 
 			   tipo='".$_REQUEST['type']."',
 			   peso=".($_REQUEST['peso']==''? CONST_MAX_PESO : $_REQUEST['peso']).",
-			   comparable=".($_REQUEST['comparable']?1:0).
+			   comparable=".($_REQUEST['comparable']?1:0).",
+			   publico=".($_REQUEST['publico']?1:0).
 			   ($_REQUEST['largo']==NULL?"":", largo=".$_REQUEST['largo']).
 			   " where atr_id = ".$_REQUEST['atr_id'];
 	//print_r($qryUpd);
@@ -145,10 +147,20 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	</td>
 </tr>
 <tr>
-	<td> 
-		<input type="checkbox" name="filter" value="1" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['filter']) echo "checked" ?> > Filtro
-	</td><td>
-		<input type="checkbox" name="comparable" value="1"> Comparable
+	<td colspan="2"> 
+		<table width="100%">
+			<tr>
+				<td width="33%" align="center">
+					<input type="checkbox" name="filter" value="1" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['filter']) echo "checked" ?> > Filtro
+				</td>
+				<td width="33%" align="center">
+					<input type="checkbox" name="comparable" value="1" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['comparable']) echo "checked" ?>> Comparable
+				</td>
+				<td width="33%" align="center">
+					<input type="checkbox" name="publico" value="1" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['publico']) echo "checked" ?>> Publico
+				</td>
+			</tr>
+		</table>
 	</td>
 </tr>
 <tr>

@@ -17,6 +17,15 @@ require_once("funcionesDB.php");
 		setInterval('100000');
 		document.getElementById("divButtons").style.display = "";
 	}
+	
+	function verImg(img){
+		document.getElementById("imgGrande").src = document.getElementById("img"+img).src;
+		document.getElementById("divImg").style.display = '';
+	}
+	
+	function closeImg(){
+		document.getElementById("divImg").style.display = 'none';
+	}
 </script>
 <br>
 <br>
@@ -26,7 +35,8 @@ require_once("funcionesDB.php");
 	</tr>
 	<tr>
 		<td colspan="2"> 
-			<table width="100%"><tr>
+			<table width="100%">
+			<tr>
 			<?php 
 				$qryImages = "select c.value from atributos a, celulares_atributos c
 							  where a.atr_id = c.atr_id 
@@ -35,15 +45,24 @@ require_once("funcionesDB.php");
 							  and c.celu_id = ".$_REQUEST['celu_id'];
 				//print_r($qryImages);
 				$resImages = doSelect($qryImages);
+				$i = 0;
 				while ($img = mysql_fetch_array($resImages)){
+					$i++;
 					if ($img[0] != ""){
 					?>
-					<td align="center"><img src="/cti/src/img/<?php echo $img[0] ?>" width="100" height="100"></td>
+					<td align="center"><a href="javascript:verImg(<?php echo $i ?>);"><img border="0" id="img<?php echo $i ?>" src="/cti/src/img/<?php echo $img[0] ?>" width="100" height="100"></a></td>
 					<?php
 					}
 				}
 			?>
 			</tr></table>
+			<div id="divImg" style="border:1;border-bottom-style:solid;position:absolute; display:none; z-index:1; left: 352px; top: 89px; width: 295px">
+				<table border="2" style="border-collapse:collapse;border-color:black;background-color:#FFFFFF">
+					<tr>
+						<td align="center"><img id="imgGrande" width="295" height="350"><br>
+						<a href="javascript:closeImg()">Cerrar</a>
+				</td></tr></table>
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -63,6 +82,7 @@ require_once("funcionesDB.php");
 					  where a.atr_id = c.atr_id
 					  and a.tipo != '".ATTR_TYPE_IMAGE."'
 					  and a.status = 'A'
+					  and a.publico = 1
 					  and c.celu_id = ".$_REQUEST['celu_id']."
 					  order by a.peso";
 		$resAtribs = doSelect($qryAtribs);
