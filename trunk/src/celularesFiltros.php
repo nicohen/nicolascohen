@@ -21,6 +21,8 @@
 				$result = doSelect($query);
 				//Valida el cambio de type para abrir o cerrar el select
 				$isCombo=false;
+				//Nombre del ultimo checkbox utilizado
+				$lastCheckbox = "";
 				while ($res = mysql_fetch_array($result)) {
 					//Este $nextType vale 1
 					if ($res['tipo']==ATTR_TYPE_TEXT || $res['tipo']==ATTR_TYPE_SELECT || $res['tipo']==ATTR_TYPE_NUMBER || $res['tipo']==ATTR_TYPE_MULTIPLE) {
@@ -43,7 +45,10 @@
 							echo "</select></td></tr>";
 							$isCombo=false;
 						}
-						echo "<tr><td align='right' width='100'>".$res['name'].":</td><td align='left'><input type='checkbox' name='atr".$res['atr_id']."'></td></tr>";
+						if ($lastCheckbox!=$res['name']) {
+							echo "<tr><td align='right' width='100'>".$res['name'].":</td><td align='left'><input type='checkbox' name='atr".$res['atr_id']."'></td></tr>";
+							$lastCheckbox = $res['name'];
+						}
 					}
 				}
 				if ($isCombo)

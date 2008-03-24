@@ -18,6 +18,9 @@ else
 
 <?php
 
+//Parsear correctamente el request (para las opciones multiples)
+echo $_REQUEST['marca'];
+
 $attrQuery = "select atr_id from atributos where filter=1 and status='A'";
 $attrResult = doSelect($attrQuery);
 $firstAttr=true;
@@ -31,14 +34,15 @@ while ($attrRes = mysql_fetch_array($attrResult)) {
 			$postAttrs = $postAttrs.",".$attrRes['atr_id'];
 	}
 }
-
+echo $postAttrs;
 
 $celQuery = 
 "select distinct c.celu_id, c.marca, c.modelo 
-from celulares c, celulares_atributos ca
-where c.celu_id=ca.celu_id
-and c.status='A' ".(($postAttrs!='')?("and ca.atr_id in (".$postAttrs.")"):"")."
+from celulares c, celulares_atributos ca 
+where c.celu_id=ca.celu_id 
+and c.status='A' ".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
 order by c.marca, c.modelo";
+//.(($_REQUEST['marca']!='')?(" and c.marca"):"")."
 //echo $celQuery;
 $celResult = doSelect($celQuery);
 //Cuenta la cantidad de celulares
@@ -55,24 +59,28 @@ while ($celRes = mysql_fetch_array($celResult)) {
 	else
 		$inCelulares = $inCelulares.",".$celRes['celu_id'];
 
-	if ($colCount!=MAX_COLS) {
-		$colCount++;
-		//if ($colCount==MIN_COLS)
-			//echo "<tr width='".getColWidth()."%'>";
+	if ($colCount<=MAX_COLS) {
 		//Marca Modelo
 		echo "<td align='center'>".$celRes['marca']." ".$celRes['modelo']."</td>";
+		$colCount++;
 		if ($colCount==MAX_COLS)
 			echo "</tr>";
 	}	
 }
-
+if ($colCount>0 && $colCount<MAX_COLS) {
+	for ($i=$colCount;$i<MAX_COLS;$i++)
+		echo "<td></td>";
+	echo "</tr>";	
+}
+	
+	
 $resultQuery = 
 "select 
 ca.celu_id, a.atr_id, a.name, ca.value 
-from atributos a, celulares_atributos ca
-where a.status='A' and a.atr_id=ca.atr_id 
-and ca.celu_id in (".$inCelulares.")
-order by a.name";
+from atributos a, celulares_atributos ca, celulares c
+where a.status='A' and a.tipo!='I' and a.publico=1 and a.atr_id=ca.atr_id 
+and ca.celu_id in (".$inCelulares.") and ca.celu_id=c.celu_id
+order by a.name, c.marca, c.modelo";
 $result = doSelect($resultQuery);
 /* 
 Fila 1:     Marca Modelo
@@ -82,30 +90,29 @@ Fila 3...n: Atributos
 
 //Contador de filas
 $indexCol = 0;
+//Atributo actual
+$atributo = "";
+
 while ($res = mysql_fetch_array($result)) {
-	echo "<tr><td>".$res['name']."</td>";
-	if ($res['celu_id']==$celulares[$indexCol++]['celu_id'])
-		echo "<td align='center'>".$res['value']."</td>";
-	else
-		echo "<td></td>";
+
+	if ($atributo!=$res['name']) {
+		if ($atributo!="") {
+			if ($indexCol!=MAX_COLS)
+				for($i=$indexCol;$i<MAX_COLS;$i++) {
+					echo "<td></td>";
+				}
+			echo "</tr>";
+			$indexCol = 0;
+		}
+		echo "<tr width='".getColWidth()."%'><td>".$res['name']."</td>";
+	}
 
 	if ($res['celu_id']==$celulares[$indexCol++]['celu_id'])
-		echo "<td align='center'>".$res['value']."</td>";
+		echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
 	else
-		echo "<td></td>";
+		echo "<td>Error</td>";
 
-	if ($res['celu_id']==$celulares[$indexCol++]['celu_id'])
-		echo "<td align='center'>".$res['value']."</td>";
-	else
-		echo "<td></td>";
-
-	if ($res['celu_id']==$celulares[$indexCol]['celu_id'])
-		echo "<td align='center'>".$res['value']."</td>";
-	else
-		echo "<td></td>";
-
-	echo "</tr>";
-	$indexCol = 0;
+	$atributo = $res['name'];
 }
 
 ?>
