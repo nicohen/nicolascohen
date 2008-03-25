@@ -19,8 +19,6 @@ else
 <?php
 
 //Parsear correctamente el request (para las opciones multiples)
-echo $_REQUEST['marca'];
-
 $attrQuery = "select atr_id from atributos where filter=1 and status='A'";
 $attrResult = doSelect($attrQuery);
 $firstAttr=true;
@@ -36,11 +34,26 @@ while ($attrRes = mysql_fetch_array($attrResult)) {
 }
 echo $postAttrs;
 
+$firstMarca=true;
+$inMarcas = "";
+
+if ($_REQUEST['marcas']!='') {
+	foreach($_REQUEST['marcas'] as $marcas) {
+		if ($firstMarca==true) {
+			$inMarcas="'".$marcas."'";
+			$firstMarca=false;
+		} else {
+			$inMarcas = $inMarcas.",'".$marcas."'";
+		}
+	}
+}
+
 $celQuery = 
 "select distinct c.celu_id, c.marca, c.modelo 
 from celulares c, celulares_atributos ca 
 where c.celu_id=ca.celu_id 
 and c.status='A' ".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
+".((!$firstMarca)?(" and c.marca in (".$inMarcas.")"):"")."
 order by c.marca, c.modelo";
 //.(($_REQUEST['marca']!='')?(" and c.marca"):"")."
 //echo $celQuery;
@@ -72,8 +85,7 @@ if ($colCount>0 && $colCount<MAX_COLS) {
 		echo "<td></td>";
 	echo "</tr>";	
 }
-	
-	
+		
 $resultQuery = 
 "select 
 ca.celu_id, a.atr_id, a.name, ca.value 
@@ -106,7 +118,6 @@ while ($res = mysql_fetch_array($result)) {
 		}
 		echo "<tr width='".getColWidth()."%'><td>".$res['name']."</td>";
 	}
-
 	if ($res['celu_id']==$celulares[$indexCol++]['celu_id'])
 		echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
 	else
