@@ -74,10 +74,10 @@ $label=get_label($_REQUEST['lbl']);
 										<?php } ?>
 									</td>
 									<td width="20%">
-										<?php if($label==MENU_SERVICIOS) { ?>
+										<?php if($label==MENU_ABM_SERVICIOS || isServiciosSubSection($label)) { ?>
 											<b>Servicios</b>
 										<?php } else { ?>
-											<a href="/cti/src/index.php?lbl=<?php echo MENU_SERVICIOS ?>">Servicios</a>
+											<a href="/cti/src/index.php?lbl=<?php echo MENU_ABM_SERVICIOS ?>">Servicios</a>
 										<?php } ?>
 									</td>
 									<td width="20%">
@@ -109,7 +109,8 @@ $label=get_label($_REQUEST['lbl']);
 					</tr>
 					<?php }
 					addEncOptions($label,$_COOKIE['user_active']);
-					addCelularesOptions($label); ?>
+					addCelularesOptions($label); 
+					addServiciosOptions($label); ?>
 					<tr>
 						<td>
 							<table width="100%" border="0" cellpadding="0" cellspacing="3">

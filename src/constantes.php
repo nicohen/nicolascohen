@@ -27,6 +27,8 @@
 	define('MENU_RES_RESULTADOS','resEncuesta');
 	define('MENU_RESPUESTAS','abmRespuestas');
 	define('MENU_SERVICIOS', 'servicios');
+	define('MENU_ABM_SERVICIOS','abmServicios');
+	define('MENU_ALTA_SERVICIOS','altaServicios');
 	define('MENU_REGISTROS', 'registros');
 	define('MENU_USUARIOS', 'usuarios');
 	define('MENU_USUARIOS_ALTA', 'usuariosAgregar');
@@ -38,11 +40,12 @@
 	define('MENU_REGISTROS','registros');
 	define('MENU_ALTA_CELULARES','altaCelulares');
 	define('MENU_ABM_CELULARES','abmCelulares');
+	define('MENU_ABM_ATRIBUTOS_SERVICIOS','abmAtrsServicios');
 		
 	//Defino las constantes para la base de datos
 	define('DB_SERVER','localhost');
 	define('DB_USER','root');
-	define('DB_PASS','');
+	define('DB_PASS','p5f7sa7h');
 	define('DB_NAME','cti');
 	
 	//Defino constantes para encuesta
