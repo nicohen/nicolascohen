@@ -71,6 +71,10 @@ Function do_content($lang,$lbl) {
 			include("ABMRespuestas.php");
 		else if($lbl==MENU_SERVICIOS)
 			include("servicios.php");
+		else if($lbl==MENU_ALTA_SERVICIOS)
+			include("altaServicios.php");
+		else if($lbl==MENU_ABM_SERVICIOS)
+			include("abmServicios.php");
 		else if($lbl==MENU_INFO)
 			include("info.php");
 		else if($lbl==MENU_USUARIOS)
@@ -89,6 +93,8 @@ Function do_content($lang,$lbl) {
 			include("altaCelulares.php");
 		else if($lbl==MENU_ABM_CELULARES)
 			include("abmCelulares.php");
+		else if($lbl==MENU_ABM_ATRIBUTOS_SERVICIOS)
+			include("abmAtributosServicios.php");
 		else
 			include("home.php");
 	} else {
@@ -179,6 +185,27 @@ function addCelularesOptions($label){
 		appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
 		appendEncRow(MENU_ABM_CELULARES, "Administrar");
 		appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
+		echo "</tr></table></td></tr>";
+	}	
+}
+
+function isServiciosSubSection($label){
+	if ($label == MENU_ALTA_SERVICIOS)
+		return true;
+	else if ($label == MENU_SERVICIOS)
+		return true;
+	else if ($label == MENU_ABM_ATRIBUTOS_SERVICIOS)
+		return true;
+		
+	return false;
+}
+
+function addServiciosOptions($label){	
+	if ($label == MENU_ABM_SERVICIOS || isServiciosSubSection($label)){
+		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
+		appendEncRow(MENU_ALTA_SERVICIOS, "Dar de alta");
+		appendEncRow(MENU_ABM_SERVICIOS, "Administrar");
+		appendEncRow(MENU_ABM_ATRIBUTOS_SERVICIOS, "Ver atributos");
 		echo "</tr></table></td></tr>";
 	}	
 }
