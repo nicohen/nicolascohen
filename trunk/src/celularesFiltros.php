@@ -9,7 +9,7 @@
 				
 				<?php
 				
-				$query = "select marca from celulares where status='A' order by marca";
+				$query = "select distinct marca from celulares where status='A' order by marca";
 				$result = doSelect($query);
 				echo "<tr><td align='right' width='100'>Marca:</td><td align='left'><select name='marcas[]' multiple>";
 				while ($res = mysql_fetch_array($result)) {

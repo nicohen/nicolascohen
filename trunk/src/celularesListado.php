@@ -19,12 +19,11 @@ else
 <?php
 
 //Parsear correctamente el request (para las opciones multiples)
-$attrQuery = "select atr_id from atributos where filter=1 and status='A'";
+$attrQuery = "SELECT distinct atr_id from atributos where filter=1 and STATUS = 'A'";
 $attrResult = doSelect($attrQuery);
 $firstAttr=true;
 while ($attrRes = mysql_fetch_array($attrResult)) {
 	if ($_REQUEST["atr".$attrRes['atr_id']]!='') {
-		//$postAttrs[$cantPostAttrs++]=$_REQUEST['atr_id'];
 		if ($firstAttr==true) {
 			$postAttrs = $attrRes['atr_id'];
 			$firstAttr = false;
@@ -32,7 +31,22 @@ while ($attrRes = mysql_fetch_array($attrResult)) {
 			$postAttrs = $postAttrs.",".$attrRes['atr_id'];
 	}
 }
-echo $postAttrs;
+
+//Recorrer $postAttrs
+$valueQuery = "SELECT DISTINCT atr_id, ca.value FROM atributos a, celulares_atributos ca WHERE a.filter = 1 AND a.status = 'A' AND a.atr_id = ca.atr_id";
+$valueResult = doSelect($valueQuery);
+$firstValue=true;
+while ($valueRes = mysql_fetch_array($valueResult)) {
+	if ($_REQUEST["atr".$valueRes['value']]==$valueRes['value']) {
+		if ($firstValue==true) {
+			$postValues = $valueRes['value'];
+			$firstValue = false;
+		} else
+			$postValues = $postValues.",".$valueRes['value'];
+	}
+}
+
+//echo "postattrs: ".$postAttrs;
 
 $firstMarca=true;
 $inMarcas = "";
@@ -52,11 +66,13 @@ $celQuery =
 "select distinct c.celu_id, c.marca, c.modelo 
 from celulares c, celulares_atributos ca 
 where c.celu_id=ca.celu_id 
-and c.status='A' ".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
 ".((!$firstMarca)?(" and c.marca in (".$inMarcas.")"):"")."
+and c.status='A' 
+".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
+".(($postValues!='')?(" and ca.atr_id in (".$postValues.")"):"")."
 order by c.marca, c.modelo";
-//.(($_REQUEST['marca']!='')?(" and c.marca"):"")."
-//echo $celQuery;
+
+echo $celQuery;
 $celResult = doSelect($celQuery);
 //Cuenta la cantidad de celulares
 $celCount = 0;
