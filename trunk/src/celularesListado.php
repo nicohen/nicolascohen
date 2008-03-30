@@ -30,34 +30,6 @@ while ($attrRes = mysql_fetch_array($attrResult)) {
 	}
 }
 
-//Recorrer $postAttrs
-/*$firstValue=true;
-$tok = strtok ($postAttrs, ",");
-while ($tok !== false) {
-	if ($firstValue==true) {
-		$postValues = (($_REQUEST["atr".$tok]=='on')?"'1'":"'".$_REQUEST["atr".$tok]."'");
-		$firstValue = false;
-	} else
-		$postValues = $postValues.",".(($_REQUEST["atr".$tok]=='on')?"'1'":"'".$_REQUEST["atr".$tok]."'");
-	echo "atributo:".$tok." value:".$postValues."<br>";
-	$tok = strtok(" \n\t");
-}*/
-/*
-$valueQuery = "SELECT DISTINCT atr_id, ca.value FROM atributos a, celulares_atributos ca WHERE a.filter = 1 AND a.status = 'A' AND a.atr_id = ca.atr_id";
-$valueResult = doSelect($valueQuery);
-$firstValue=true;
-while ($valueRes = mysql_fetch_array($valueResult)) {
-	if ($_REQUEST["atr".$valueRes['value']]==$valueRes['value']) {
-		if ($firstValue==true) {
-			$postValues = $valueRes['value'];	
-			$firstValue = false;
-		} else
-			$postValues = $postValues.",".$valueRes['value'];
-	}
-}
-*/
-//echo "postattrs: ".$postAttrs;
-
 $firstMarca=true;
 $inMarcas = "";
 
@@ -84,17 +56,6 @@ AND c.status = 'A'
 AND ca.value !=0
 AND ca.value IS NOT NULL
 ORDER BY c.marca, c.modelo";
-/*
-$celQuery = 
-"select distinct c.celu_id, c.marca, c.modelo 
-from celulares c, celulares_atributos ca 
-where c.celu_id=ca.celu_id 
-and c.status='A' 
-".((!$firstMarca)?(" and c.marca in (".$inMarcas.")"):"")."
-".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
-order by c.marca, c.modelo";
-*/
-/*".(($postValues!='')?(" and ca.value in (".$postValues.")"):"")."*/
 
 //echo $celQuery;
 $celResult = doSelect($celQuery);
@@ -111,17 +72,16 @@ while ($celRes = mysql_fetch_array($celResult)) {
 	$tok = strtok ($postAttrs, ",");
 	while ($tok !== false) {
 		$hasAttrQuery = "select 1 from celulares_atributos where celu_id=".$celRes['celu_id']." and atr_id=".$tok." and value=".(($_REQUEST["atr".$tok]=='on')?'1':'0');
-		//echo "<br>".$hasAttrQuery;
 		$hasAttrResult = doSelect($hasAttrQuery);
 		$hasAttrRes = mysql_fetch_array($hasAttrResult);
 		$hasAllAttributes = $hasAllAttributes*$hasAttrRes['1'];
-		//echo "<br>".$hasAllAttributes;
+
 		if ($firstValue==true) {
 			$celular = (($_REQUEST["atr".$tok]=='on')?"'1'":"'".$_REQUEST["atr".$tok]."'");
 			$firstValue = false;
 		} else
 			$postValues = $postValues.",".(($_REQUEST["atr".$tok]=='on')?"'1'":"'".$_REQUEST["atr".$tok]."'");
-		//echo "<br>atributo:".$tok." value:".$postValues;
+
 		$tok = strtok(" \n\t");
 	}
 	if ($hasAllAttributes) {
@@ -134,13 +94,11 @@ while ($celRes = mysql_fetch_array($celResult)) {
 
 		if ($colCount<=MAX_COLS) {
 			//Marca Modelo
-			echo "<td align='center'>".$celRes['marca']." ".$celRes['modelo']."</td>";
+			echo "<td align='center'><a href='vpp.php?celu_id=".$celRes['celu_id']."'>".$celRes['marca']." ".$celRes['modelo']."</a></td>";
 			$colCount++;
 			if ($colCount==MAX_COLS)
 				echo "</tr>";
 		}	
-	} else {
-		$hasAllAttributes = 1;
 	}
 }
 if ($colCount>0 && $colCount<MAX_COLS && $celCount>0) {
@@ -157,6 +115,7 @@ if($inCelulares!='') {
 	where a.status='A' and a.tipo!='I' and a.publico=1 and a.atr_id=ca.atr_id 
 	and ca.celu_id in (".$inCelulares.") and ca.celu_id=c.celu_id
 	order by a.name, c.marca, c.modelo";
+	echo $resultQuery;
 	$result = doSelect($resultQuery);
 	/* 
 	Fila 1:     Marca Modelo
@@ -170,7 +129,6 @@ if($inCelulares!='') {
 	$atributo = "";
 	
 	while ($res = mysql_fetch_array($result)) {
-	
 		if ($atributo!=$res['name']) {
 			if ($atributo!="") {
 				if ($indexCol!=MAX_COLS)
