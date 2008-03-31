@@ -1,6 +1,6 @@
 <center><h4><u>Consulta de celulares</u></h4></center>
 
-<form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>" method="post">
+<form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>&list=1" method="post">
 	<table border="1" align="center" cellpadding="3" cellspacing="0" width="400">
 		<tr><td><b>Elija los criterios:</b></td></tr>
 		<tr>
@@ -53,6 +53,10 @@
 				}
 				if ($isCombo)
 					echo "</select></td></tr>";
+					
+				setcookie("celulares_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
+				setcookie("list_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
+
 				?>
 				<tr>
 					<td height="10"></td>
