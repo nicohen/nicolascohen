@@ -71,11 +71,11 @@ require_once("funcionesDB.php");
 	</tr>
 	<tr>
 		<td> Precio Pre-Pago: </td>
-		<td> <?php echo $celular['precio_prepago']?> </td>
+		<td> $<?php echo $celular['precio_prepago']?> </td>
 	</tr>
 	<tr>
 		<td> Precio Post-Pago: </td>
-		<td> <?php echo $celular['precio_postpago']?> </td>
+		<td> $<?php echo $celular['precio_postpago']?> </td>
 	</tr>
 	<?php 
 		$qryAtribs = "select a.name, c.value, a.tipo from atributos a, celulares_atributos c
@@ -91,7 +91,7 @@ require_once("funcionesDB.php");
 			<tr>
 				<td> <?php echo $atrib['name'] ?> </td>
 				<td> <?php
-						if ($atrib['tipo'] == ATTR_TYPE_CHECK){
+						if ($atrib['tipo'] == ATTR_TYPE_CHECKBOX){
 							echo $atrib['value']?"Si":"No";
 						} else {
 							if ($atrib['tipo'] == ATTR_TYPE_MONEY)
