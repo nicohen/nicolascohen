@@ -91,9 +91,13 @@ require_once("funcionesDB.php");
 			<tr>
 				<td> <?php echo $atrib['name'] ?> </td>
 				<td> <?php
-						if ($atrib['tipo'] == ATTR_TYPE_MONEY)
-							echo "$"; 
-						echo $atrib['value'] ?> </td>
+						if ($atrib['tipo'] == ATTR_TYPE_CHECK){
+							echo $atrib['value']?"Si":"No";
+						} else {
+							if ($atrib['tipo'] == ATTR_TYPE_MONEY)
+								echo "$"; 
+							echo $atrib['value'];
+						} ?> </td>
 			</tr>
 		<?php
 		}			  
@@ -105,7 +109,7 @@ require_once("funcionesDB.php");
 		<tr>
 			<td align="center"> 
 				<input type="button" value="Imprimir" onClick="imprimirCelu()">
-				<input type="button" value="Cerrar" onClick="window.close()">
+				<input type="button" value="Cerrar" onClick="javascript:window.close();">
 			</td>
 		</tr>
 	</table>
