@@ -87,7 +87,7 @@ while ($celRes = mysql_fetch_array($celResult)) {
 
 		if ($celCount>(MAX_COLS*$_REQUEST['list']-MAX_COLS) && $celCount<=(MAX_COLS*$_REQUEST['list'])) {
 			//Marca Modelo
-			echo "<td align='center'><a href='vpp.php?celu_id=".$celRes['celu_id']."'>".$celRes['marca']." ".$celRes['modelo']."</a></td>";
+			echo "<td align='center'><a href='vpp.php?celu_id=".$celRes['celu_id']."' target='_blank'>".$celRes['marca']." ".$celRes['modelo']."</a></td>";
 			$colCount++;
 			if ($colCount==MAX_COLS)
 				echo "</tr>";
@@ -113,7 +113,7 @@ if($inCelulares!='') {
 			$imgQuery = "select value from celulares_atributos where celu_id=".$celTok." and atr_id=15";
 			$imgResult = doSelect($imgQuery);
 			if ($imgRes = mysql_fetch_array($imgResult))
-				echo "<td align='center'><a href='vpp.php?celu_id=$celTok'><img border='0' width='100' height='100' src='img/".$imgRes['value']."' /></a></td>"; 
+				echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' width='100' height='100' src='img/".$imgRes['value']."' /></a></td>"; 
 		}
 		$tokNum++;
 		$celTok = strtok(",");
