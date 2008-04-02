@@ -54,7 +54,7 @@ function agregarOpcion(){
 <?php
 		echo $tipos[1];
 		if (mostrarBorrar($tipos[0])){
-			echo "<a href=\"/cti/src/ABMRespuestas.php?act=".DEL_RTA."&tipo_rta=".$tipos[0]."\"> Borrar </a>";
+			echo "<a href=\"ABMRespuestas.php?act=".DEL_RTA."&tipo_rta=".$tipos[0]."\"> Borrar </a>";
 		}
 		echo "<br>";
 ?>
@@ -63,7 +63,7 @@ function agregarOpcion(){
 	} 
 ?>
 </table>
-<form name="frmMain" action="/cti/src/index.php?lbl=<?php echo MENU_RESPUESTAS?>" method="post">
+<form name="frmMain" action="index.php?lbl=<?php echo MENU_RESPUESTAS?>" method="post">
 <input type="hidden" name="cantValues" id="cantValues" value="1">
 <input type="hidden" name="act" id="act" value="<?php echo SAVE_RTA ?>">
 <table width="100%"><tr><td align="center"> <input type="button" class="boton" value="Agregar nuevo" onClick="document.getElementById('divNuevo').style.display=''"> </td></tr></table>

@@ -96,7 +96,7 @@ function borrarPregunta(){
 	</tr>
 </table>
 <br>
-<form name="frmAlta" action="/cti/src/index.php?lbl=<?php echo MENU_ENCUESTAS ?>" method="post">
+<form name="frmAlta" action="index.php?lbl=<?php echo MENU_ENCUESTAS ?>" method="post">
 <input type="hidden" name="act" id="act" value="<?php echo SAVE_ENC ?>">
 <input type="hidden" name="cantidad" id="cantidad" value="0">
 <font class="txt07">Título: </font><input class="input" type="text" id="titulo" name="titulo" size="70"><br> <br>

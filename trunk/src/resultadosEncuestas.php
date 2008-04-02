@@ -1,5 +1,5 @@
 <br>
-<form action="/cti/src/index.php?lbl=<?php echo MENU_RES_RESULTADOS ?>" method="post" name="frmMain">
+<form action="index.php?lbl=<?php echo MENU_RES_RESULTADOS ?>" method="post" name="frmMain">
 <table width="100%">
 	<tr>
 		<td align="center"> Sección resultados de las encuestas <br> </td>
