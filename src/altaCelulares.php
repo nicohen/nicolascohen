@@ -134,7 +134,7 @@ while ($atrib = mysql_fetch_array($resAtribs)){
 								<?php 
 								} else {
 									?>
-									<img src="/cti/src/img/<?php echo $celuAtrib['value'] ?>" width="50" height="50">
+									<img src="img/<?php echo $celuAtrib['value'] ?>" width="50" height="50">
 									<a href="index.php?lbl=<?php echo MENU_ALTA_CELULARES ?>&act=<?php echo MODIF_CEL ?>&celu_id=<?php echo $_REQUEST['celu_id'] ?>&subAct=<?php echo DELETE_IMG_CEL ?>&foto_id=<?php echo $atrib['atr_id'] ?>&imgFile=<?php echo $celuAtrib['value'] ?>"> Borrar </a>
 									<?php
 								}

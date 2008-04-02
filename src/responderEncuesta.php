@@ -35,7 +35,7 @@ function submitear(){
 
 <body>
 <br>
-<form name="frmQues" action="/cti/src/finalizaEncuesta.php" method="post">
+<form name="frmQues" action="finalizaEncuesta.php" method="post">
 <input type="hidden" name="enc_id" value="<?php echo $_REQUEST['enc_id'] ?>">
 <table align="center" border="1" cellpadding="3" cellspacing="0" width="700" style="border-collapse:collapse;border-color:gray">
 <tr bgcolor="#FFCC99">

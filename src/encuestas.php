@@ -30,10 +30,10 @@ if ( $act == SAVE_ENC){
 		echo "<tr bgcolor=\"#FFCC66\">";
 		//echo "ID: ".$reg['enc_id']."<br>";
 		echo "<td class=\"textCS\">&nbsp;&nbsp;&nbsp;&nbsp;".$reg['titulo']."</td>";
-		echo "<td><a class=\"ca\" href=/cti/src/responderEncuesta.php?enc_id=".$reg['enc_id']." target=\"_blank\">Responder</a>";
+		echo "<td><a class=\"ca\" href=responderEncuesta.php?enc_id=".$reg['enc_id']." target=\"_blank\">Responder</a>";
 		if (isSupervisor($_COOKIE['user_active'])){
 			echo "&nbsp;&nbsp;&nbsp;";
-			echo "<a class=\"ca\" href=\"/cti/src/index.php?lbl=".MENU_ENCUESTAS."&enc_id=".$reg['enc_id']."&act=".DELETE_ENC."\">Borrar</a>";
+			echo "<a class=\"ca\" href=\"index.php?lbl=".MENU_ENCUESTAS."&enc_id=".$reg['enc_id']."&act=".DELETE_ENC."\">Borrar</a>";
 		}
 		echo "</td>";
 		echo "</tr>";

@@ -149,7 +149,7 @@ function isEncuestasSubSection($label){
 }
 	
 function appendEncRow($valor, $texto){
-	echo "<td> <a href=\"/cti/src/index.php?lbl=".$valor."\">". $texto ."</a></td>";
+	echo "<td> <a href=\"index.php?lbl=".$valor."\">". $texto ."</a></td>";
 }
 
 function isSupervisor($user_id){

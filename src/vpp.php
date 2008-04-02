@@ -50,7 +50,7 @@ require_once("funcionesDB.php");
 					$i++;
 					if ($img[0] != ""){
 					?>
-					<td align="center"><a href="javascript:verImg(<?php echo $i ?>);"><img border="0" id="img<?php echo $i ?>" src="/cti/src/img/<?php echo $img[0] ?>" width="100" height="100"></a></td>
+					<td align="center"><a href="javascript:verImg(<?php echo $i ?>);"><img border="0" id="img<?php echo $i ?>" src="img/<?php echo $img[0] ?>" width="100" height="100"></a></td>
 					<?php
 					}
 				}

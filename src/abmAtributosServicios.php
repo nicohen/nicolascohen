@@ -99,7 +99,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	}
 </script>
 
-<form name="frmMain" action="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>" method="post">
+<form name="frmMain" action="index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>" method="post">
 <input type="hidden" id="act" name="act" value="<?php echo ($_REQUEST['act'] != MODIF_ATTR)?SAVE_ATTR:UPDATE_ATTR ?>">
 <?php if ($_REQUEST['act'] != MODIF_ATTR){ ?>
 <table width="100%" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray" align="center">
@@ -117,12 +117,12 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 			</td>
 			<td>
 				<?php if ($attr['status'] == 'A'){ ?>
-				<a href="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo INACTIVATE_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>">Desactivar</a>
+				<a href="index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo INACTIVATE_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>">Desactivar</a>
 				<?php } else { ?>
-				<a href="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo ACTIVATE_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>">Activar</a>
+				<a href="index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo ACTIVATE_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>">Activar</a>
 				<?php } ?>
-				<a href="/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo MODIF_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>">Editar</a>
-				<a href="javascript:borrar('/cti/src/index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo DELETE_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>')">Borrar</a>
+				<a href="index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo MODIF_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>">Editar</a>
+				<a href="javascript:borrar('index.php?lbl=<?php echo MENU_ABM_ATRIBUTOS_SERVICIOS ?>&act=<?php echo DELETE_ATTR ?>&atr_id=<?php echo $attr['atr_id'] ?>')">Borrar</a>
 			</td>
 		</tr>
 	<?php
