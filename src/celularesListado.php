@@ -73,6 +73,13 @@ function addComparePhone(user_id,celu_id,chk) {
 //	alert(GetCookie('compare1_'+user_id)+" "+GetCookie('compare2_'+user_id)+" "+GetCookie('compare3_'+user_id)+" "+GetCookie('compare4_'+user_id)+"  "+GetCookie('compare_cant_'+user_id));
 }
 
+	function imprimir(){
+		document.getElementById("divButtons").style.display = "none";
+		window.print();
+		setInterval('100000');
+		document.getElementById("divButtons").style.display = "";
+	}
+
 </script>
 
 <?php
@@ -123,6 +130,13 @@ if ( !isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['comp
 			}
 		}
 	}
+	
+	$prepagoMinPrice = $_REQUEST['precio_prepago_min'];
+	$prepagoMaxPrice = $_REQUEST['precio_prepago_max'];
+	$postPagoMinPrice = $_REQUEST['precio_postpago_min'];
+	$postPagoMaxPrice = $_REQUEST['precio_postpago_max'];
+	//echo $postPagoMinPrice;
+	
 }
 
 
@@ -138,9 +152,13 @@ $celQuery =
 FROM celulares c, celulares_atributos ca
 WHERE c.celu_id = ca.celu_id
 AND c.status = 'A'
-".((!$firstMarca && $inMarcas!='')?(" and c.marca in (".$inMarcas.")"):"")."
+".((!$firstMarca && $inMarcas!='')?(" and c.marca in (".$inMarcas.")"):"")." 
+".(($prePagoMinPrice != "") ? " and c.precio_prepago >= ".$prePagoMinPrice : "")." 
+".(($prePagoMaxPrice != "") ? " and c.precio_prepago <= ".$prePagoMaxPrice : "")." 
+".(($postPagoMinPrice != "") ? " and c.precio_postpago >= ".$postPagoMinPrice : "")." 
+".(($postPagoMinPrice != "") ? " and c.precio_postpago <= ".$postPagoMaxPrice : "")." 
 ".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
-".((isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['compare']=='Y'))?"AND ca.celu_id in (".$_COOKIE['celulares_'.$_COOKIE['user_active']].")":"")."
+".((isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['compare']=='Y'))?" AND ca.celu_id in (".$_COOKIE['celulares_'.$_COOKIE['user_active']].")":"")."
 ".(($_REQUEST['compare']=='Y')?"AND ca.celu_id in (".$celCompare.")":"")."
 AND ca.value !=0
 AND ca.value IS NOT NULL
@@ -311,3 +329,10 @@ if ($celCount>MAX_COLS) {
 }
 
 ?>
+<div id="divButtons">
+<table width="100%" align="center" border="0">
+	<tr>
+		<td align="center"> <input type="button" value="Imprimir" onClick="imprimir()"> </td>
+	</tr>
+</table>
+</div>

@@ -27,6 +27,17 @@ function SetCookie(cookieName,cookieValue) {
 					echo "<option value='".$res['marca']."'>".$res['marca']."</option>";
 				}
 				echo "</select></td></tr>";
+				
+				?>
+				<tr>
+					<td> Precio Pre-pago: </td>
+					<td> Desde <input type="text" name="precio_prepago_min" size="4"> hasta <input size="4" type="text" name="precio_prepago_max"></td>
+				</tr>
+				<tr>
+					<td> Precio Post-pago: </td>
+					<td> Desde <input type="text" name="precio_postpago_min" size="4"> hasta <input size="4" type="text" name="precio_postpago_max"></td>
+				</tr>
+				<?php
 
 				$query = "select distinct ca.atr_id,a.name,a.tipo,ca.value from atributos a, celulares_atributos ca where a.atr_id=ca.atr_id and filter=1 order by a.name";
 				$result = doSelect($query);
