@@ -160,8 +160,7 @@ AND c.status = 'A'
 ".(($postAttrs!='')?(" and ca.atr_id in (".$postAttrs.")"):"")."
 ".((isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['compare']=='Y'))?" AND ca.celu_id in (".$_COOKIE['celulares_'.$_COOKIE['user_active']].")":"")."
 ".(($_REQUEST['compare']=='Y')?"AND ca.celu_id in (".$celCompare.")":"")."
-AND ca.value !=0
-AND ca.value IS NOT NULL
+".(($postAttrs!='')?"AND ca.value !=0 AND ca.value IS NOT NULL":"")."
 ORDER BY c.marca, c.modelo";
 
 //echo $celQuery;
