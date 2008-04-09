@@ -54,7 +54,7 @@ if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==USER_SUPERVISOR) { ?>
 			<td align='center'>Acciones</td>
 		</tr>
 		<?php
-		$query = "select user_id, name, last_name, nickname, pwd, super, status, ins_dt from usuarios order by nickname";
+		$query = "select user_id, name, last_name, nickname, pwd, super, status, DATE_FORMAT(ins_dt,'%d/%m/%Y') as fecha from usuarios order by nickname";
 		$result = doSelect($query) or die("Error en select ".mysql_error());
 		while ($res = mysql_fetch_array($result)) {
 			echo "<tr>";
@@ -71,11 +71,7 @@ if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==USER_SUPERVISOR) { ?>
 			else
 				echo "<td><font color='#FF0000'>Inactivo</font></td>";
 				
-			$month = substr($res['ins_dt'],5,2);
-			$day = substr($res['ins_dt'],8,2);
-			$year = substr($res['ins_dt'],0,4); 
-				
-			echo "<td>".$day."/".$month."/".$year."</td>";
+			echo "<td>".$res['fecha']."</td>";
 			echo "<td align='center	'><a href='index.php?lbl=usuariosModificar&user_id=".$res['user_id']."'><img src='imgs/b_edit.png' alt='Modificar' border='0'></a>";
 //			if (!$res['super'] || $_COOKIE['user_active']==$res['user_id']) {
 				if ($res['status']=='A')

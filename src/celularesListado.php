@@ -83,6 +83,20 @@ function addComparePhone(user_id,celu_id,chk) {
 </script>
 
 <?php
+function POST_to_GET(){
+    foreach($_POST as $key=>$valor) {
+        if(isset($temp)){
+            $temp = $temp."&".$key."=".$valor;
+        }
+        else{
+            $temp = "?".$key."=".$valor;    
+        }
+    }
+    return $temp;
+}
+
+store_action($_REQUEST['user_id'],BUSQUEDA,'Busqueda en celulares',$_SERVER['REQUEST_URI'].POST_to_GET());
+
 define('MAX_COLS',4);
 define('MIN_COLS',1);
 
