@@ -88,5 +88,6 @@
 	
 	define('LOGIN',1);
 	define('LOGOUT',2);
+	define('BUSQUEDA',3);
 
 ?>
