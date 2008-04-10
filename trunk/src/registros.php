@@ -21,7 +21,7 @@
 			<td align="center">Detalle 2</td>
 		</tr>
 		<?php 
-			$query = "select l.ins_dt as fecha,a.descr as desc1,l.descr as desc2 from logs as l,acciones as a, usuarios as u where l.act_id=a.act_id and l.user_id=u.user_id and l.user_id=".$_REQUEST['user_id']." order by fecha desc";
+			$query = "select DATE_FORMAT(l.ins_dt,'%d/%m/%Y %H:%i:%S') as fecha,a.descr as desc1,l.descr as desc2 from logs as l,acciones as a, usuarios as u where l.act_id=a.act_id and l.user_id=u.user_id and l.user_id=".$_REQUEST['user_id']." order by fecha desc";
 			$result = doSelect($query);
 			while ($res = mysql_fetch_array($result)) {
 				echo "<tr>";

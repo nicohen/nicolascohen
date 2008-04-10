@@ -95,7 +95,7 @@ function POST_to_GET(){
     return $temp;
 }
 
-store_action($_REQUEST['user_id'],BUSQUEDA,'Busqueda en celulares',$_SERVER['REQUEST_URI'].POST_to_GET());
+store_action($_COOKIE['user_active'],BUSQUEDA,'',$_SERVER['REQUEST_URI']);
 
 define('MAX_COLS',4);
 define('MIN_COLS',1);

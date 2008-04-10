@@ -45,7 +45,8 @@ Function doExecuteAndGetCount($query){
 }
 
 Function store_action($usrid,$act,$desc,$url) {
-	$query = "insert into logs (user_id, ins_dt, act, descr, url) values (".$usrid.",sysdate(),".$act.",'".$desc."','".$url."')";
+	$query = "insert into logs (user_id, ins_dt, act_id, descr, url) values (".$usrid.",sysdate(),".$act.",'".$desc."','".$url."')";
+	echo $query;
 	doInsert($query);
 }
 
