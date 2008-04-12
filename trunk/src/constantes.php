@@ -41,6 +41,7 @@
 	define('MENU_ALTA_CELULARES','altaCelulares');
 	define('MENU_ABM_CELULARES','abmCelulares');
 	define('MENU_ABM_ATRIBUTOS_SERVICIOS','abmAtrsServicios');
+	define('MENU_SERIVICIOS_RESUME','serviciosResume');
 		
 	//Defino las constantes para la base de datos
 	define('DB_SERVER','localhost');
