@@ -95,6 +95,8 @@ Function do_content($lang,$lbl) {
 			include("abmCelulares.php");
 		else if($lbl==MENU_ABM_ATRIBUTOS_SERVICIOS)
 			include("abmAtributosServicios.php");
+		else if($lbl==MENU_SERIVICIOS_RESUME)
+			include("serviciosResume.php");
 		else
 			include("home.php");
 	} else {
@@ -196,12 +198,14 @@ function isServiciosSubSection($label){
 		return true;
 	else if ($label == MENU_ABM_ATRIBUTOS_SERVICIOS)
 		return true;
+	else if ($label == MENU_ABM_SERVICIOS)
+		return true;
 		
 	return false;
 }
 
 function addServiciosOptions($label){	
-	if ($label == MENU_ABM_SERVICIOS || isServiciosSubSection($label)){
+	if ($label == MENU_SERIVICIOS_RESUME || isServiciosSubSection($label)){
 		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
 		appendEncRow(MENU_ALTA_SERVICIOS, "Dar de alta");
 		appendEncRow(MENU_ABM_SERVICIOS, "Administrar");

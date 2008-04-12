@@ -18,9 +18,10 @@ function esMultiple($type){
 }
 
 if ($_REQUEST['act'] == SAVE_ATTR){
-	$insAttr = "insert into atributos_servicios (name, tipo".(($_REQUEST['largo'] != '')?", largo)":")").
+	$insAttr = "insert into atributos_servicios (name, tipo, importante".(($_REQUEST['largo'] != '')?", largo)":")").
 				"values ('".$_REQUEST['atr_name']."',
-				'".$_REQUEST['type']."'"
+				'".$_REQUEST['type']."', 
+				".($_REQUEST['importante']?1:0)
 				.($_REQUEST['largo']==''?"":",".$_REQUEST['largo']).")";
 	//print_r($insAttr);
 	$attrID = doInsertAndGetLast($insAttr);
@@ -41,7 +42,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	deleteAtributosValores();
 	
 } else if ($_REQUEST['act'] == MODIF_ATTR){
-	$qrySel = "select name, tipo, largo from atributos_servicios where atr_id = ".$_REQUEST['atr_id'];
+	$qrySel = "select name, tipo, importante, largo from atributos_servicios where atr_id = ".$_REQUEST['atr_id'];
 	$resSel = doSelect($qrySel);
 	$atributo = mysql_fetch_array($resSel);
 	$commaValores = "";
@@ -58,7 +59,8 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 } else if ($_REQUEST['act'] == UPDATE_ATTR){
 	$qryUpd = "update atributos_servicios 
 			   set name='".$_REQUEST['atr_name']."', 
-			   tipo='".$_REQUEST['type']."'".
+			   tipo='".$_REQUEST['type']."',
+			   importante=".($_REQUEST['importante']?1:0).
 			   ($_REQUEST['largo']==NULL?"":", largo=".$_REQUEST['largo']).
 			   " where atr_id = ".$_REQUEST['atr_id'];
 	//print_r($qryUpd);
@@ -140,7 +142,7 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 	</td>
 </tr>
 <tr>
-	<td colspan="2"> Tipo de atributo: <select id="type" name="type" onChange="javascript:cambiar(this);">
+	<td> Tipo de atributo: <select id="type" name="type" onChange="javascript:cambiar(this);">
 						<option value="<?php echo ATTR_TYPE_TEXT ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_TEXT) echo "selected" ?> > Texto </option>
 						<option value="<?php echo ATTR_TYPE_SELECT ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_SELECT) echo "selected" ?> > Combo </option>
 						<option value="<?php echo ATTR_TYPE_NUMBER ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_NUMBER) echo "selected" ?> > Número </option>
@@ -149,6 +151,9 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 						<option value="<?php echo ATTR_TYPE_MONEY ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_MONEY) echo "selected" ?>> Moneda </option>
 					</select> 
 					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div></td>
+	<td>
+		<input type="checkbox" name="importante" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['importante']) echo "checked"; ?>> Importante
+	</td>
 </tr>
 <tr>
 	<td colspan="2"> Largo (opcional): <input type="text" name="largo" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributos['largo'] ?>"></td></tr>

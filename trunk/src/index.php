@@ -74,10 +74,10 @@ $label=get_label($_REQUEST['lbl']);
 										<?php } ?>
 									</td>
 									<td width="20%">
-										<?php if($label==MENU_ABM_SERVICIOS || isServiciosSubSection($label)) { ?>
+										<?php if($label==MENU_SERIVICIOS_RESUME) { ?>
 											<b>Servicios</b>
 										<?php } else { ?>
-											<a href="index.php?lbl=<?php echo MENU_ABM_SERVICIOS ?>">Servicios</a>
+											<a href="index.php?lbl=<?php echo MENU_SERIVICIOS_RESUME ?>">Servicios</a>
 										<?php } ?>
 									</td>
 									<td width="20%">

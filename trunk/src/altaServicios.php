@@ -64,7 +64,7 @@ if ($modifing){
 	<tr>
 		<td> Tecnología (*) </td>
 		<td> <select name="tecnologia">
-				<option value="ALL" <?php if ($modifing && 'ALL' == $celu['tecnologia']) echo "selected"?>> Todas </option>
+				<option value="Todas" <?php if ($modifing && 'Todas' == $celu['tecnologia']) echo "selected"?>> Todas </option>
 			<?php 
 				$qryTecno = "select valor from atributos_values where atr_id = ".ATTR_TYPE_TECNOLOGIA;
 				$resTecno = doSelect($qryTecno);
