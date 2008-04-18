@@ -63,11 +63,17 @@ function insertAttr($celuID){
 }
 
 function deleteAtribs(){
-	$qryDelAtribs = "delete from servicios_atributos c where srv_id = ".$_REQUEST['srv_id'];
+//	$qryDelAtribs = "delete from servicios_atributos c where srv_id = ".$_REQUEST['srv_id'];
+	$qryDelAtribs = "DELETE servicios_atributos.* FROM servicios_atributos s";
 	if ($_REQUEST['act']== UPDATE_CEL){
-		$qryDelAtribs = $qryDelAtribs." and (select tipo from atributos_servicios where atr_id = c.atr_id) = '".ATTR_TYPE_IMAGE."'";
+		$qryDelAtribs = $qryDelAtribs." LEFT JOIN atributos_servicios a USING ( atr_id ) WHERE a.tipo != '".ATTR_TYPE_IMAGE."' and " ;
+	} else {
+		$qryDelAtribs = $qryDelAtribs." where ";
 	}
-	doInsert($qryDelAtribs);
+	$qryDelAtribs = $qryDelAtribs."srv_id = ".$_REQUEST['srv_id'];
+	
+	//echo $qryDelAtribs;
+	echo doInsert($qryDelAtribs);
 }
 
 if ($_REQUEST['act'] == SAVE_CEL){
@@ -90,7 +96,7 @@ if ($_REQUEST['act'] == SAVE_CEL){
 			   descripcion = '".$_REQUEST['descripcion']."',			   
 			   last_mod_dt = sysdate(), 
 			   last_mod_user = ".$_COOKIE['user_active']." 
-			   where celu_id = ".$_REQUEST['celu_id'];
+			   where srv_id = ".$_REQUEST['srv_id'];
 	doInsert($qryUpd);
 	
 	deleteAtribs();
