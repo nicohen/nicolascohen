@@ -63,10 +63,19 @@ function insertAttr($celuID){
 }
 
 function deleteAtribs(){
-	$qryDelAtribs = "delete from celulares_atributos c where celu_id = ".$_REQUEST['celu_id'];
+/*	$qryDelAtribs = "delete from celulares_atributos c where celu_id = ".$_REQUEST['celu_id'];
 	if ($_REQUEST['act']== UPDATE_CEL){
-		$qryDelAtribs = $qryDelAtribs." and (select tipo from atributos where atr_id = c.atr_id) = '".ATTR_TYPE_IMAGE."'";
+		$qryDelAtribs = $qryDelAtribs." and (select tipo from atributos where atr_id = c.atr_id) != '".ATTR_TYPE_IMAGE."'";
 	}
+	*/
+	$qryDelAtribs = "DELETE celulares_atributos.* FROM celulares_atributos c";
+	if ($_REQUEST['act']== UPDATE_CEL){
+		$qryDelAtribs = $qryDelAtribs." LEFT JOIN atributos a USING ( atr_id ) WHERE a.tipo != '".ATTR_TYPE_IMAGE."' and " ;
+	} else {
+		$qryDelAtribs = $qryDelAtribs." where ";
+	}
+	$qryDelAtribs = $qryDelAtribs."c.celu_id = ".$_REQUEST['celu_id'];
+	
 	doInsert($qryDelAtribs);
 }
 
