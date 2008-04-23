@@ -237,7 +237,12 @@ if($inCelulares!='') {
 	$minCel = ($_REQUEST['list']*MAX_COLS)-MAX_COLS;
 	while ($celTok !== false) {
 		if ($tokNum>$minCel && $tokNum<=($minCel+MAX_COLS)) {
-			$imgQuery = "select value from celulares_atributos where celu_id=".$celTok." and atr_id=15";
+			//$imgQuery = "select value from celulares_atributos where celu_id=".$celTok." and atr_id=15";
+			$imgQuery = "SELECT c.value FROM celulares_atributos c, atributos a
+						 WHERE a.atr_id = c.atr_id
+						 AND a.tipo = '".ATTR_TYPE_IMAGE."'
+						 and c.celu_id=".$celTok;
+			
 			$imgResult = doSelect($imgQuery);
 			if ($imgRes = mysql_fetch_array($imgResult))
 				echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' width='100' height='100' src='img/".$imgRes['value']."' /></a></td>"; 
