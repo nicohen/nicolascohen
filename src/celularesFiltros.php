@@ -39,7 +39,12 @@ function SetCookie(cookieName,cookieValue) {
 				</tr>
 				<?php
 
-				$query = "select distinct ca.atr_id,a.name,a.tipo,ca.value from atributos a, celulares_atributos ca where a.atr_id=ca.atr_id and filter=1 order by a.name";
+				$query = "select distinct ca.atr_id,a.name,a.tipo,ca.value from atributos a, celulares_atributos ca 
+					      where a.atr_id=ca.atr_id 
+						  and filter=1 
+						  and trim(ca.value) != ''
+						  and a.tipo != '".ATTR_TYPE_IMAGE."'
+						  order by a.name, ca.value";
 				$result = doSelect($query);
 				//Valida el cambio de type para abrir o cerrar el select
 				$isCombo=false;
