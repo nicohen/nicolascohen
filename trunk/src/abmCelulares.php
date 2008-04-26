@@ -6,11 +6,13 @@ function insertAttr($celuID){
 		$atrID = $_REQUEST['atrName'.$i];
 		$valor = "";
 		//print_r($atrID."->".$tipo."<br>");
-		if ($tipo == ATTR_TYPE_MULTIPLE){			
-			foreach ($_REQUEST['atrValue'.$i] as $opcion) {
-  				if ($valor != "") $valor = $valor.", ";
-				$valor = $valor.trim($opcion);
-			} 
+		if ($tipo == ATTR_TYPE_MULTIPLE){
+		    if ($_REQUEST['atrValue'.$i]){			
+				foreach ($_REQUEST['atrValue'.$i] as $opcion) {
+					if ($valor != "") $valor = $valor.", ";
+					$valor = $valor.trim($opcion);
+				} 
+			}
 		} else if ($tipo == ATTR_TYPE_CHECKBOX){
 			$valor = ($_REQUEST['atrValue'.$i]?"1":"0");
 		} else if ($tipo == ATTR_TYPE_IMAGE && $_FILES['atrValue'.$i]['name'] != ''){
