@@ -43,6 +43,23 @@ function checkCountCompare(user_id) {
 		window.location.href = 'index.php?lbl=celularesListado&list=1&compare=Y';
 }
 
+function limpiarChecks(user_id) {
+	SetCookie('compare1_'+user_id,"-1");
+	SetCookie('compare2_'+user_id,"-1");
+	SetCookie('compare3_'+user_id,"-1");
+	SetCookie('compare4_'+user_id,"-1");
+	SetCookie('compare_cant_'+user_id,0);
+	//Desactivar checkboxes
+	var inputs = document.getElementsByTagName("input");
+	for(var i=0; i<inputs.length; i++){
+		if(inputs[i].getAttribute('type')=='checkbox') {
+			if (inputs[i]["checked"]) {
+				inputs[i].checked=false;
+			}
+		}
+	}
+}
+
 function addComparePhone(user_id,celu_id,chk) {
 	if (chk) {
 		if (parseInt(GetCookie('compare_cant_'+user_id))<4) {
@@ -155,9 +172,9 @@ if ( !isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['comp
 
 
 echo "<br>
-<form action='comparar.php' method='post' name='searchList'>
-<table border='1' align='center' cellpadding='3' cellspacing='0' align='left' style='border-collapse:collapse;border-color:gray'>";
-
+<form action='comparar.php' method='post' name='searchList'>";?>
+<table border='1' align='center' cellpadding='3' cellspacing='0' align='left' style='border-collapse:collapse;border-color:gray;font-size:13px; font:Arial, Helvetica, sans-serif'>
+<?php
 if ($_REQUEST['compare']=='Y')
 	$celCompare = $_COOKIE['compare1_'.$_COOKIE['user_active']].",".$_COOKIE['compare2_'.$_COOKIE['user_active']].",".$_COOKIE['compare3_'.$_COOKIE['user_active']].",".$_COOKIE['compare4_'.$_COOKIE['user_active']];
 
@@ -219,8 +236,8 @@ while ($celRes = mysql_fetch_array($celResult)) {
 	}
 }
 if ($colCount>0 && $colCount<MAX_COLS && $celCount>0) {
-	for ($i=$colCount;$i<MAX_COLS;$i++)
-		echo "<td></td>";
+	//for ($i=$colCount;$i<MAX_COLS;$i++)
+		//echo "<td></td>";
 	echo "</tr>";	
 }
 
@@ -255,7 +272,7 @@ if($inCelulares!='') {
 	if (!($_REQUEST['compare']=='Y')) {
 		
 		echo "<tr><td align='right'>";
-		echo "<a href='javascript:checkCountCompare(".$_COOKIE['user_active'].");'>Comparar celulares</a> (<a href='javascript:limpiarChecks()'>Limpiar</a>)";
+		echo "<a href='javascript:checkCountCompare(".$_COOKIE['user_active'].");'>Comparar celulares</a> (<a href='javascript:limpiarChecks(".$_COOKIE['user_active'].");'>Limpiar</a>)";
 		echo "</td>";
 		$tokNum = 1;
 		$compareTok = strtok ($inCelulares, ",");
@@ -296,11 +313,11 @@ if($inCelulares!='') {
 	while ($res = mysql_fetch_array($result)) {
 		if ($atributoActual!=$res['name']) {
 			if ($atributoActual!="") {
-				if ($indexCol!=MAX_COLS) {
-					for($i=$indexCol;$i<MAX_COLS;$i++) {
-						echo "<td></td>";
-					}
-				}
+				//if ($indexCol!=MAX_COLS) {
+					//for($i=$indexCol;$i<MAX_COLS;$i++) {
+						//echo "<td></td>";
+					//}
+				//}
 				echo "</tr>";
 				$indexCol = 0;
 			}
@@ -329,7 +346,7 @@ if ($_REQUEST['compare']=='Y') {
 echo "</form>";
 
 if ($celCount>MAX_COLS) {
-	echo "<br><center>";
+	echo "<center><font face='Arial, Helvetica, sans-serif' size='2px'>";
 	if ($_REQUEST['list']>1)
 		echo "<a href='index.php?lbl=".MENU_CELULARES_LISTADO."&list=".($_REQUEST['list']-1)."'>Anterior</a> ";
 	$i=1;
@@ -343,7 +360,7 @@ if ($celCount>MAX_COLS) {
 	}
 	if ($_REQUEST['list']!=$cantLinks)	
 		echo " <a href='index.php?lbl=".MENU_CELULARES_LISTADO."&list=".($_REQUEST['list']+1)."'>Siguiente</a>";
-	echo "</center><br>";
+	echo "</font></center><br>";
 }
 
 ?>
