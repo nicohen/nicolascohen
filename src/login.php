@@ -42,7 +42,7 @@ Function check_login($usr, $pwd) {
 		if ($res = mysql_fetch_array($result)) {
 			if (!esta_logueado($res) && $res['status']=='A') {
 				setear_cookies_usuario($res,$usr);
-				store_action($res['user_id'],LOGIN,'',$_SERVER['REQUEST_URI']);
+//				store_action($res['user_id'],LOGIN,'',$_SERVER['REQUEST_URI']);
 				return true;
 			} else {
 				return false;

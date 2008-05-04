@@ -12,11 +12,11 @@ function SetCookie(cookieName,cookieValue) {
 <center><h4><u>Consulta de celulares</u></h4></center>
 
 <form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>&list=1" method="post">
-	<table border="1" align="center" cellpadding="3" cellspacing="0" width="400">
+	<table border="1" align="center" cellpadding="3" cellspacing="0" width="400" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 		<tr><td><b>Elija los criterios:</b></td></tr>
 		<tr>
 			<td>
-				<table border="0" align="center" cellpadding="3" cellspacing="0">
+				<table border="0" align="center" cellpadding="3" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 				
 				<?php
 				
@@ -50,6 +50,7 @@ function SetCookie(cookieName,cookieValue) {
 				$isCombo=false;
 				//Nombre del ultimo checkbox utilizado
 				$lastCheckbox = "";
+				$multivalue = "";
 				while ($res = mysql_fetch_array($result)) {
 					//Este $nextType vale 1
 					if ($res['tipo']==ATTR_TYPE_TEXT || $res['tipo']==ATTR_TYPE_SELECT || $res['tipo']==ATTR_TYPE_NUMBER || $res['tipo']==ATTR_TYPE_MULTIPLE) {
@@ -60,8 +61,12 @@ function SetCookie(cookieName,cookieValue) {
 						if ($res['tipo']==ATTR_TYPE_MULTIPLE) {
 							$tok = strtok($res['value'], ",");
 							while ($tok !== false) {
-								echo "<option value='".$tok."'>".$tok."</option>";
-								$tok = strtok(" \n\t");
+//							echo "[".strpos($multivalue,"#".$tok."#")."]";
+								if (!is_numeric(strpos($multivalue,"#".$tok."#"))) {
+									echo "<option value='".$tok."'>".$tok."</option>";
+									$multivalue = $multivalue."#".$tok."#";
+								}
+								$tok = strtok(" ,");
 							}
 						} else {
 							echo "<option value='".$res['value']."'>".$res['value']."</option>";

@@ -161,7 +161,7 @@ function isSupervisor($user_id){
 function addEncOptions($label,$user_id){
 	if (isSupervisor($user_id)){
 		if ($label == MENU_ENCUESTAS || isEncuestasSubSection($label)){
-			echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
+			echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
 			appendEncRow(MENU_ALTA_ENCUESTAS, "Dar de alta");
 			appendEncRow(MENU_RESPUESTAS, "Ver respuestas");
 			appendEncRow(MENU_RES_ENCUESTAS,"Ver resultados");
@@ -183,7 +183,7 @@ function isCelularesSubSection($label){
 
 function addCelularesOptions($label){	
 	if ($label == MENU_CELULARES_FILTROS || isCelularesSubSection($label)){
-		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
+		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
 		appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
 		appendEncRow(MENU_ABM_CELULARES, "Administrar");
 		appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
@@ -206,7 +206,7 @@ function isServiciosSubSection($label){
 
 function addServiciosOptions($label){	
 	if ($label == MENU_SERIVICIOS_RESUME || isServiciosSubSection($label)){
-		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3'><tr align='center'>";
+		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
 		appendEncRow(MENU_ALTA_SERVICIOS, "Dar de alta");
 		appendEncRow(MENU_ABM_SERVICIOS, "Administrar");
 		appendEncRow(MENU_ABM_ATRIBUTOS_SERVICIOS, "Ver atributos");

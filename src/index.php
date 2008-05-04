@@ -41,7 +41,7 @@ $label=get_label($_REQUEST['lbl']);
 					</tr>
 					<tr>
 						<td>
-							<table align="right" border="0" cellpadding="0" cellspacing="10">
+							<table align="right" border="0" cellpadding="0" cellspacing="10" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 								<tr>
 									<?php 
 										$tok = strtok ($_COOKIE['user_ids'], ",");
@@ -64,7 +64,7 @@ $label=get_label($_REQUEST['lbl']);
 					<?php if ($_COOKIE['user_active']!='' && !$_REQUEST['login']=='Y') { ?>
 					<tr align="center">
 						<td>
-							<table width="100%" border="0" cellpadding="0" cellspacing="3">
+							<table width="100%" border="0" cellpadding="0" cellspacing="3" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 								<tr align="center">
 									<td width="20%">
 										<?php if($label==MENU_CELULARES_FILTROS) { ?>
