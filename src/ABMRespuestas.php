@@ -1,6 +1,7 @@
 <?php 
 //Funciones para operar con DB y otros
 require("funcionesEncuestas.php");
+//require("funcionesDB.php");
 
 $act = $_REQUEST['act'];
 if ($act == SAVE_RTA){
@@ -54,7 +55,7 @@ function agregarOpcion(){
 <?php
 		echo $tipos[1];
 		if (mostrarBorrar($tipos[0])){
-			echo "<a href=\"ABMRespuestas.php?act=".DEL_RTA."&tipo_rta=".$tipos[0]."\"> Borrar </a>";
+			echo "<a href=\"index.php?lbl=".MENU_RESPUESTAS."&act=".DEL_RTA."&tipo_rta=".$tipos[0]."\"> Borrar </a>";
 		}
 		echo "<br>";
 ?>
