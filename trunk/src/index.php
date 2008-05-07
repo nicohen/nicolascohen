@@ -33,10 +33,19 @@ $label=get_label($_REQUEST['lbl']);
 	<table align="center" border="0" width="768" cellpadding="0" cellspacing="0">
 		<tr>
 			<td valign="top">
-				<table align="center" width="100%" border="1" cellpadding="0" cellspacing="0" style='border-collapse:collapse;border-color:gray'>
+				<table align="center" width="100%" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-color:gray">
 					<tr>
-						<td align="center" height="70">
-							<h1>Administrador de Consultas para Claro</h1>
+						
+						<td valign="middle" align="center" height="70"> 
+							<object width="566" height="70" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+								<param value="http://www.claroargentina.com/flash/top.swf" name="movie"/>
+								<param value="high" name="quality"/>
+								<param value="transparent" name="wmode"/>
+								<embed width="566" height="98" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="http://www.claroargentina.com/flash/top.swf"/>
+							</object> 
+							<div style="position:absolute; left: 287px; top: 53px; width: 565px;">
+						  		<h1>Administrador de Consultas para Claro</h1>
+							</div>
 						</td>
 					</tr>
 					<tr>

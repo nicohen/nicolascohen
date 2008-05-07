@@ -248,7 +248,7 @@ if($inCelulares!='') {
 	//Seteo la cookie para viajar por los listados de celulares
 	setcookie("celulares_".$_COOKIE['user_active'],$inCelulares,time()*365*24*60*60,"/");
 		
-	echo "<tr><td></td>";
+	echo "<tr><td><img src=\"http://www.claroargentina.com/imgs/promos/primer_claro.jpg\"</td>";
 	$tokNum = 1;
 	$celTok = strtok ($inCelulares, ",");
 	$minCel = ($_REQUEST['list']*MAX_COLS)-MAX_COLS;
