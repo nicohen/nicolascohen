@@ -31,7 +31,13 @@ require_once("funcionesDB.php");
 <br>
 <table width="768" border="1" cellpadding="3" cellspacing="0" style="border-collapse:collapse;border-color:gray;font:Arial, Helvetica, sans-serif; font-size:13px;" align="center">
 	<tr bgcolor="#FFCC99">
-		<td colspan="2" align="center"> <?php echo $celular['marca']." ".$celular['modelo'] ?> </td>
+		<td colspan="2" align="center"><table width="100%">
+		<tr>
+			<td width="98">&nbsp;</td>
+			<td align="center"><h1> <?php echo $celular['marca']." ".$celular['modelo'] ?> </h1></td>
+			<td width="98"> <img src="./imgs/logot.jpg"></td>
+		</tr>
+		</table>  </td>
 	</tr>
 	<tr>
 		<td colspan="2"> 

@@ -16,7 +16,7 @@ function SetCookie(cookieName,cookieValue) {
 		<tr><td><b>Elija los criterios:</b></td></tr>
 		<tr>
 			<td>
-				<table border="0" align="center" cellpadding="3" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
+				<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 				
 				<?php
 				
@@ -30,11 +30,11 @@ function SetCookie(cookieName,cookieValue) {
 				
 				?>
 				<tr>
-					<td> Precio Pre-pago: </td>
+					<td align="right"> Precio Pre-pago: </td>
 					<td> Desde <input type="text" name="precio_prepago_min" size="4"> hasta <input size="4" type="text" name="precio_prepago_max"></td>
 				</tr>
 				<tr>
-					<td> Precio Post-pago: </td>
+					<td align="right"> Precio Post-pago: </td>
 					<td> Desde <input type="text" name="precio_postpago_min" size="4"> hasta <input size="4" type="text" name="precio_postpago_max"></td>
 				</tr>
 				<?php
@@ -101,8 +101,9 @@ function SetCookie(cookieName,cookieValue) {
 					<td></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td><input type="submit" name="consultar" value="Buscar"></td>
+					<td colspan="2" valign="top" align="center">
+					<input type="submit" name="consultar" value="Buscar">
+					</td>
 				</tr>
 				
 				</table>
