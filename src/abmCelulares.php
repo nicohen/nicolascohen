@@ -13,6 +13,7 @@ function insertAttr($celuID){
 					$valor = $valor.trim($opcion);
 				} 
 			}
+			//echo $valor;
 		} else if ($tipo == ATTR_TYPE_CHECKBOX){
 			$valor = ($_REQUEST['atrValue'.$i]?"1":"0");
 		} else if ($tipo == ATTR_TYPE_IMAGE && $_FILES['atrValue'.$i]['name'] != ''){
@@ -58,6 +59,7 @@ function insertAttr($celuID){
 		}
 		
 		$qryInsAtr = "insert into celulares_atributos (celu_id, atr_id, value) values (".$celuID.", ".$atrID.",'".$valor."')";
+		//echo $qryInsAtr.";<br>";
 		//print_r($qryInsAtr."<br>");
 		doInsert($qryInsAtr);
 	}
@@ -70,7 +72,7 @@ function deleteAtribs(){
 		$qryDelAtribs = $qryDelAtribs." and (select tipo from atributos where atr_id = c.atr_id) != '".ATTR_TYPE_IMAGE."'";
 	}
 	*/
-	$qryDelAtribs = "DELETE celulares_atributos.* FROM celulares_atributos c";
+	$qryDelAtribs = "DELETE c.* FROM celulares_atributos c";
 	if ($_REQUEST['act']== UPDATE_CEL){
 		$qryDelAtribs = $qryDelAtribs." LEFT JOIN atributos a USING ( atr_id ) WHERE a.tipo != '".ATTR_TYPE_IMAGE."' and " ;
 	} else {
@@ -78,6 +80,7 @@ function deleteAtribs(){
 	}
 	$qryDelAtribs = $qryDelAtribs."c.celu_id = ".$_REQUEST['celu_id'];
 	
+	//echo $qryDelAtribs. "<br>";
 	doInsert($qryDelAtribs);
 }
 

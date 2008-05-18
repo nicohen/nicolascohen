@@ -4,7 +4,9 @@
 			if ($type == ATTR_TYPE_SELECT){
 				if($celuAtrib['value'] == $valor['valor'] ) echo "selected";
 			} else {
-				if (strpos($celuAtrib['value'],$valor['valor']) >= 0 ) echo "selected";
+				$pos = strpos($celuAtrib['value'],$valor['valor']);
+				//echo $celuAtrib['value']." -> ".$valor." = ".$pos;
+				if ( !($pos === false) ) echo "selected";
 			}
 		}		
 	}
