@@ -292,9 +292,9 @@ if($inCelulares!='') {
 	"select 
 	ca.celu_id, a.atr_id, a.name, ca.value 
 	from atributos a, celulares_atributos ca, celulares c
-	where a.status='A' and a.tipo!='I' and a.publico=1 and a.atr_id=ca.atr_id 
+	where a.status='A' and a.tipo!='I' and a.publico=1 and a.comparable=1 and a.atr_id=ca.atr_id 
 	and ca.celu_id in (".$inCelulares.") and ca.celu_id=c.celu_id
-	order by a.name, c.marca, c.modelo";
+	order by a.peso, a.name, c.marca, c.modelo";
 	//echo $resultQuery;
 	$result = doSelect($resultQuery);
 	/* 

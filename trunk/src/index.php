@@ -82,6 +82,7 @@ $label=get_label($_REQUEST['lbl']);
 											<a href="index.php?lbl=<?php echo MENU_CELULARES_FILTROS ?>">Celulares</a>
 										<?php } ?>
 									</td>
+									<?php if (!isPriceLoader($_COOKIE['user_active'])){ ?>
 									<td width="20%">
 										<?php if($label==MENU_SERIVICIOS_RESUME) { ?>
 											<b>Servicios</b>
@@ -96,7 +97,8 @@ $label=get_label($_REQUEST['lbl']);
 											<a href="index.php?lbl=<?php echo MENU_ENCUESTAS ?>">Encuestas</a>
 										<?php } ?>
 									</td>
-									<?php if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==true) {?>
+									<?php } 
+										if (isSupervisor($_COOKIE['user_active'])) {?>
 									<td width="20%">
 										<?php if($label==MENU_REGISTROS) { ?>
 											<b>Registros</b>
