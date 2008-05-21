@@ -13,6 +13,7 @@
 	define('INFO','info/');
 	
 	//Defino los tipos de usuario
+	define('USER_PRICE',2);
 	define('USER_SUPERVISOR', 1);
 	define('USER_NORMAL', 0);
 	

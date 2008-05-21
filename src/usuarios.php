@@ -7,8 +7,9 @@ if ($_REQUEST['newUser']=='Y') {
 		header("Location: index.php?lbl=".MENU_USUARIOS_ALTA."&name=".$_REQUEST['name']."&last_name=".$_REQUEST['last_name']."&nickname=".$_REQUEST['nickname']."&password=".$_REQUEST['password']."&super=".(($_REQUEST['super'])?1:0)."&status=".$_REQUEST['status']."&err=1");
 	} else {
 		$query = "insert into usuarios (name,last_name,nickname,pwd,super,status) values ('".$_REQUEST['name']."',
-				 '".$_REQUEST['last_name']."','".$_REQUEST['nickname']."','".$_REQUEST['password']."',".(($_REQUEST['super'])?1:0).",
+				 '".$_REQUEST['last_name']."','".$_REQUEST['nickname']."','".$_REQUEST['password']."',".$_REQUEST['super'].",
 				 '".$_REQUEST['status']."')";
+		//echo $query;
 		doInsert($query);
 	}
 }
@@ -21,7 +22,7 @@ if ($_REQUEST['modifUser']=='Y') {
 	} else {
 	
 		$query = "update usuarios set name='".$_REQUEST['name']."', last_name='".$_REQUEST['last_name']."', 
-				  nickname='".$_REQUEST['nickname']."', pwd='".$_REQUEST['password']."', super=".(($_REQUEST['super'])?1:0).",
+				  nickname='".$_REQUEST['nickname']."', pwd='".$_REQUEST['password']."', super=".$_REQUEST['super'].",
 				  status='".$_REQUEST['status']."' where user_id=".$_REQUEST['user_id']."";
 		doInsert($query);
 	}
@@ -63,7 +64,10 @@ if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==USER_SUPERVISOR) { ?>
 			echo "<td>".$res['name']."</td>";
 			echo "<td>".$res['last_name']."</td>";
 			if ($res['super'])
-				echo "<td><i>Supervisor</i></td>";
+				if ($res['super'] == 1) 
+					echo "<td><i>Supervisor</i></td>";
+				else
+					echo "<td><u>Cargador de precios</u></td>";
 			else
 				echo "<td>Empleado</td>";
 			if($res['status']=='A')

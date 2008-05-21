@@ -7,7 +7,9 @@ function insertAttr($celuID){
 		$valor = "";
 		//print_r($atrID."->".$tipo."<br>");
 		if ($tipo == ATTR_TYPE_MULTIPLE){
-		    if ($_REQUEST['atrValue'.$i]){			
+			if (isPriceLoader($_COOKIE['user_active'])){
+				$valor =  $_REQUEST['atrValue'.$i];
+		    } else if ($_REQUEST['atrValue'.$i]){			
 				foreach ($_REQUEST['atrValue'.$i] as $opcion) {
 					if ($valor != "") $valor = $valor.", ";
 					$valor = $valor.trim($opcion);
@@ -133,20 +135,26 @@ if ($_REQUEST['act'] == SAVE_CEL){
 		<tr>
 			<td width="50%"><a target="_blank" href="vpp.php?celu_id=<?php echo $celu['celu_id'] ?>"><?php echo $celu['marca']." ".$celu['modelo'] ?></a></td>
 			<td>
+				<?php if (!isPriceLoader($_COOKIE['user_active'])){?>
 				<?php if($celu['status'] == 'A'){ ?>
 				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo INACTIVE_CEL ?>&celu_id=<?php echo $celu['celu_id'] ?>">Inactivar</a>
 				<?php } else { ?>
 				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo ACTIVE_CEL ?>&celu_id=<?php echo $celu['celu_id'] ?>">Activar</a>
-				<?php } ?>
+				<?php } 
+					}?>
 				<a href="index.php?lbl=<?php echo MENU_ALTA_CELULARES ?>&act=<?php echo MODIF_CEL?>&celu_id=<?php echo $celu['celu_id']?>">Editar</a>
-				<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo DELETE_CEL?>&celu_id=<?php echo $celu['celu_id']?>">Borrar</a>
+				<?php if (!isPriceLoader($_COOKIE['user_active'])){?>
+					<a href="index.php?lbl=<?php echo MENU_ABM_CELULARES ?>&act=<?php echo DELETE_CEL?>&celu_id=<?php echo $celu['celu_id']?>">Borrar</a>
+				<?php } ?>
 			</td>
 		</tr>
 		<?php
 	}
 	
 	?>
+	<?php if (!isPriceLoader($_COOKIE['user_active'])){?>
 	<tr>
 		<td colspan="2" align="center"> <input type="button" value="Nuevo celular" onClick="javascript:location.href = 'index.php?lbl=<?php echo MENU_ALTA_CELULARES ?>'"> </td>
 	</tr>
+	<? } ?>
 </table>

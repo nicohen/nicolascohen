@@ -157,6 +157,14 @@ function appendEncRow($valor, $texto){
 function isSupervisor($user_id){
 	return $_COOKIE['user_super_'.$user_id] == USER_SUPERVISOR;
 }	
+
+function isPriceLoader($user_id){
+	return $_COOKIE['user_super_'.$user_id] == USER_PRICE;
+}
+
+function isEmpleado($user_id){
+	return $_COOKIE['user_super_'.$user_id] == USER_NORMAL;
+}
 	
 function addEncOptions($label,$user_id){
 	if (isSupervisor($user_id)){
@@ -184,9 +192,11 @@ function isCelularesSubSection($label){
 function addCelularesOptions($label){	
 	if ($label == MENU_CELULARES_FILTROS || isCelularesSubSection($label)){
 		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
-		appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
+		if (!isPriceLoader($_COOKIE['user_active']))
+			appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
 		appendEncRow(MENU_ABM_CELULARES, "Administrar");
-		appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
+		if (!isPriceLoader($_COOKIE['user_active']))
+			appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
 		echo "</tr></table></td></tr>";
 	}	
 }

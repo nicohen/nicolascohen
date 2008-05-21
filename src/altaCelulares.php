@@ -57,33 +57,58 @@ if ($modifing){
 	</tr>
 	<tr>
 		<td> Marca (*) </td>
-		<td> <input type="text" value="<?php if ($modifing) echo $celu['marca'] ?>" id="marca" name="marca" maxlength="20"></td>
+		<td> <?php if (isPriceLoader($_COOKIE['user_active'])){ ?>
+				<input type="hidden" value="<?php echo $celu['marca'] ?>" id="marca" name="marca"> <?php echo $celu['marca'] ?>
+			<?php } else { ?>
+				<input type="text" value="<?php if ($modifing) echo $celu['marca'] ?>" id="marca" name="marca" maxlength="20">
+			<?php } ?>
+		</td>
 	</tr>
 	<tr>
 		<td> Modelo (*) </td>
-		<td> <input type="text" value="<?php if ($modifing) echo $celu['modelo'] ?>" id="modelo" name="modelo" maxlength="30"> </td>
+		<td>  <?php if (isPriceLoader($_COOKIE['user_active'])){ ?>
+				<input type="hidden" value="<?php echo $celu['modelo'] ?>" id="modelo" name="modelo"> <?php echo $celu['modelo'] ?>
+			<?php } else { ?>
+				<input type="text" value="<?php if ($modifing) echo $celu['modelo'] ?>" id="modelo" name="modelo" maxlength="30"> 
+			<?php } ?>
+		</td>
 	</tr>
 	<tr>
 		<td> Tecnología (*) </td>
-		<td> <select name="tecnologia">
-			<?php 
-				$qryTecno = "select valor from atributos_values where atr_id = ".ATTR_TYPE_TECNOLOGIA;
-				$resTecno = doSelect($qryTecno);
-				while ($tecno = mysql_fetch_array($resTecno)){
+		<td>  <?php if (isPriceLoader($_COOKIE['user_active'])){ ?>
+				<input type="hidden" value="<?php echo $celu['tecnologia'] ?>" name="tecnologia"> <?php echo $celu['tecnologia'] ?>
+			  <?php } else { ?>
+				<select name="tecnologia">
+					<?php 
+						$qryTecno = "select valor from atributos_values where atr_id = ".ATTR_TYPE_TECNOLOGIA;
+						$resTecno = doSelect($qryTecno);
+						while ($tecno = mysql_fetch_array($resTecno)){
+							?>
+							<option value="<?php echo $tecno['valor']?>" <?php if ($modifing && $tecno['valor'] == $celu['tecnologia']) echo "selected"?>> <?php echo $tecno['valor'] ?></option>
+							<?php
+						}
 					?>
-					<option value="<?php echo $tecno['valor']?>" <?php if ($modifing && $tecno['valor'] == $celu['tecnologia']) echo "selected"?>> <?php echo $tecno['valor'] ?></option>
-					<?php
-				}
-			?>
-		</select> </td>
+				</select> 
+			<?php } ?>
+		</td>
 	</tr>
 	<tr>
 		<td> Precio Pre-Pago (*) </td>
-		<td> $ <input type="text" value="<?php if ($modifing) echo $celu['precio_prepago'] ?>" id="precio_prepago" name="precio_prepago" onKeyDown="checkForInt(event)"> </td>
+		<td>  <?php if (isEmpleado($_COOKIE['user_active'])){ ?>
+				$ <input type="hidden" value="<?php echo $celu['precio_prepago'] ?>" id="precio_prepago" name="precio_prepago"> <?php echo $celu['precio_prepago'] ?>
+			<?php } else { ?>
+				$ <input type="text" value="<?php if ($modifing) echo $celu['precio_prepago'] ?>" id="precio_prepago" name="precio_prepago" onKeyDown="checkForInt(event)"> 
+			<?php } ?>
+		</td>
 	</tr>
 	<tr>
 		<td> Precio Post-Pago (*) </td>
-		<td> $ <input type="text" value="<?php if ($modifing) echo $celu['precio_postpago'] ?>" id="precio_prepago" name="precio_postpago" onKeyDown="checkForInt(event)"> </td>
+		<td>  <?php if (isEmpleado($_COOKIE['user_active'])){ ?>
+				$ <input type="hidden" value="<?php echo $celu['precio_postpago'] ?>" id="precio_postpago" name="precio_postpago"> <?php echo $celu['precio_postpago'] ?>
+			<?php } else { ?>		
+				$ <input type="text" value="<?php if ($modifing) echo $celu['precio_postpago'] ?>" id="precio_prepago" name="precio_postpago" onKeyDown="checkForInt(event)"> 
+			<?php } ?>
+		</td>
 	</tr>
 <?php
 $qryAtribs = "select atr_id,name,tipo,largo from atributos where status = 'A' order by name";
@@ -107,12 +132,22 @@ while ($atrib = mysql_fetch_array($resAtribs)){
 	switch ($atrib['tipo']){
 		case ATTR_TYPE_TEXT: 
 		case ATTR_TYPE_NUMBER: 
-		case ATTR_TYPE_MONEY: if ($atrib['tipo'] == ATTR_TYPE_MONEY) echo "$ " ?> 
+		case ATTR_TYPE_MONEY: if ($atrib['tipo'] == ATTR_TYPE_MONEY) echo "$ "; 
+							  if (($atrib['tipo'] == ATTR_TYPE_MONEY && isEmpleado($_COOKIE['user_active'])) 
+							     ||($atrib['tipo'] != ATTR_TYPE_MONEY && isPriceLoader($_COOKIE['user_active']))){?> 
+							   		<input type="hidden" name="atrValue<?php echo $i ?>" value="<?php echo $celuAtrib['value'] ?>"> <?php echo $celuAtrib['value'] ?>
+								<?php } else{  ?>
 								  <input type="text" name="atrValue<?php echo $i ?>" value="<?php if ($modifing) echo $celuAtrib['value'] ?>" 
 								   <?php if ($atrib['largo'] != NULL) echo "maxlength=".$atrib['largo'] ?>
-								   <?php if ($atrib['tipo'] == ATTR_TYPE_NUMBER || $atrib['tipo'] == ATTR_TYPE_MONEY) echo "onKeyDown=\"return checkForInt(event)\""; ?>> <?php break;
+								   <?php if ($atrib['tipo'] == ATTR_TYPE_NUMBER || $atrib['tipo'] == ATTR_TYPE_MONEY) echo "onKeyDown=\"return checkForInt(event)\""; ?>> <?php 
+								}
+								
+								break;
 		case ATTR_TYPE_SELECT: 
-		case ATTR_TYPE_MULTIPLE: ?> <select name="atrValue<?php echo $i; if ($atrib['tipo'] == ATTR_TYPE_MULTIPLE) echo "[]" ?>" <?php if ($atrib['tipo'] == ATTR_TYPE_MULTIPLE) echo "multiple" ?>>
+		case ATTR_TYPE_MULTIPLE: if (isPriceLoader($_COOKIE['user_active'])){ ?> 
+									<input type="hidden" value="<?php echo $celuAtrib['value'] ?>" name="atrValue<?php echo $i ?>"> <?php echo $celuAtrib['value'] ?>
+								<?php } else { ?>
+								    <select name="atrValue<?php echo $i; if ($atrib['tipo'] == ATTR_TYPE_MULTIPLE) echo "[]" ?>" <?php if ($atrib['tipo'] == ATTR_TYPE_MULTIPLE) echo "multiple" ?>>
 									<?php 
 										if ($atrib['tipo'] == ATTR_TYPE_MULTIPLE){
 										?>
@@ -128,17 +163,25 @@ while ($atrib = mysql_fetch_array($resAtribs)){
 										<?php }
 									?>
 									</select>
-									<?php break;
+									<?php  } break;
 									
-		case ATTR_TYPE_CHECKBOX: ?> <input type="checkbox" name="atrValue<?php echo $i ?>" value="Si" <?php if($modifing && $celuAtrib['value']) echo "checked" ?>> <?php break;
+		case ATTR_TYPE_CHECKBOX: if (isPriceLoader($_COOKIE['user_active'])){ ?> 
+									<input type="hidden" name="atrValue<?php echo $i ?>" value="<?php echo $celuAtrib['value']?>">
+										<?php echo $celuAtrib['value']?"Si":"No" ?>
+								<?php } else { ?>
+									<input type="checkbox" name="atrValue<?php echo $i ?>" value="Si" <?php if($modifing && $celuAtrib['value']) echo "checked" ?>> 
+								<?php } break;
 		case ATTR_TYPE_IMAGE: 
-								if (!$modifing || $celuAtrib['value'] == "") {?> <input type="file" accept="image/*" name="atrValue<?php echo $i ?>"> 								
-								<?php 
+								if (!$modifing || $celuAtrib['value'] == "") {
+									if (!isPriceLoader($_COOKIE['user_active'])){ ?> <input type="file" accept="image/*" name="atrValue<?php echo $i ?>"> 								
+								<?php }
 								} else {
 									?>
 									<img src="img/<?php echo $celuAtrib['value'] ?>" width="50" height="50">
-									<a href="index.php?lbl=<?php echo MENU_ALTA_CELULARES ?>&act=<?php echo MODIF_CEL ?>&celu_id=<?php echo $_REQUEST['celu_id'] ?>&subAct=<?php echo DELETE_IMG_CEL ?>&foto_id=<?php echo $atrib['atr_id'] ?>&imgFile=<?php echo $celuAtrib['value'] ?>"> Borrar </a>
-									<?php
+									<?php if (!isPriceLoader($_COOKIE['user_active'])){ ?>
+										<a href="index.php?lbl=<?php echo MENU_ALTA_CELULARES ?>&act=<?php echo MODIF_CEL ?>&celu_id=<?php echo $_REQUEST['celu_id'] ?>&subAct=<?php echo DELETE_IMG_CEL ?>&foto_id=<?php echo $atrib['atr_id'] ?>&imgFile=<?php echo $celuAtrib['value'] ?>"> Borrar </a>
+									<?php } ?>
+								<?php
 								}
 								
 								break;

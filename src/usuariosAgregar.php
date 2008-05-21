@@ -31,8 +31,13 @@ function validarCampos() {
 			<td><input type="text" name="password" value="<?php echo $_REQUEST['password'] ?>" maxlength="20"></td>
 		</tr>
 		<tr>
-			<td>Supervisor</td>
-			<td><input type="checkbox" name="super" <?php if ($_REQUEST['super']) echo "checked"; ?>></td>
+			<td>Tipo</td>
+			<!--td><input type="checkbox" name="super" <?php //if ($_REQUEST['super']) echo "checked"; ?>></td-->
+			<td> <select name="super">
+					<option value="0" <?php if ($_REQUEST['super']==0) echo "selected" ?>>Empleado</option>
+					<option value="1" <?php if ($_REQUEST['super']==1) echo "selected" ?>>Supervisor</option>
+					<option value="2" <?php if ($_REQUEST['super']==2) echo "selected" ?>>Cargador de precios</option>
+			</select> </td>
 		</tr>
 		<tr>
 			<td>Estado</td>
