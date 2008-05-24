@@ -36,6 +36,8 @@ function insertAttr($celuID){
 			
 			$fileTo = $dirTo.$fotoID.$ext;
 			
+//			echo $fileTo;
+			
 			while (file_exists($fileTo)){
 				$fotoID++;
 				$fileTo = $dirTo.$fotoID.$ext;

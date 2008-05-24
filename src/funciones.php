@@ -230,7 +230,8 @@ function getLinkImage($image,$width, $height){
 
 function getDocumentRoot(){
 	$docRoot = preg_replace('/\/$/', '', $_SERVER['DOCUMENT_ROOT']);
-	if ($docRoot.substr("xampp", 0)){
+	//if ($docRoot.substr("xampp", 0)){
+	if (!(strpos($docRoot,"xampp") === FALSE)){
 		$docRoot = $docRoot."/cti/src";
 	}
 	return $docRoot;
