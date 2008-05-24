@@ -13,7 +13,8 @@
 	
 	
 	if ($_REQUEST['subAct'] == DELETE_IMG_CEL){
-		unlink("img\\".$_REQUEST['imgFile']);
+		$docRoot	= getDocumentRoot();
+		unlink($docRoot."/img/".$_REQUEST['imgFile']);
 		
 		$qryUpd = "update celulares_atributos set value = '' where atr_id = ".$_REQUEST['foto_id']. " and celu_id = ".$_REQUEST['celu_id'];
 		doInsert($qryUpd);
@@ -95,7 +96,7 @@ if ($modifing){
 	<tr>
 		<td> Precio Pre-Pago (*) </td>
 		<td>  <?php if (isEmpleado($_COOKIE['user_active'])){ ?>
-				$ <input type="hidden" value="<?php echo $celu['precio_prepago'] ?>" id="precio_prepago" name="precio_prepago"> <?php echo $celu['precio_prepago'] ?>
+				$ <input type="hidden" value="<?php echo $modifing?$celu['precio_prepago']:0 ?>" id="precio_prepago" name="precio_prepago"> <?php echo $celu['precio_prepago'] ?>
 			<?php } else { ?>
 				$ <input type="text" value="<?php if ($modifing) echo $celu['precio_prepago'] ?>" id="precio_prepago" name="precio_prepago" onKeyDown="checkForInt(event)"> 
 			<?php } ?>
@@ -104,7 +105,7 @@ if ($modifing){
 	<tr>
 		<td> Precio Post-Pago (*) </td>
 		<td>  <?php if (isEmpleado($_COOKIE['user_active'])){ ?>
-				$ <input type="hidden" value="<?php echo $celu['precio_postpago'] ?>" id="precio_postpago" name="precio_postpago"> <?php echo $celu['precio_postpago'] ?>
+				$ <input type="hidden" value="<?php echo $modifing?$celu['precio_postpago']:0 ?>" id="precio_postpago" name="precio_postpago"> <?php echo $celu['precio_postpago'] ?>
 			<?php } else { ?>		
 				$ <input type="text" value="<?php if ($modifing) echo $celu['precio_postpago'] ?>" id="precio_prepago" name="precio_postpago" onKeyDown="checkForInt(event)"> 
 			<?php } ?>

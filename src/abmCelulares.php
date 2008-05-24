@@ -1,6 +1,7 @@
 <?php 
 $fotoID = 0;
 function insertAttr($celuID){
+	$docRoot = getDocumentRoot();	
 	for ($i = 1; $i <= $_REQUEST['cantAtrib']; $i++){
 		$tipo = $_REQUEST['atrType'.$i];
 		$atrID = $_REQUEST['atrName'.$i];
@@ -24,7 +25,8 @@ function insertAttr($celuID){
 			
 			$tmpFoto = $_FILES['atrValue'.$i]['tmp_name'];
 			//$dirBase = "";
-			$dirTo = "img\\".$celuID."_";
+
+			$dirTo = $docRoot."/img/".$celuID."_";
 						
 			//mkdir(dirname($dirTo),0755,true);
 			//recur_mkdirs($dirTo);
