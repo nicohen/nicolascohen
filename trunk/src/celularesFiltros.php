@@ -1,3 +1,15 @@
+<?php 
+//Preload de las marcas
+
+$queryMarcas = "select distinct marca from celulares where status='A' order by marca";
+$resultMarcas = doSelect($queryMarcas); 
+$i = 0;
+while ($marcaRes = mysql_fetch_array($resultMarcas)) {
+	$marcas[$i] = $marcaRes['marca'];
+	$i++;
+}
+
+?>
 <script>
 function SetCookie(cookieName,cookieValue) {
 	var value = cookieValue;
@@ -21,24 +33,15 @@ function searchMarca(marca){
 	<tr>
 		<td width="184" valign="top">
 			<table width="184" align="center">
-				<?php
-					$queryCountMarcas = "select count(1) from (
-												select distinct marca from celulares c where status='A') t";
-					$resultCountMarcas = doSelect($queryCountMarcas);
-					$countRes = mysql_fetch_array($resultCountMarcas);
-					$cantMarcas = $countRes[0];
-					
-					//echo "Cantidad de marcas: ".$cantMarcas;
-					
-					$queryMarcas = "select distinct marca from celulares where status='A' order by marca";
-					$resultMarcas = doSelect($queryMarcas); 
-					$rows = 1;
-					while (($rows <= $cantMarcas / 2) && ($marcaRes = mysql_fetch_array($resultMarcas))) {?>
+				<?
+					$rows = 0;
+//					echo count($marcas);
+					for (; $rows < count($marcas)/2; $rows++) {?>
 						<tr>
-							<td width="184" height="30" align="center"> <a href="javascript:searchMarca('<?php echo $marcaRes['marca'] ?>')"> <img border="0" src="imgs/<?php echo $marcaRes['marca'] ?>.gif"> </a> 
+							<td width="184" height="30" align="center"> <a href="javascript:searchMarca('<?php echo $marcas[$rows] ?>')"> <img border="0" src="imgs/<?php echo $marcas[$rows] ?>.gif"> </a> 
 							</td>
 						</tr>
-					<?php $rows++; } ?>
+					<?php  } ?>
 			</table>
 		</td>
 		<td>
@@ -53,12 +56,9 @@ function searchMarca(marca){
 					<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 					
 					<?php
-					
-					$query = "select distinct marca from celulares where status='A' order by marca";
-					$result = doSelect($query);
 					echo "<tr><td align='right' width='100'>Marca:</td><td align='left'><select name='marcas[]' multiple>";
-					while ($res = mysql_fetch_array($result)) {
-						echo "<option value='".$res['marca']."'>".$res['marca']."</option>";
+					for ($iMarca = 0; $iMarca < count($marcas); $iMarca++){
+						echo "<option value='".$marcas[$iMarca]."'>".$marcas[$iMarca]."</option>";
 					}
 					echo "</select></td></tr>";
 					
@@ -147,9 +147,9 @@ function searchMarca(marca){
 	</td>
 	<td width="184" valign="top">
 		<table width="184" align="center">
-			<?php while ($marcaRes = mysql_fetch_array($resultMarcas)){?>
+			<?php for (;$rows < count($marcas); $rows++){?>
 				<tr>
-					<td width="184" height="30" align="center"> <a href="javascript:searchMarca('<?php echo $marcaRes['marca'] ?>')"> <img border="0" src="imgs/<?php echo $marcaRes['marca'] ?>.gif"> </a> 
+					<td width="184" height="30" align="center"> <a href="javascript:searchMarca('<?php echo $marcas[$rows] ?>')"> <img border="0" src="imgs/<?php echo $marcas[$rows] ?>.gif"> </a> 
 					</td>
 				</tr>
 			<?php } ?>
