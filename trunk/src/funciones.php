@@ -224,4 +224,16 @@ function addServiciosOptions($label){
 	}	
 }
 
+function getLinkImage($image,$width, $height){
+	return "image.php?width=".$width."&height=".$height."&image=".$image;
+}
+
+function getDocumentRoot(){
+	$docRoot = preg_replace('/\/$/', '', $_SERVER['DOCUMENT_ROOT']);
+	if ($docRoot.substr("xampp", 0)){
+		$docRoot = $docRoot."/cti/src";
+	}
+	return $docRoot;
+}
+
 ?>

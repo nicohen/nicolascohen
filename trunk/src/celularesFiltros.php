@@ -22,15 +22,23 @@ function searchMarca(marca){
 		<td width="184" valign="top">
 			<table width="184" align="center">
 				<?php
+					$queryCountMarcas = "select count(1) from (
+												select distinct marca from celulares c where status='A') t";
+					$resultCountMarcas = doSelect($queryCountMarcas);
+					$countRes = mysql_fetch_array($resultCountMarcas);
+					$cantMarcas = $countRes[0];
+					
+					//echo "Cantidad de marcas: ".$cantMarcas;
 					
 					$queryMarcas = "select distinct marca from celulares where status='A' order by marca";
 					$resultMarcas = doSelect($queryMarcas); 
-					while ($marcaRes = mysql_fetch_array($resultMarcas)) {?>
+					$rows = 1;
+					while (($rows <= $cantMarcas / 2) && ($marcaRes = mysql_fetch_array($resultMarcas))) {?>
 						<tr>
 							<td width="184" height="30" align="center"> <a href="javascript:searchMarca('<?php echo $marcaRes['marca'] ?>')"> <img border="0" src="imgs/<?php echo $marcaRes['marca'] ?>.gif"> </a> 
 							</td>
 						</tr>
-					<?php } ?>
+					<?php $rows++; } ?>
 			</table>
 		</td>
 		<td>
@@ -137,7 +145,16 @@ function searchMarca(marca){
 			</tr>
 		</table>
 	</td>
-	<td width="184">&nbsp;</td>
+	<td width="184" valign="top">
+		<table width="184" align="center">
+			<?php while ($marcaRes = mysql_fetch_array($resultMarcas)){?>
+				<tr>
+					<td width="184" height="30" align="center"> <a href="javascript:searchMarca('<?php echo $marcaRes['marca'] ?>')"> <img border="0" src="imgs/<?php echo $marcaRes['marca'] ?>.gif"> </a> 
+					</td>
+				</tr>
+			<?php } ?>
+		</table>
+	</td>
 	</tr>
 	</table>
 </form>

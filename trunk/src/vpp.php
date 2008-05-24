@@ -19,7 +19,7 @@ require_once("funcionesDB.php");
 	}
 	
 	function verImg(img){
-		document.getElementById("imgGrande").src = document.getElementById("img"+img).src;
+		document.getElementById("imgGrande").src = img;
 		document.getElementById("divImg").style.display = '';
 	}
 	
@@ -56,16 +56,28 @@ require_once("funcionesDB.php");
 					$i++;
 					if ($img[0] != ""){
 					?>
-					<td align="center"><a href="javascript:verImg(<?php echo $i ?>);"><img border="0" id="img<?php echo $i ?>" src="img/<?php echo $img[0] ?>" width="100" height="100"></a></td>
+					<td align="center" valign="middle">
+						<table cellpadding="0" cellspacing="0" border="0" width="100">
+							<tbody>
+								<tr>
+									<td align="center"> 
+										<a href="javascript:verImg('<?php echo getLinkImage("/img/".$img[0],295,350) ?>');">
+											<img border="0" height="100" id="img<?php echo $i ?>" src="<?php echo getLinkImage("/img/".$img[0],100,100) ?>">
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
 					<?php
 					}
 				}
 			?>
 			</tr></table>
 			<div id="divImg" style="border:1;border-bottom-style:solid;position:absolute; display:none; z-index:1; left: 352px; top: 89px; width: 295px">
-				<table border="2" style="border-collapse:collapse;border-color:black;background-color:#FFFFFF">
+				<table width="295" border="2" style="border-collapse:collapse;border-color:black;background-color:#FFFFFF;  ">
 					<tr>
-						<td align="center"><img id="imgGrande" width="295" height="350"><br>
+						<td align="center"><img id="imgGrande"><br>
 						<a href="javascript:closeImg()">Cerrar</a>
 				</td></tr></table>
 			</div>

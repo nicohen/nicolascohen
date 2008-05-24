@@ -262,7 +262,7 @@ if($inCelulares!='') {
 			
 			$imgResult = doSelect($imgQuery);
 			if ($imgRes = mysql_fetch_array($imgResult))
-				echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' width='100' height='100' src='img/".$imgRes['value']."' /></a></td>"; 
+				echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' src='".getLinkImage("/img/".$imgRes['value'],120,136)."' /></a></td>"; 
 		}
 		$tokNum++;
 		$celTok = strtok(",");
