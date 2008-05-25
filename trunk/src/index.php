@@ -33,7 +33,7 @@ $label=get_label($_REQUEST['lbl']);
 	<table align="center" border="0" width="768" cellpadding="0" cellspacing="0">
 		<tr>
 			<td valign="top">
-				<table align="center" width="100%" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-color:gray">
+				<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-color:gray">
 					<tr>
 						
 						<td valign="middle" align="center" height="70"> 
@@ -44,7 +44,7 @@ $label=get_label($_REQUEST['lbl']);
 								<embed width="566" height="98" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/top.swf"/>
 							</object> 
 							<div style="position:absolute; left: 287px; top: 53px; width: 565px;">
-						  		<h1>Administrador de Consultas para Claro</h1>
+						  		<!--h1>Administrador de Consultas para Claro</h1-->
 							</div>
 						</td>
 					</tr>
@@ -73,54 +73,72 @@ $label=get_label($_REQUEST['lbl']);
 					<?php if ($_COOKIE['user_active']!='' && !$_REQUEST['login']=='Y') { ?>
 					<tr align="center">
 						<td>
-							<table width="100%" border="0" cellpadding="0" cellspacing="3" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
-								<tr align="center">
-									<td width="20%">
-											<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-												<param value="imgs/celulares.swf" name="movie"/>
-												<param value="high" name="quality"/>
-												<param value="transparent" name="wmode"/>
-												<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/celulares.swf"/>
-											</object>
-									</td>
-									<?php if (!isPriceLoader($_COOKIE['user_active'])){ ?>
-									<td width="20%">
-										<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-												<param value="imgs/servicios.swf" name="movie"/>
-												<param value="high" name="quality"/>
-												<param value="transparent" name="wmode"/>
-												<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/servicios.swf"/>
-											</object>
-									</td>
-									<td width="20%">
-										<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-												<param value="imgs/encuestas.swf" name="movie"/>
-												<param value="high" name="quality"/>
-												<param value="transparent" name="wmode"/>
-												<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/encuestas.swf"/>
-											</object>
-									</td>
-									<?php } 
-										if (isSupervisor($_COOKIE['user_active'])) {?>
-									<td width="20%">
-										<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-												<param value="imgs/registros.swf" name="movie"/>
-												<param value="high" name="quality"/>
-												<param value="transparent" name="wmode"/>
-												<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/registros.swf"/>
-											</object>
-									</td>
-									<td width="20%">
-										<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-												<param value="imgs/usuarios.swf" name="movie"/>
-												<param value="high" name="quality"/>
-												<param value="transparent" name="wmode"/>
-												<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/usuarios.swf"/>
-											</object>
-									</td>
-									<?php } ?>
+							<table width="768" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="768" colspan="3"><img src="imgs/top6.jpg" border="0" width="768" height="28"></td>
 								</tr>
+								<tr>
+									<td background="imgs/left_bg.jpg" width="8" style="background-repeat:repeat-y;"></td>
+									<td>
+										<table width="749" border="0" cellpadding="0" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
+											<tr align="center">
+												<td width="20%">
+													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+														<param value="imgs/celulares.swf" name="movie"/>
+														<param value="high" name="quality"/>
+														<param value="transparent" name="wmode"/>
+														<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/celulares.swf"/>
+													</object>
+												</td>
+												<?php if (!isPriceLoader($_COOKIE['user_active'])){ ?>
+												<td width="20%">
+													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+															<param value="imgs/servicios.swf" name="movie"/>
+															<param value="high" name="quality"/>
+															<param value="transparent" name="wmode"/>
+															<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/servicios.swf"/>
+														</object>
+												</td>
+												<td width="20%">
+													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+															<param value="imgs/encuestas.swf" name="movie"/>
+															<param value="high" name="quality"/>
+															<param value="transparent" name="wmode"/>
+															<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/encuestas.swf"/>
+														</object>
+												</td>
+												<?php } 
+													if (isSupervisor($_COOKIE['user_active'])) {?>
+												<td width="20%">
+													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+															<param value="imgs/registros.swf" name="movie"/>
+															<param value="high" name="quality"/>
+															<param value="transparent" name="wmode"/>
+															<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/registros.swf"/>
+														</object>
+												</td>
+												<td width="20%">
+													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+															<param value="imgs/usuarios.swf" name="movie"/>
+															<param value="high" name="quality"/>
+															<param value="transparent" name="wmode"/>
+															<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/usuarios.swf"/>
+														</object>
+												</td>
+												<?php } ?>
+											</tr>
+										</table>
+									</td>
+									<td background="imgs/right_bg.jpg" width="11"></td>
+								</tr>
+								<tr>
+									<td valign="top"><img src="imgs/c1.jpg" border="0" width="8" height="9" alt=""></td>
+									<td valign="top" background="imgs/bottom_bg.jpg"></td>
+									<td valign="top"><img src="imgs/c2.jpg" border="0" width="11" height="9" alt=""></td>
+								</tr>			
+					
 							</table>
+
 						</td>
 					</tr>
 					<?php }
@@ -128,10 +146,10 @@ $label=get_label($_REQUEST['lbl']);
 					addCelularesOptions($label); 
 					addServiciosOptions($label); ?>
 					<tr>
-						<td>
-							<table width="100%" border="0" cellpadding="0" cellspacing="3">
+						<td><br>
+							<table width="100%" border="0" cellpadding="0" cellspacing="0">
 								<tr>
-									<td height="400" valign="top">
+									<td height="400" valign="top"><hr>
 										<?php do_content($language,$label); ?>
 									</td>
 								</tr>

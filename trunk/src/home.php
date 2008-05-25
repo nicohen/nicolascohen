@@ -2,11 +2,15 @@
 if ($_COOKIE['user_active']=='' || $_REQUEST['login']=='Y') { 
 ?>
 <br><br><br><br><br><br>
-<form action="login.php" method="post">
-	<table border="1" cellpadding="0" cellspacing="0" align="center">
-		<tr>
-			<td>
-				<table border="0" cellpadding="0" cellspacing="4">
+
+<table width="328" border="0" cellpadding="0" cellspacing="0" align="center">
+	<tr><td width="328" colspan="3"><img src="imgs/top4.png" border="0" width="328" height="27" alt=""></td></tr>
+	<tr>
+		<td background="imgs/left_bg.jpg" width="8"></td>
+		<td width="409" valign="top" style="font-family:arial" bgcolor="white" style="color: black; font-size: 7pt; font-family: verdana">
+			<form action="login.php" method="post">
+				<table border="0" cellpadding="0" cellspacing="4" align="center">
+					<tr><td height="10"></td></tr>
 					<tr>
 						<td>Usuario:</td>
 						<td><input type="text" name="usr" value="" /></td>
@@ -20,11 +24,19 @@ if ($_COOKIE['user_active']=='' || $_REQUEST['login']=='Y') {
 						<td><input type="submit" name="login" value="Continuar"></td>
 					</tr>
 				</table>
-				
-			</td>
-		</tr>
-	</table>
-</form>
+			</form>
+		</td>
+
+		<td background="imgs/right_bg.jpg" width="11"></td>
+	</tr>
+	<tr>
+		<td valign="top"><img src="imgs/c1.jpg" border="0" width="8" height="9" alt=""></td>
+		<td valign="top" background="imgs/bottom_bg.jpg"></td>
+		<td valign="top"><img src="imgs/c2.jpg" border="0" width="11" height="9" alt=""></td>
+	</tr>			
+
+</table>
+	
 <?php } else {?>
 <table width="100%" height="100%">
 <tr>

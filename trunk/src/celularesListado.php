@@ -143,14 +143,14 @@ if ( !isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['comp
 			if ($firstAttr==true) {
 				$postAttrs = $attrRes['atr_id'];
 				$firstAttr = false;
-			} else
+			} else {
 				$postAttrs = $postAttrs.",".$attrRes['atr_id'];
+			}
 		}
 	}
 	
 	$firstMarca=true;
 	$inMarcas = "";
-	
 	if ($_REQUEST['marcas']!='') {
 		foreach($_REQUEST['marcas'] as $marcas) {
 			if ($firstMarca==true) {
@@ -209,18 +209,34 @@ while ($celRes = mysql_fetch_array($celResult)) {
 		$hasAllAttributes = 1;
 		$tok = strtok ($postAttrs, ",");
 		while ($tok !== false) {
-			$hasAttrQuery = "select 1 from celulares_atributos where celu_id=".$celRes['celu_id']." and atr_id=".$tok." and value=".(($_REQUEST["atr".$tok]=='on')?'1':'0');
-			$hasAttrResult = doSelect($hasAttrQuery);
-			$hasAttrRes = mysql_fetch_array($hasAttrResult);
-			$hasAllAttributes = $hasAllAttributes*$hasAttrRes['1'];
-			
+			$isCheckQuery = "select tipo from atributos where atr_id=".$tok;
+			$isCheckResult = doSelect($isCheckQuery);
+			$isCheckRes = mysql_fetch_array($isCheckResult);
+
+			if ($isCheckRes['tipo']=='CH') {
+				$hasAttrQuery = "select 1 from celulares_atributos where celu_id=".$celRes['celu_id']." and atr_id=".$tok." and value=".(($_REQUEST["atr".$tok]=='on')?'1':'0');
+				$hasAttrResult = doSelect($hasAttrQuery);
+				$hasAttrRes = mysql_fetch_array($hasAttrResult);
+				$hasAllAttributes = $hasAllAttributes*$hasAttrRes['1'];
+			} else if ($isCheckRes['tipo']=='SM') {
+				$tieneAtributo=false;
+				foreach($_REQUEST['atr'.$tok] as $atributo) {
+					$hasAttrQuery = "select 1 from celulares_atributos where celu_id=".$celRes['celu_id']." and atr_id=".$tok." and trim(instr(value,'".$atributo."'))>0";
+					$hasAttrResult = doSelect($hasAttrQuery);
+					$hasAttrRes = mysql_fetch_array($hasAttrResult);
+					if ($hasAttrRes['1']==1)
+						$tieneAtributo=true;
+				}
+				if(!$tieneAtributo) 
+					$hasAllAttributes=0;
+			}
+
 			$tok = strtok(",");
 		}
 	}
 	
 	if ($hasAllAttributes || isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) || ($_REQUEST['compare']=='Y')) {
 		$celulares[$celCount++] = $celRes;
-
 		if ($celCount==1)
 			$inCelulares = $celRes['celu_id'];
 		else
@@ -300,7 +316,8 @@ if($inCelulares!='') {
 	/* 
 	Fila 1:     Marca Modelo
 	Fila 2:     Foto
-	Fila 3...n: Atributos
+	Fila 3:     Checks
+	Fila 4...n: Atributos
 	*/
 	
 	//Contador de columnas
@@ -309,15 +326,16 @@ if($inCelulares!='') {
 	$celCounter = 1;
 	//Atributo actual
 	$atributoActual = "";
-	
+	//echo $resultQuery;
 	while ($res = mysql_fetch_array($result)) {
 		if ($atributoActual!=$res['name']) {
 			if ($atributoActual!="") {
-				//if ($indexCol!=MAX_COLS) {
-					//for($i=$indexCol;$i<MAX_COLS;$i++) {
-						//echo "<td></td>";
-					//}
-				//}
+				//echo "<br>index:".$indexCol;
+				/*if ($indexCol<=$celCount) {
+					for($i=$indexCol;$i<$celCount;$i++) {
+						echo "<td></td>";
+					}
+				}*/
 				echo "</tr>";
 				$indexCol = 0;
 			}
@@ -325,14 +343,21 @@ if($inCelulares!='') {
 			$atributoActual = $res['name'];
 			$celCounter=1;
 		}
-
-		if ($celCounter>((MAX_COLS*$_REQUEST['list'])-MAX_COLS) && $celCounter<=($_REQUEST['list']*MAX_COLS)) {
-			if ($res['celu_id']==$celulares[$celCounter-1]['celu_id']) {
+		//echo "<br>atributoActual:".$atributoActual;
+		//echo "<br>res:".$res['value'];
+		$tempCelCounter = $celCounter++;
+		while($tempCelCounter<=MAX_COLS) {
+			if ($tempCelCounter>((MAX_COLS*$_REQUEST['list'])-MAX_COLS) && $tempCelCounter<=($_REQUEST['list']*MAX_COLS)) {
 				$indexCol++;
-				echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
+				if ($res['celu_id']==$celulares[$tempCelCounter-1]['celu_id']) {
+					echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
+					break;
+				} else {
+					echo "<td></td>";
+				}
 			}
+			$tempCelCounter++;
 		}
-		$celCounter++;
 	}
 } else {
 	echo "<tr><td>No hay celulares que concuerden con su búsqueda.</td></tr>";

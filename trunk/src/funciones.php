@@ -191,7 +191,7 @@ function isCelularesSubSection($label){
 
 function addCelularesOptions($label){	
 	if ($label == MENU_CELULARES_FILTROS || isCelularesSubSection($label)){
-		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
+		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='0' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
 		if (!isPriceLoader($_COOKIE['user_active']))
 			appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
 		appendEncRow(MENU_ABM_CELULARES, "Administrar");
@@ -216,7 +216,7 @@ function isServiciosSubSection($label){
 
 function addServiciosOptions($label){	
 	if ($label == MENU_SERIVICIOS_RESUME || isServiciosSubSection($label)){
-		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='3' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
+		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='0' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
 		appendEncRow(MENU_ALTA_SERVICIOS, "Dar de alta");
 		appendEncRow(MENU_ABM_SERVICIOS, "Administrar");
 		appendEncRow(MENU_ABM_ATRIBUTOS_SERVICIOS, "Ver atributos");
