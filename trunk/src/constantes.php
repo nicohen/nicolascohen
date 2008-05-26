@@ -87,6 +87,7 @@
 	define('ACTIVE_CEL','active_cel');
 	define('DELETE_IMG_CEL','delete_img');
 	define('DELETE_CEL','delete_cel');
+	define('UPDATE_PRICE_CEL','update_prices');
 	
 	define('LOGIN',1);
 	define('LOGOUT',2);
