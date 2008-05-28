@@ -264,7 +264,7 @@ if($inCelulares!='') {
 	//Seteo la cookie para viajar por los listados de celulares
 	setcookie("celulares_".$_COOKIE['user_active'],$inCelulares,time()*365*24*60*60,"/");
 		
-	echo "<tr><td><img src=\"imgs/primer_claro.jpg\"</td>";
+	echo "<tr><td><img src=\"imgs/primer_claro.jpg\"></td>";
 	$tokNum = 1;
 	$celTok = strtok ($inCelulares, ",");
 	$minCel = ($_REQUEST['list']*MAX_COLS)-MAX_COLS;
@@ -320,44 +320,27 @@ if($inCelulares!='') {
 	Fila 4...n: Atributos
 	*/
 	
-	//Contador de columnas
-	$indexCol = 0;
-	//Contador de celulares
-	$celCounter = 1;
 	//Atributo actual
 	$atributoActual = "";
-	//echo $resultQuery;
+	//echo "<br>".$resultQuery;
 	while ($res = mysql_fetch_array($result)) {
 		if ($atributoActual!=$res['name']) {
 			if ($atributoActual!="") {
-				//echo "<br>index:".$indexCol;
-				/*if ($indexCol<=$celCount) {
-					for($i=$indexCol;$i<$celCount;$i++) {
-						echo "<td></td>";
-					}
-				}*/
 				echo "</tr>";
-				$indexCol = 0;
 			}
 			echo "<tr width='".getColWidth()."%'><td>".$res['name']."</td>";
 			$atributoActual = $res['name'];
-			$celCounter=1;
+			$celCounter=0;
 		}
-		//echo "<br>atributoActual:".$atributoActual;
-		//echo "<br>res:".$res['value'];
-		$tempCelCounter = $celCounter++;
-		while($tempCelCounter<=MAX_COLS) {
-			if ($tempCelCounter>((MAX_COLS*$_REQUEST['list'])-MAX_COLS) && $tempCelCounter<=($_REQUEST['list']*MAX_COLS)) {
-				$indexCol++;
-				if ($res['celu_id']==$celulares[$tempCelCounter-1]['celu_id']) {
-					echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
-					break;
-				} else {
-					echo "<td></td>";
-				}
+		if ($celCounter>=((MAX_COLS*$_REQUEST['list'])-MAX_COLS) && $celCounter<($_REQUEST['list']*MAX_COLS)) {
+			if ($res['celu_id']==$celulares[$celCounter]['celu_id']) {
+				echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
+			} else {
+				echo "<td></td>";
+				//$celCounter=0;
 			}
-			$tempCelCounter++;
 		}
+		$celCounter++;
 	}
 } else {
 	echo "<tr><td>No hay celulares que concuerden con su búsqueda.</td></tr>";
