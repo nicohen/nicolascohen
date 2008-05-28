@@ -134,7 +134,7 @@ function searchMarca(marca){
 										SetCookie("compare3_".$_COOKIE['user_active'],"-1");
 										SetCookie("compare4_".$_COOKIE['user_active'],"-1");
 										SetCookie("compare_cant_".$_COOKIE['user_active'],"0");
-										setcookie("celulares_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
+										setcookie("celulares_".$_COOKIE['user_active'],"");
 										setcookie("list_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
 										//setcookie("compare_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
 						
