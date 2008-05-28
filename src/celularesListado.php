@@ -262,8 +262,8 @@ if ($_REQUEST['compare']=='Y')
 
 if($inCelulares!='') {
 	//Seteo la cookie para viajar por los listados de celulares
-	setcookie("celulares_".$_COOKIE['user_active'],$inCelulares,time()*365*24*60*60,"/");
-		
+	setcookie("celulares_".$_COOKIE['user_active'],"");
+	setcookie("celulares_".$_COOKIE['user_active'],$inCelulares);
 	echo "<tr><td><img src=\"imgs/primer_claro.jpg\"></td>";
 	$tokNum = 1;
 	$celTok = strtok ($inCelulares, ",");
