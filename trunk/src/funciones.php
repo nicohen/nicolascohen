@@ -21,6 +21,8 @@ Function do_header($titulo) {
 	-->
 	</style>
 	<link rel='stylesheet' type='text/css' href='styles/stylesClaro.css' />
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 	<?php
 	echo "</head>";
 }
