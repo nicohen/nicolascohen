@@ -87,6 +87,7 @@ function searchMarca(marca){
 												  and filter=1 
 												  and trim(ca.value) != ''
 												  and a.tipo != '".ATTR_TYPE_IMAGE."'
+												  and a.status='A'
 												  order by a.peso, a.name, ca.value";
 										$result = doSelect($query);
 										//Valida el cambio de type para abrir o cerrar el select
