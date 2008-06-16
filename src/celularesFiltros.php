@@ -137,8 +137,6 @@ function searchMarca(marca){
 										setcookie("celulares_".$_COOKIE['user_active'],"");
 										setcookie("list_".$_COOKIE['user_active'],"");
 										//setcookie("compare_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
-										echo $_COOKIE["celulares_".$_COOKIE['user_active']];
-										echo $_COOKIE["list_".$_COOKIE['user_active']];
 										?>
 										<tr>
 											<td height="10"></td>
