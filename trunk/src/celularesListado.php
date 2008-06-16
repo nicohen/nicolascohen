@@ -276,8 +276,13 @@ if($inCelulares!='') {
 						 and c.celu_id=".$celTok;
 			
 			$imgResult = doSelect($imgQuery);
-			if ($imgRes = mysql_fetch_array($imgResult))
-				echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' src='".getLinkImage("/img/".$imgRes['value'],120,136)."' /></a></td>"; 
+			if ($imgRes = mysql_fetch_array($imgResult)) {
+				if (file_exists("img/".$imgRes['value']) && $imgRes['value']!="")  {
+					echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' src='".getLinkImage("/img/".$imgRes['value'],120,136)."' /></a></td>"; 
+				} else {
+					echo "<td align='center'><a href='vpp.php?celu_id=$celTok' target='_blank'><img border='0' src='".getLinkImage("/img/no-disponible.jpg",120,136)."' /></a></td>"; 
+				}
+			}
 		}
 		$tokNum++;
 		$celTok = strtok(",");
