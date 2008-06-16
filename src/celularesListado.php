@@ -212,13 +212,12 @@ while ($celRes = mysql_fetch_array($celResult)) {
 			$isCheckQuery = "select tipo from atributos where atr_id=".$tok;
 			$isCheckResult = doSelect($isCheckQuery);
 			$isCheckRes = mysql_fetch_array($isCheckResult);
-
 			if ($isCheckRes['tipo']=='CH') {
 				$hasAttrQuery = "select 1 from celulares_atributos where celu_id=".$celRes['celu_id']." and atr_id=".$tok." and value=".(($_REQUEST["atr".$tok]=='on')?'1':'0');
 				$hasAttrResult = doSelect($hasAttrQuery);
 				$hasAttrRes = mysql_fetch_array($hasAttrResult);
 				$hasAllAttributes = $hasAllAttributes*$hasAttrRes['1'];
-			} else if ($isCheckRes['tipo']=='SM') {
+			} else if ($isCheckRes['tipo']=='SM' || $isCheckRes['tipo']=='S') {
 				$tieneAtributo=false;
 				foreach($_REQUEST['atr'.$tok] as $atributo) {
 					$hasAttrQuery = "select 1 from celulares_atributos where celu_id=".$celRes['celu_id']." and atr_id=".$tok." and trim(instr(value,'".$atributo."'))>0";
