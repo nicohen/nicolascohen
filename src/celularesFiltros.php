@@ -135,9 +135,10 @@ function searchMarca(marca){
 										SetCookie("compare4_".$_COOKIE['user_active'],"-1");
 										SetCookie("compare_cant_".$_COOKIE['user_active'],"0");
 										setcookie("celulares_".$_COOKIE['user_active'],"");
-										setcookie("list_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
+										setcookie("list_".$_COOKIE['user_active'],"");
 										//setcookie("compare_".$_COOKIE['user_active'],"",time()*365*24*60*60,"/");
-						
+										echo $_COOKIE["celulares_".$_COOKIE['user_active']];
+										echo $_COOKIE["list_".$_COOKIE['user_active']];
 										?>
 										<tr>
 											<td height="10"></td>
@@ -153,8 +154,6 @@ function searchMarca(marca){
 									</td>
 								</tr>
 							</table>
-	
-	
 						</td>
 						<td background="imgs/right_bg.jpg" width="11"></td>
 					</tr>
