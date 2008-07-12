@@ -13,6 +13,7 @@ Function getConnection(){
 
 Function doSelect($query){
 	$connection = getConnection();
+	printQuery($query);
 	$returnSelect = mysql_query($query,$connection);// or die ("Problemas en select".mysql_error());
 	closeConnection($connection);
 	return $returnSelect;
@@ -20,16 +21,24 @@ Function doSelect($query){
 
 Function doInsert($query){
 	$connection = getConnection();
-	mysql_query($query,$connection);
+	printQuery($query);
+	mysql_query($query,$connection);// or die ("Error en insert ".mysql_error()."\n".$query);
 	closeConnection($connection);
 }
 
 Function doInsertAndGetLast($query){
 	$conn = getConnection();
+	printQuery($query);
 	mysql_query($query,$conn) or die ("Error en insert".mysql_error());
 	$returnInsert = mysql_insert_id($conn);
 	closeConnection($conn);
 	return $returnInsert;
+}
+
+Function printQuery($query){
+	if ($_REQUEST['showSQL'] == 'Y'){
+		echo $query."<br>";
+	}
 }
 
 Function closeConnection($conn) {
@@ -46,7 +55,6 @@ Function doExecuteAndGetCount($query){
 
 Function store_action($usrid,$act,$desc,$url) {
 	$query = "insert into logs (user_id, ins_dt, act_id, descr, url) values (".$usrid.",sysdate(),".$act.",'".$desc."','".$url."')";
-	echo $query;
 	doInsert($query);
 }
 
