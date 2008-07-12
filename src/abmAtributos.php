@@ -176,9 +176,9 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div></td>
 </tr>
 <tr>
-	<td colspan="2"> Peso: <input type="text" name="peso" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributos['peso'] ?>"></td></tr>
+	<td colspan="2"> Peso: <input type="text" name="peso" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributo['peso'] ?>"></td></tr>
 <tr>
-	<td colspan="2"> Largo (opcional): <input type="text" name="largo" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributos['largo'] ?>"></td></tr>
+	<td colspan="2"> Largo (opcional): <input type="text" name="largo" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributo['largo'] ?>"></td></tr>
 <tr>
 	<td colspan="2" align="center"> <input type="button" onClick="javascript:enviar();" value="<?php echo ($_REQUEST['act'] == MODIF_ATTR)?"Grabar":"Agregar" ?>"> 
 					<?php if ($_REQUEST['act'] == MODIF_ATTR){ ?>

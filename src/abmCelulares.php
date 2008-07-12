@@ -65,6 +65,7 @@ function insertAttr($celuID){
 		} else if ($tipo == ATTR_TYPE_CHECKBOX){
 			$valor = ($_REQUEST['atrValue'.$i]?"1":"0");
 		} else if ($tipo == ATTR_TYPE_IMAGE && $_FILES['atrValue'.$i]['name'] != ''){
+			
 			//print_r($_FILES['atrValue'.$i]['name']);
 			$fotoID++;
 			
@@ -123,16 +124,27 @@ function deleteAtribs(){
 		$qryDelAtribs = $qryDelAtribs." and (select tipo from atributos where atr_id = c.atr_id) != '".ATTR_TYPE_IMAGE."'";
 	}
 	*/
-	$qryDelAtribs = "DELETE c.* FROM celulares_atributos c";
+	
 	if ($_REQUEST['act']== UPDATE_CEL){
-		$qryDelAtribs = $qryDelAtribs." LEFT JOIN atributos a USING ( atr_id ) WHERE a.tipo != '".ATTR_TYPE_IMAGE."' and " ;
+		$qryDelAtribs = "select atr_id from atributos a WHERE a.tipo != '".ATTR_TYPE_IMAGE."'" ;
+		$resAtrib = doSelect($qryDelAtribs);
+		while ($atrib = mysql_fetch_array($resAtrib)){
+			$qryDel = "delete from celulares_atributos where celu_id = ".$_REQUEST['celu_id']." and atr_id = ".$atrib['atr_id'];
+			doInsert($qryDel);
+		}
+		
 	} else {
+		$qryDelAtribs = "DELETE c.* FROM celulares_atributos c";
 		$qryDelAtribs = $qryDelAtribs." where ";
+		$qryDelAtribs = $qryDelAtribs."c.celu_id = ".$_REQUEST['celu_id'];
+		doInsert($qryDelAtribs);
 	}
-	$qryDelAtribs = $qryDelAtribs."c.celu_id = ".$_REQUEST['celu_id'];
+
+	
+	
 	
 	//echo $qryDelAtribs. "<br>";
-	doInsert($qryDelAtribs);
+	
 }
 
 $isPrice = isPriceLoader($_COOKIE['user_active']);
@@ -214,7 +226,7 @@ if ($_REQUEST['act'] == SAVE_CEL){
 		<?php for($i = 0; $i < count($atributos); $i++){ ?>
 		<td align="center" width="<?php echo getWidth(count($atributos)); ?>"> <?php echo $atributos[$i]['name']; ?> </td>
 		<?php } ?>
-		<td width="50"> &nbsp; </td>
+		<td width="50">&nbsp;  </td>
 	</tr>
 	<?php } ?>
 	<?php 
