@@ -112,6 +112,31 @@ if ($modifing){
 		</td>
 	</tr>
 <?php
+	//Armado de la sección de las disponibilidades
+	$qrySucursales = "select s.suc_id, s.nombre, cs.disponible
+					  from sucursales as s
+					  left join celulares_sucursales as cs
+					  on s.suc_id = cs.suc_id
+					  and cs.celu_id = ".($_REQUEST['celu_id'] == ""?0:$_REQUEST['celu_id'])."
+					  where s.status = 'A'";
+					  //echo $qrySucursales;
+	$resSuc = doSelect($qrySucursales);
+	while ($suc = mysql_fetch_array($resSuc)){
+//		echo "Entre";
+	?>
+		<tr>
+			<td> Cantidad en <?php echo $suc['nombre'] ?> </td>
+			<td> <?php if (isPriceLoader($_COOKIE['user_active'])){ ?>
+					<?php echo $suc['disponible'] ?> 			
+				<?php } else { ?> 			
+					<input name="disp<?php echo $suc['suc_id'] ?>" type="text" value="<?php echo $suc['disponible'] ?>">
+				<?php } ?>
+			</td>
+		</tr>
+	<?php
+	}
+?>	
+<?php
 $qryAtribs = "select atr_id,name,tipo,largo from atributos where status = 'A' order by name";
 $resAtribs = doSelect($qryAtribs);
 $i = 0;

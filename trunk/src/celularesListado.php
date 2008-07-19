@@ -112,6 +112,20 @@ function POST_to_GET(){
     return $temp;
 }
 
+function getAndForSucursal($sucursal){
+		if ("" == $sucursal){
+			return "";
+		}
+		
+		$and = " and cs.celu_id = c.celu_id 
+		         and cs.disponible > 0 ";
+		if ($sucursal != 'all'){
+			$and = $and."and cs.suc_id = ".$sucursal;
+		}
+		
+		return $and;
+}
+
 store_action($_COOKIE['user_active'],BUSQUEDA,'',$_SERVER['REQUEST_URI']);
 
 define('MAX_COLS',4);
@@ -166,6 +180,8 @@ if ( !isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['comp
 	$prepagoMaxPrice = $_REQUEST['precio_prepago_max'];
 	$postPagoMinPrice = $_REQUEST['precio_postpago_min'];
 	$postPagoMaxPrice = $_REQUEST['precio_postpago_max'];
+	$sucursal = $_REQUEST['sucursal'];
+	//echo $_REQUEST['sucursal'];
 	//echo $postPagoMinPrice;
 	
 }
@@ -180,7 +196,7 @@ if ($_REQUEST['compare']=='Y')
 
 $celQuery = 
 "SELECT DISTINCT c.celu_id, c.marca, c.modelo
-FROM celulares c, celulares_atributos ca
+FROM celulares c, celulares_atributos ca, celulares_sucursales cs
 WHERE c.celu_id = ca.celu_id
 AND c.status = 'A'
 ".((!$firstMarca && $inMarcas!='')?(" and c.marca in (".$inMarcas.")"):"")." 
@@ -192,6 +208,7 @@ AND c.status = 'A'
 ".((isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['compare']=='Y'))?" AND ca.celu_id in (".$_COOKIE['celulares_'.$_COOKIE['user_active']].")":"")."
 ".(($_REQUEST['compare']=='Y')?"AND ca.celu_id in (".$celCompare.")":"")."
 ".(($postAttrs!='')?"AND ca.value !=0 AND ca.value IS NOT NULL":"")."
+".getAndForSucursal($sucursal)."
 ORDER BY c.marca, c.modelo";
 
 //echo $celQuery;
@@ -258,6 +275,10 @@ if ($colCount>0 && $colCount<MAX_COLS && $celCount>0) {
 
 if ($_REQUEST['compare']=='Y')
 	$inCelulares=$celCompare;
+
+//Seteo la cookie con la sucursal que elijió.
+$pudo = setcookie("sucursal_".$_COOKIE['user_active'],$sucursal); 
+//echo "Pudo cookie: ".$pudo;
 
 if($inCelulares!='') {
 	//Seteo la cookie para viajar por los listados de celulares

@@ -1,4 +1,5 @@
 <?php 
+
 //Preload de las marcas
 
 $queryMarcas = "select distinct marca from celulares where status='A' order by marca";
@@ -28,7 +29,7 @@ function searchMarca(marca){
 
 <center><h4><u>Consulta de celulares</u></h4></center>
 
-<form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>&list=1" method="post">
+<form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>&list=1" method="post" name="frmMain">
 	<table border="0" align="left" width="100%">
 		<tr>
 			<td width="184" valign="top">
@@ -63,7 +64,25 @@ function searchMarca(marca){
 								<tr>
 									<td>
 										<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
-										
+										<tr>
+											<td align="right">
+												Elija una sucursal:
+											</td>
+											<td>
+												<select name="sucursal" onChange="document.frmSubMarca.sucursal.value=this.options[this.selectedIndex].value;">
+													<?php
+													$qrySucursales = "select suc_id, nombre from sucursales where status = 'A'";
+													$resSuc = doSelect($qrySucursales);
+													while ($suc = mysql_fetch_array($resSuc)){
+														?>
+														<option value="<?php echo $suc['suc_id'] ?>" <?php if ($suc['suc_id'] == $_COOKIE['sucursal_'.$_COOKIE['user_active']]) echo "selected"; ?>> <?php echo $suc['nombre'] ?> </option>
+														<?php
+													}
+													?>
+													<option value="all" <?php if ($_COOKIE['sucursal_'.$_COOKIE['user_active']] == 'all') echo "selected"; ?>> Todas </option>
+												</select>
+											</td>
+										</tr>
 										<?php
 										echo "<tr><td align='right' width='100'>Marca:</td><td align='left'><select name='marcas[]' multiple>";
 										for ($iMarca = 0; $iMarca < count($marcas); $iMarca++){
@@ -180,4 +199,9 @@ function searchMarca(marca){
 </form>
 <form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>&list=1" name="frmSubMarca" method="post">
 	<input type="hidden" name="marcas[]" id="marcaSola" value="">
+	<input type="hidden" name="sucursal" id="sucursal" value="">
 </form>
+
+<script language="javascript">
+	document.frmSubMarca.sucursal.value=document.frmMain.sucursal.options[document.frmMain.sucursal.selectedIndex].value;
+</script>

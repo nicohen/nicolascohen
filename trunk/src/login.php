@@ -38,6 +38,9 @@ Function esta_logueado($res) {
 
 Function check_login($usr, $pwd) {
 		$query = "select user_id, name, last_name, super, status, ins_dt from usuarios where nickname='".$usr."' and pwd='".$pwd."'";
+		if ($_REQUEST['from'] == 'ADMIN'){
+			$query = $query." and super = ".USER_SUPERVISOR."";
+		}
 		$result = doSelect($query) or die("Error en select ".mysql_error());
 		if ($res = mysql_fetch_array($result)) {
 			if (!esta_logueado($res) && $res['status']=='A') {
@@ -54,6 +57,10 @@ Function check_login($usr, $pwd) {
 
 $login = check_login($_REQUEST['usr'], $_REQUEST['pwd']);
 
-header( 'Location: index.php' );
+if ($_REQUEST['from'] == 'ADMIN'){
+	header( "Location: ".$_REQUEST['urlTo']."/" );
+} else {
+	header( 'Location: index.php' );
+}
 
 ?>

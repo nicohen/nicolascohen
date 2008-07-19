@@ -92,5 +92,13 @@
 	define('LOGIN',1);
 	define('LOGOUT',2);
 	define('BUSQUEDA',3);
+	
+	//Constatntes para acciones de atributos
+	define('SAVE_SUC','save_suc');
+	define('INACTIVATE_SUC','inactivate_suc');
+	define('DELETE_SUC','delete_suc');
+	define('ACTIVATE_SUC','activate_suc');
+	define('MODIF_SUC','modif_suc');
+	define('UPDATE_SUC','update_suc');
 
 ?>

@@ -121,6 +121,24 @@ require_once("funcionesDB.php");
 		}			  
 					  
 	?>
+	<tr>
+		<td colspan="2">
+			Lo podés ubicar en las siguientes sucursales: <br>
+			<table border="0" width="80%" align="center" cellpadding="0" cellspacing="0">
+				<?php  
+					$qrySuc = "select s.nombre, s.direccion from sucursales s, celulares_sucursales sc
+							   where sc.celu_id = ".$_REQUEST['celu_id']."
+							   and sc.suc_id = s.suc_id";
+					$resSuc = doSelect($qrySuc);
+					while ($suc = mysql_fetch_array($resSuc)){
+				?>
+					<tr><td>
+					<font size="-1"><li> <?php echo $suc['nombre'] ?>(<?php echo $suc['direccion'] ?>)  </li></font>
+					</td></tr>
+				<?php } ?>
+				</table>
+		</td>
+	</tr>
 </table>
 <div id="divButtons">
 	<table width="768" align="center">
