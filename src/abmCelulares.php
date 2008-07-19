@@ -139,12 +139,24 @@ function deleteAtribs(){
 		$qryDelAtribs = $qryDelAtribs."c.celu_id = ".$_REQUEST['celu_id'];
 		doInsert($qryDelAtribs);
 	}
+	//echo $qryDelAtribs. "<br>";	
+}
 
-	
-	
-	
-	//echo $qryDelAtribs. "<br>";
-	
+function insertSucursales($celuID){
+	$qrySuc = "select suc_id from sucursales where status = 'A'";
+	$resSuc = doSelect($qrySuc);
+	while ($suc = mysql_fetch_array($resSuc)){
+		$qryInsSuc = "insert into celulares_sucursales (celu_id, suc_id, disponible)
+					  values
+					  (".$celuID.",".$suc['suc_id'].",".$_REQUEST['disp'.$suc['suc_id']].")";
+		//echo $qryInsSuc;
+		doInsert($qryInsSuc);
+	}
+}
+
+function deleteSucursales(){
+	$qryDelSucs = "delete from celulares_sucursales where celu_id = ".$_REQUEST['celu_id'];
+	doInsert($qryDelSucs);
 }
 
 $isPrice = isPriceLoader($_COOKIE['user_active']);
@@ -171,6 +183,7 @@ if ($_REQUEST['act'] == SAVE_CEL){
 	$celuID = doInsertAndGetLast($qryInsCel);	
 	//$celuID = 0;
 	insertAttr($celuID);
+	insertSucursales($celuID);
 	
 } else if ($_REQUEST['act'] == INACTIVE_CEL || $_REQUEST['act'] == ACTIVE_CEL){
 	$qryUpd = "update celulares set status = '".($_REQUEST['act'] == INACTIVE_CEL?"I":"A")."' where celu_id = ".$_REQUEST['celu_id'];
@@ -188,14 +201,17 @@ if ($_REQUEST['act'] == SAVE_CEL){
 	doInsert($qryUpd);
 	
 	deleteAtribs();
+	deleteSucursales();
 	
 	insertAttr($_REQUEST['celu_id']);
+	insertSucursales($_REQUEST['celu_id']);
 
 } else if ($_REQUEST['act'] == DELETE_CEL){
 //print_r("estoy borrando");
 	$qryDel = "delete from celulares where celu_id = ".$_REQUEST['celu_id'];
 	doInsert($qryDel);
 	deleteAtribs();
+	deleteSucursales();
 } else if ($_REQUEST['act'] == UPDATE_PRICE_CEL){
 	$qryUpd = "update celulares 
 		   set precio_prepago = ".$_REQUEST['precio_prepago'].",

@@ -9,10 +9,27 @@ if ($_COOKIE['user_active']=='' || $_REQUEST['login']=='Y') {
 		<td background="imgs/left_bg.jpg" width="8"></td>
 		<td width="409" valign="top" style="font-family:arial" bgcolor="white" style="color: black; font-size: 7pt; font-family: verdana">
 			<form action="login.php" method="post">
+				<?php 
+					if ($_REQUEST['from'] == 'ADMIN'){
+						?>
+						<input type="hidden" name="urlTo" value="<?php echo $_REQUEST['urlTo'] ?>">
+						<input type="hidden" name="from" value="<?php echo $_REQUEST['from'] ?>">
+						<?php						
+					}
+				?>
 				<table border="0" cellpadding="0" cellspacing="4" align="center">
 					<tr><td height="10"></td></tr>
 					<tr>
-						<td>Usuario:</td>
+						<td>Usuario:
+							<?php 
+								if ($_REQUEST['from'] == 'ADMIN'){
+									?>
+									<br>
+									<i><font size="-4">No se olvide que para esta sección solo puede entrar con usuarios administradores</font></i>
+									<?
+								}
+							?>
+						</td>
 						<td><input type="text" name="usr" value="" /></td>
 					</tr>
 					<tr>

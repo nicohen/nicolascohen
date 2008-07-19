@@ -27,6 +27,26 @@ Function do_header($titulo) {
 	echo "</head>";
 }
 
+Function do_header_lower($titulo) {
+	echo "<html><head><title>".$titulo."</title>";
+	
+	?>
+	<!-- estilos -->
+	<style type="text/css"> 
+	<!--
+	.azul {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000099;}
+	.gris {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #666666;}
+	.naranja {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: orange;}
+	.contenido {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #0904A6; }
+	-->
+	</style>
+	<link rel='stylesheet' type='text/css' href='../styles/stylesClaro.css' />
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+	<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+	<?php
+	echo "</head>";
+}
+
 Function close_html() {
 	echo "</html>";
 }
