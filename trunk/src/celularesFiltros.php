@@ -84,7 +84,7 @@ function searchMarca(marca){
 											</td>
 										</tr>
 										<?php
-										echo "<tr><td align='right' width='100'>Marca:</td><td align='left'><select name='marcas[]' multiple>";
+										echo "<tr><td align='right' width='100'>Marca:</td><td align='left'><select name='marcas[]' multiple size=\"6\">";
 										for ($iMarca = 0; $iMarca < count($marcas); $iMarca++){
 											echo "<option value='".$marcas[$iMarca]."'>".$marcas[$iMarca]."</option>";
 										}
@@ -113,15 +113,35 @@ function searchMarca(marca){
 										$isCombo=false;
 										//Nombre del ultimo checkbox utilizado
 										$lastCheckbox = "";
+										//Nomber del último combo utilizado
+										$lastMultiple = "";
 										$multivalue = "";
-										while ($res = mysql_fetch_array($result)) {
+										while ($res = mysql_fetch_array($result)) {											
+											//Este $nextType vale 2
+											if ($res['tipo']==ATTR_TYPE_CHECKBOX) {
+												if ($isCombo) {
+													echo "</select></td></tr>";
+													$isCombo=false;
+												}
+												if ($lastCheckbox!=$res['name']) {
+													echo "<tr><td align='right' width='100'>".$res['name'].":</td><td align='left'><input type='checkbox' name='atr".$res['atr_id']."'></td></tr>";
+													$lastCheckbox = $res['name'];
+												}
+												
+												$lastMultiple = "";
+											//} if ($res['tipo']==ATTR_TYPE_TEXT || $res['tipo']==ATTR_TYPE_SELECT || $res['tipo']==ATTR_TYPE_NUMBER || $res['tipo']==ATTR_TYPE_MULTIPLE) {
 											//Este $nextType vale 1
-											if ($res['tipo']==ATTR_TYPE_TEXT || $res['tipo']==ATTR_TYPE_SELECT || $res['tipo']==ATTR_TYPE_NUMBER || $res['tipo']==ATTR_TYPE_MULTIPLE) {
+											} else {
+												if ($lastMultiple != "" && $lastMultiple != $res['name']){
+													echo "</select></td></tr>";
+													$isCombo=false;
+												}
+											
 												if (!$isCombo) {
-													echo "<tr><td align='right' width='100'>".$res['name'].":</td><td align='left'><select name='atr".$res['atr_id']."[]' multiple>";
+													echo "<tr><td align='right' width='100'>".$res['name'].":</td><td align='left'><select name='atr".$res['atr_id']."[]' multiple size=\"6\">";
 													$isCombo=true;
 												}
-												if ($res['tipo']==ATTR_TYPE_MULTIPLE) {
+												/*if ($res['tipo']==ATTR_TYPE_MULTIPLE) {
 													$tok = strtok($res['value'], ",");
 													while ($tok !== false) {
 						//							echo "[".strpos($multivalue,"#".$tok."#")."]";
@@ -131,19 +151,10 @@ function searchMarca(marca){
 														}
 														$tok = strtok(" ,");
 													}
-												} else {
+												} else {*/
 													echo "<option value='".$res['value']."'>".$res['value']."</option>";
-												}
-											//Este $nextType vale 2
-											} else if ($res['tipo']==ATTR_TYPE_CHECKBOX) {
-												if ($isCombo) {
-													echo "</select></td></tr>";
-													$isCombo=false;
-												}
-												if ($lastCheckbox!=$res['name']) {
-													echo "<tr><td align='right' width='100'>".$res['name'].":</td><td align='left'><input type='checkbox' name='atr".$res['atr_id']."'></td></tr>";
-													$lastCheckbox = $res['name'];
-												}
+												//}
+												$lastMultiple = $res['name'];
 											}
 										}
 										if ($isCombo)
