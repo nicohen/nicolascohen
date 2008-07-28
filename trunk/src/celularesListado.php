@@ -91,10 +91,29 @@ function addComparePhone(user_id,celu_id,chk) {
 }
 
 	function imprimir(){
-		document.getElementById("divButtons").style.display = "none";
-		window.print();
-		setInterval('100000');
-		document.getElementById("divButtons").style.display = "";
+		//document.getElementById("divButtons").style.display = "none";
+		//window.print();
+		//setInterval('100000');
+		//document.getElementById("divButtons").style.display = "";
+		w=740;
+		h=500;
+		specialSettings = "";
+		pURL="";
+		pName = "Name";
+		text = document.getElementById("divPrint").innerHTML;
+		xLeft=(screen.width)?(screen.width-w)/2:0;
+		xTop=(screen.height)?(screen.height-h)/2:0;
+		xSettings = 'height='+h+',width='+w+',top='+xTop+',left='+xLeft+',scrollbars='+scroll+specialSettings
+		hwnd = window.open(pURL,pName,xSettings);
+		if(hwnd.window.focus){hwnd.window.focus();}
+		hwnd.document.write(text);
+//		hwnd.print();
+		hwnd.document.writeln("<script>");
+		hwnd.document.writeln("window.print()");
+//		hwnd.document.writeln("document.setInterval(1000)");
+		hwnd.document.writeln("window.close()");
+		hwnd.document.writeln("</"+"script>");
+		
 	}
 
 </script>
@@ -186,7 +205,7 @@ if ( !isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['comp
 	
 }
 
-
+echo "<div id=\"divPrint\">";
 echo "<br>
 <form action='comparar.php' method='post' name='searchList'>";?>
 <table border='1' align='center' cellpadding='3' cellspacing='0' align='left' style='border-collapse:collapse;border-color:gray;font-size:13px; font:Arial, Helvetica, sans-serif'>
@@ -397,6 +416,7 @@ if ($celCount>MAX_COLS) {
 }
 
 ?>
+</div>
 <div id="divButtons">
 <table width="100%" align="center" border="0">
 	<tr>
