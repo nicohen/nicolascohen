@@ -1,4 +1,4 @@
-package parser;
+package scraper.utils;
 
 import java.io.IOException;
 
