@@ -8,8 +8,8 @@ import org.htmlparser.Parser;
 import org.htmlparser.util.ChainedException;
 import org.htmlparser.util.ParserException;
 
-import parser.HtmlUtils;
 import scraper.dao.SpiderDao;
+import scraper.utils.HtmlUtils;
 import dto.AttributeDto;
 import dto.CategoryDto;
 import dto.ProductDto;

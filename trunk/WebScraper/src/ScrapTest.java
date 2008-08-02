@@ -10,7 +10,7 @@ import org.htmlparser.tags.TableRow;
 import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 
-import parser.HtmlUtils;
+import scraper.utils.HtmlUtils;
 
 
 public class ScrapTest {
