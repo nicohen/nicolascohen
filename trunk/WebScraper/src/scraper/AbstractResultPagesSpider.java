@@ -8,7 +8,6 @@ import org.htmlparser.Parser;
 import org.htmlparser.util.ChainedException;
 import org.htmlparser.util.ParserException;
 
-import scraper.dao.SpiderDao;
 import scraper.utils.HtmlUtils;
 import dto.AttributeDto;
 import dto.CategoryDto;
@@ -21,7 +20,7 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 	protected String  nextHtml = null;
 	protected String  currentCategory = null;
 	protected Integer currentResultPageNumber = null;
-	private SpiderDao spiderDao;
+//	private SpiderDao spiderDao;
 	
 	public AbstractResultPagesSpider() {
 		parser = new Parser();
@@ -54,7 +53,7 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 			resultPage.setProductList(newProductsList);
 			categoryDto.addResultPage(resultPage);
 			
-			spiderDao.storeResultPage(resultPage);
+//			spiderDao.storeResultPage(resultPage);
 			
 			getNextResultPageHtml();
 		}
@@ -63,11 +62,11 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 	}
 
 	private void getNextResultPageHtml() throws ChainedException {
-		parser.reset();
 		currentResultPageNumber++;
 		nextHtml = HtmlUtils.getHtml(getResultPageUrl());
 		try {
 			parser.setInputHTML(nextHtml);
+			parser.reset();
 		} catch(ParserException pe) {
 			throw new ChainedException();
 		}

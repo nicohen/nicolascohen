@@ -1,7 +1,8 @@
-package scraper;
+package scraper.jobs;
 
 import org.htmlparser.util.ChainedException;
 
+import scraper.AbstractResultPagesSpider;
 import scraper.sites.buscape.BuscapeResultPagesSpider;
 import dto.CategoryDto;
 import dto.ProductDto;
