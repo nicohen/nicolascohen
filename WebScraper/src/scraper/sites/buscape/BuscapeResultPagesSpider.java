@@ -11,6 +11,8 @@ import org.htmlparser.filters.AndFilter;
 import org.htmlparser.filters.HasAttributeFilter;
 import org.htmlparser.filters.LinkStringFilter;
 import org.htmlparser.filters.NodeClassFilter;
+import org.htmlparser.filters.NotFilter;
+import org.htmlparser.filters.OrFilter;
 import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.nodes.TagNode;
 import org.htmlparser.tags.LinkTag;
@@ -33,8 +35,7 @@ public class BuscapeResultPagesSpider extends AbstractResultPagesSpider {
 	public boolean hasNext() {
 		// http://precio2.buscape.com.ar/camara-fotografica-digital-pg2.html
 	    NodeFilter filter = new AndFilter(new NodeClassFilter(LinkTag.class),
-	    					new AndFilter(new HasAttributeFilter("class","xf"),
-	    					new HasAttributeFilter("onClick","setids(this)")));
+	    					new LinkStringFilter("--pg"));
 	    
 	    Integer pageNumber = null;
 	    
@@ -80,8 +81,8 @@ public class BuscapeResultPagesSpider extends AbstractResultPagesSpider {
 	@Override
 	public ResultPageDto next() {
 		// http://compare.buscape.com.ar/prod_ficha?idu=112552
-	    NodeFilter filter = new AndFilter(new LinkStringFilter("compare.buscape.com"),
-	    					new LinkStringFilter("prod_ficha?idu="));
+	    NodeFilter filter = new AndFilter(new LinkStringFilter("www.buscape.com"),
+	    					new LinkStringFilter("detalles--"));
 	    
 	    ResultPageDto resultPageDto = new ResultPageDto();
 	    
@@ -119,14 +120,19 @@ public class BuscapeResultPagesSpider extends AbstractResultPagesSpider {
 
 	@Override
 	protected String getResultPageUrl() {
-		return getBaseUrl()+currentCategory+"-pg"+currentResultPageNumber+".html";
+		if (currentResultPageNumber==1) {
+			return getBaseUrl()+currentCategory+".html";
+		} else {
+			return getBaseUrl()+currentCategory+"--pg"+currentResultPageNumber+".html";
+		}
 	}
 
 	@Override
 	protected List<AttributeDto> parseProductAttributes() {
 		// http://precio2.buscape.com.ar/camara-fotografica-digital-pg2.html
-	    NodeFilter filter = new AndFilter(new TagNameFilter("font"),
-	    					new HasAttributeFilter("class","xj"));
+	    NodeFilter filter = new AndFilter(new NotFilter(new HasAttributeFilter("class","group"))
+	    					,new OrFilter(new TagNameFilter("dt"),
+	    					new TagNameFilter("dd")));
 	    
 	    List<AttributeDto> attributes = new ArrayList<AttributeDto>();
 	    AttributeDto attribute = null;
@@ -139,9 +145,9 @@ public class BuscapeResultPagesSpider extends AbstractResultPagesSpider {
 		    	if (nextNode!=null) {
 		    		if (i%2==0) {
 		    			attribute = new AttributeDto();
-		    			attribute.setAttributeName(Translate.decode(nextNode.getParent().getChildren().elementAt(1).getText()));
+		    			attribute.setAttributeName(Translate.decode(nextNode.getChildren().elementAt(0).getText()));
 		    		} else {
-		    			attribute.setAttributeValue(Translate.decode(nextNode.getParent().getChildren().elementAt(2).getText()));
+		    			attribute.setAttributeValue(Translate.decode(nextNode.getChildren().elementAt(0).getText()));
 		    			attributes.add(attribute);
 		    		}
 		    		i++;
