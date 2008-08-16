@@ -1,10 +1,10 @@
-package scraper.sites.shopping;
+package spider.sites.shopping;
 
 import java.util.List;
 
 import dto.AttributeDto;
 import dto.ResultPageDto;
-import scraper.AbstractResultPagesSpider;
+import spider.AbstractResultPagesSpider;
 
 public class ShoppingResultPagesSpider extends AbstractResultPagesSpider {
 

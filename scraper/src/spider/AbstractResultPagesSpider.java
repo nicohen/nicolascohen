@@ -1,4 +1,4 @@
-package scraper;
+package spider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,7 +8,7 @@ import org.htmlparser.Parser;
 import org.htmlparser.util.ChainedException;
 import org.htmlparser.util.ParserException;
 
-import scraper.utils.HtmlUtils;
+import spider.utils.HtmlUtils;
 import dto.AttributeDto;
 import dto.CategoryDto;
 import dto.ProductDto;
@@ -30,7 +30,7 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 	public CategoryDto spiderCategory(String category) throws ChainedException {
 		currentCategory = category;
 		CategoryDto categoryDto = new CategoryDto();
-		List<ProductDto> newProductsList = new ArrayList<ProductDto>();
+		List<ProductDto> newProductsList = null;
 		ResultPageDto resultPage = null;
 		
 		getNextResultPageHtml();
@@ -38,6 +38,7 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 			System.out.println("--- Analizando result page "+currentResultPageNumber+" ---");
 			parser.reset();
 			resultPage = next();
+			newProductsList = new ArrayList<ProductDto>();
 			for (ProductDto productDto : resultPage.getProductList()) {
 				getNextProductHtml(productDto.getUrl());
 	    		productDto.setInsertDt(Calendar.getInstance().getTime());
