@@ -211,7 +211,6 @@ public abstract class AbstractSQL {
         }
     }
 
-    @SuppressWarnings({"unchecked"})
     private void checkPos(int pos) {
         try {
             if (parameters.size() < pos) {
@@ -263,7 +262,6 @@ public abstract class AbstractSQL {
      * @param param
      *            Posición del parámetro
      */
-    @SuppressWarnings("unchecked")
     public void setString(int pos, String param) {
         try {
             checkPos(pos);
@@ -285,7 +283,6 @@ public abstract class AbstractSQL {
      * @param param
      *            Posición del parámetro
      */
-    @SuppressWarnings("unchecked")
     public void setInt(int pos, int param) {
         try {
             checkPos(pos);
@@ -303,7 +300,6 @@ public abstract class AbstractSQL {
      * @param param
      *            Posición del parámetro
      */
-    @SuppressWarnings("unchecked")
     public void setInt(int pos, Integer param) {
         try {
             checkPos(pos);
@@ -325,7 +321,6 @@ public abstract class AbstractSQL {
      * @param param
      *            Posición del parámetro
      */
-    @SuppressWarnings("unchecked")
     public void setDate(int pos, java.util.Date param) {
         try {
             checkPos(pos);
@@ -349,7 +344,6 @@ public abstract class AbstractSQL {
      *           
      * @author Nicolás Allegrotti - Mar 15, 2007
      */
-    @SuppressWarnings("unchecked")
     public void setCalendar(int pos, Calendar param) {
         try {
             checkPos(pos);
@@ -376,7 +370,6 @@ public abstract class AbstractSQL {
      * @param param
      *            Posición del parámetro
      */
-    @SuppressWarnings("unchecked")
     public void setTimestamp(int pos, Timestamp param) {
         try {
             checkPos(pos);
@@ -396,7 +389,6 @@ public abstract class AbstractSQL {
      *
      * @author gcalvi
      */
-    @SuppressWarnings("unchecked")
     public void setTimestamp(int pos, java.util.Date param) {
         try {
             checkPos(pos);
@@ -410,7 +402,6 @@ public abstract class AbstractSQL {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void setDouble(int pos, double param) {
         try {
             checkPos(pos);
@@ -428,7 +419,6 @@ public abstract class AbstractSQL {
      * @param param
      *            Posición del parámetro
      */
-    @SuppressWarnings("unchecked")
     public void setDouble(int pos, Double param) {
         try {
             checkPos(pos);
@@ -451,7 +441,6 @@ public abstract class AbstractSQL {
      *            Posición del parámetro
      * @author Nicolás Allegrotti - Nov 9, 2006
      */
-    @SuppressWarnings({ "unchecked" })
     public void setBigDecimal(int pos, BigDecimal param) {
         try {
             checkPos(pos);
@@ -471,7 +460,6 @@ public abstract class AbstractSQL {
  *
  * @author Nicolás Allegrotti - Feb 20, 2007
  */
-    @SuppressWarnings("unchecked")
     public void setLong(int pos, long param) {
         try {
             checkPos(pos);
@@ -484,7 +472,6 @@ public abstract class AbstractSQL {
     /**
      *
      */
-    @SuppressWarnings("unchecked")
     public void setLong(int pos, Long param) {
         try {
             checkPos(pos);
@@ -498,7 +485,6 @@ public abstract class AbstractSQL {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void setFloat(int pos, float param) {
         try {
             checkPos(pos);
@@ -515,7 +501,6 @@ public abstract class AbstractSQL {
      * @param param
      * @author Nicolás Allegrotti - Feb 20, 2007
      */
-    @SuppressWarnings("unchecked")
     public void setFloat(int pos, Float param) {
         try {
             checkPos(pos);
@@ -529,7 +514,6 @@ public abstract class AbstractSQL {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void setNull(int pos, int type) {
         try {
             checkPos(pos);
@@ -538,28 +522,6 @@ public abstract class AbstractSQL {
             doException("error en setNull()", e);
         }
     }
-
-//    /**
-//     * Setea un parámetro de tipo BinaryStream
-//     *
-//     * @param pos
-//     *            Posición del parámetro
-//     * @param param
-//     *            Posición del parámetro
-//     */
-//    @SuppressWarnings("unchecked")
-//    public void setBinaryStream(int pos, InputStream param, int size) {
-//        try {
-//            checkPos(pos);
-//            if (param != null) {
-//                parameters.set(pos - 1, new MLInputStream(param, size));
-//            } else {
-//                setNull(pos, Types.VARCHAR);
-//            }
-//        } catch (RuntimeException e) {
-//            doException("error en setBinaryStream()", e);
-//        }
-//    }
 
     void doException(String message, Throwable ex) throws RuntimeException {
         RuntimeException rtme = new RuntimeException(message + " at [" + query

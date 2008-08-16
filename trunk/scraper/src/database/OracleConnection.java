@@ -16,7 +16,7 @@ public class OracleConnection {
 	    
 	        // Create a connection to the database
 	        String serverName = "127.0.0.1";
-	        String portNumber = "1521";
+	        String portNumber = "1521"; //no deberia ser 8095?
 	        String sid = "XE";
 	        String url = "jdbc:oracle:thin:@" + serverName + ":" + portNumber + ":" + sid;
 	        String username = "system";
