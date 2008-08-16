@@ -1,4 +1,4 @@
-package scraper.sites.buscape;
+package spider.sites.buscape;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +20,7 @@ import org.htmlparser.util.ParserException;
 import org.htmlparser.util.SimpleNodeIterator;
 import org.htmlparser.util.Translate;
 
-import scraper.AbstractResultPagesSpider;
+import spider.AbstractResultPagesSpider;
 import dto.AttributeDto;
 import dto.ProductDto;
 import dto.ResultPageDto;

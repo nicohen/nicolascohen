@@ -1,4 +1,4 @@
-package scraper.utils;
+package spider.utils;
 
 import java.io.IOException;
 

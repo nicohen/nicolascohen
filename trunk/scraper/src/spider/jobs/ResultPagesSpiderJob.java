@@ -1,9 +1,9 @@
-package scraper.jobs;
+package spider.jobs;
 
 import org.htmlparser.util.ChainedException;
 
-import scraper.AbstractResultPagesSpider;
-import scraper.sites.buscape.BuscapeResultPagesSpider;
+import spider.AbstractResultPagesSpider;
+import spider.sites.buscape.BuscapeResultPagesSpider;
 import dto.CategoryDto;
 import dto.ProductDto;
 import dto.ResultPageDto;
@@ -15,7 +15,8 @@ public class ResultPagesSpiderJob {
 	public static void main(String args[]) throws ChainedException {
 		AbstractResultPagesSpider spider = new BuscapeResultPagesSpider();
 		
-		String categoria = "camara-fotografica-digital";
+		
+		String categoria = "filmadora";
 		CategoryDto categoryDto = spider.spiderCategory(categoria);
 		
 		Integer totalProductsQty = 0;

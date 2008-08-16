@@ -1,4 +1,4 @@
-package scraper.exceptions;
+package exceptions.spider;
 
 public class SpiderException {
 	public SpiderException() {
