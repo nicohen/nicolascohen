@@ -3,8 +3,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.htmlparser.util.ChainedException;
 
-import scraper.AbstractResultPagesSpider;
-import scraper.sites.buscape.BuscapeResultPagesSpider;
+import spider.AbstractResultPagesSpider;
+import spider.sites.buscape.BuscapeResultPagesSpider;
 import dto.CategoryDto;
 import dto.ProductDto;
 import dto.ResultPageDto;
@@ -20,14 +20,13 @@ public class HelloWorld extends ControllerServlet {
 		StringBuffer strBuf = new StringBuffer();
 		String categoria = "camara-fotografica-digital";
 		
-		CategoryDto categoryDto = null;
-		categoryDto = spider.spiderCategory(categoria);
+		CategoryDto categoryDto = spider.spiderCategory(categoria);
 
 		Integer totalProductsQty = 0;
 		Integer currentProductsQty = 0;
 		Integer totalResultPagesQty = categoryDto.getResultPageList().size();
 		for (ResultPageDto resultPageDto : categoryDto.getResultPageList()) {
-			currentProductsQty = resultPageDto.getProductList().size();
+			currentProductsQty = resultPageDto.getQtyLinks();
 			totalProductsQty += currentProductsQty;
 			strBuf.append("<br>");
 			strBuf.append("["+categoria+"] - ["+currentProductsQty+" productos] - " +

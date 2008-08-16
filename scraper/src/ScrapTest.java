@@ -1,7 +1,7 @@
 import org.htmlparser.util.ChainedException;
 
-import scraper.AbstractResultPagesSpider;
-import scraper.sites.buscape.BuscapeResultPagesSpider;
+import spider.AbstractResultPagesSpider;
+import spider.sites.buscape.BuscapeResultPagesSpider;
 import dto.CategoryDto;
 import dto.ProductDto;
 import dto.ResultPageDto;
