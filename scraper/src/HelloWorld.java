@@ -1,24 +1,24 @@
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.htmlparser.util.ChainedException;
-
 import spider.AbstractResultPagesSpider;
 import spider.sites.buscape.BuscapeResultPagesSpider;
 import dto.CategoryDto;
 import dto.ProductDto;
 import dto.ResultPageDto;
+import exceptions.BusinessException;
+import exceptions.spider.SpiderException;
 
 public class HelloWorld extends ControllerServlet {
 
 	private static final long serialVersionUID = 5132936917759337060L;
 
 	@Override
-	protected String doContent(HttpServletRequest request,HttpServletResponse response) throws ChainedException {
+	protected String doContent(HttpServletRequest request,HttpServletResponse response) throws BusinessException, SpiderException {
 		AbstractResultPagesSpider spider = new BuscapeResultPagesSpider();
 		
 		StringBuffer strBuf = new StringBuffer();
-		String categoria = "camara-fotografica-digital";
+		String categoria = "filmadora";
 		
 		CategoryDto categoryDto = spider.spiderCategory(categoria);
 

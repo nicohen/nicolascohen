@@ -1,18 +1,18 @@
 package spider.jobs;
 
-import org.htmlparser.util.ChainedException;
-
 import spider.AbstractResultPagesSpider;
 import spider.sites.buscape.BuscapeResultPagesSpider;
 import dto.CategoryDto;
 import dto.ProductDto;
 import dto.ResultPageDto;
+import exceptions.BusinessException;
+import exceptions.spider.SpiderException;
 
 
 
 public class ResultPagesSpiderJob {
 	
-	public static void main(String args[]) throws ChainedException {
+	public static void main(String args[]) throws BusinessException, SpiderException {
 		AbstractResultPagesSpider spider = new BuscapeResultPagesSpider();
 		
 		

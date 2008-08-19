@@ -4,6 +4,7 @@ public class AttributeDto {
 	private Integer attributeId;
 	private String attributeName;
 	private String attributeValue;
+	private String attributeUnit;
 	
 	public AttributeDto() {}
 	
@@ -24,6 +25,12 @@ public class AttributeDto {
 	}
 	public void setAttributeValue(String attributeValue) {
 		this.attributeValue = attributeValue;
+	}
+	public String getAttributeUnit() {
+		return attributeUnit;
+	}
+	public void setAttributeUnit(String attributeUnit) {
+		this.attributeUnit = attributeUnit;
 	}
 	@Override
 	public String toString() {
