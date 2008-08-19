@@ -41,4 +41,14 @@ public class LotDto {
 	public void setInsertDt(Date insertDt) {
 		this.insertDt = insertDt;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return ((LotDto)obj).getUrl().equals(this.getUrl());
+	}
+	
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }
