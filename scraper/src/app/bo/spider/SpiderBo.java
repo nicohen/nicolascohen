@@ -75,13 +75,26 @@ public class SpiderBo implements ISpiderBo {
 	}
 
 	@Override
-	public void storeCategory(CategoryDto categoryDto) throws BusinessException {
+	public Integer storeCategory(CategoryDto categoryDto) throws BusinessException {
 		ISpiderDao spiderDao = (ISpiderDao) ObjectFactory.getObject(ISpiderDao.class);
-		try {
-			spiderDao.insertCategory(categoryDto);
-		} catch (Exception e) {
-			throw new BusinessException("Error al insertar la categoria ["+categoryDto.getName()+"]",e);
+		Integer categoryId = null;
+		if (!existsCategory(categoryDto.getUrl())) {
+			try {
+				categoryId = getNextSpideredCategoryId();
+				categoryDto.setCategId(categoryId);
+				spiderDao.insertCategory(categoryDto);
+			} catch (Exception e) {
+				throw new BusinessException("Error al insertar la categoria ["+categoryDto.getName()+"]",e);
+			}
+		} else {
+			try {
+				categoryId = spiderDao.selectCategoryId(categoryDto.getUrl());
+			} catch(Exception e) {
+				throw new BusinessException("Error al insertar la categoria ["+categoryDto.getName()+"]",e);
+			}
 		}
+		
+		return categoryId;
 	}
 
 	@Override
@@ -97,13 +110,27 @@ public class SpiderBo implements ISpiderBo {
 	}
 
 	@Override
-	public void storeProduct(ProductDto productDto) throws BusinessException {
+	public Integer storeProduct(ProductDto productDto) throws BusinessException {
 		ISpiderDao spiderDao = (ISpiderDao) ObjectFactory.getObject(ISpiderDao.class);
-		try {
-			spiderDao.insertProduct(productDto);
-		} catch (Exception e) {
-			throw new BusinessException("Error al insertar el producto ["+productDto.getUrl()+"]",e);
+		Integer productId = null;
+		if (!existsProduct(productDto.getUrl())) {
+			try {
+				productId = getNextSpideredProductId();
+				productDto.setProductId(productId);
+				spiderDao.insertProduct(productDto);
+				spiderDao.insertAttributes(productDto.getProductId(),productDto.getAttributesList());
+			} catch (Exception e) {
+				throw new BusinessException("Error al insertar el producto ["+productDto.getUrl()+"]",e);
+			}
+		} else {
+			try {
+				productId = spiderDao.selectProductId(productDto.getUrl());
+			} catch(Exception e) {
+				throw new BusinessException("Error al insertar la categoria ["+productDto.getUrl()+"]",e);
+			}
 		}
+		
+		return productId;
 	}
 
 	@Override

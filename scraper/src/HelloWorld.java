@@ -18,9 +18,10 @@ public class HelloWorld extends ControllerServlet {
 		AbstractResultPagesSpider spider = new BuscapeResultPagesSpider();
 		
 		StringBuffer strBuf = new StringBuffer();
-		String categoria = "filmadora";
 		
-		CategoryDto categoryDto = spider.spiderCategory(categoria);
+		CategoryDto categoryDto = new CategoryDto();
+		categoryDto.setName("filmadora");
+		categoryDto = spider.spiderCategory(categoryDto);
 
 		Integer totalProductsQty = 0;
 		Integer currentProductsQty = 0;
@@ -29,7 +30,7 @@ public class HelloWorld extends ControllerServlet {
 			currentProductsQty = resultPageDto.getQtyLinks();
 			totalProductsQty += currentProductsQty;
 			strBuf.append("<br>");
-			strBuf.append("["+categoria+"] - ["+currentProductsQty+" productos] - " +
+			strBuf.append("["+categoryDto.getName()+"] - ["+currentProductsQty+" productos] - " +
 					"[pagina "+resultPageDto.getPageNumber()+"/"+totalResultPagesQty+"]");
 			for (ProductDto productDto : resultPageDto.getProductList()) {
 				strBuf.append("<br>");

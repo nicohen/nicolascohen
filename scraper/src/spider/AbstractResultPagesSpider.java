@@ -31,11 +31,12 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 		spiderBo = (ISpiderBo) ObjectFactory.getObject(ISpiderBo.class);
 	}
 	
-	public CategoryDto spiderCategory(String category) throws BusinessException, SpiderException {
-		currentCategory = category;
-		CategoryDto categoryDto = new CategoryDto();
+	public CategoryDto spiderCategory(CategoryDto categoryDto) throws BusinessException, SpiderException {
+		currentCategory = categoryDto.getName();
 		List<ProductDto> newProductsList = null;
 		ResultPageDto resultPage = null;
+		
+		Integer categoryId = spiderBo.storeCategory(categoryDto);
 		
 		getNextResultPageHtml();
 		while(hasNext()) {
@@ -58,6 +59,7 @@ public abstract class AbstractResultPagesSpider implements AbstractResultPagesIt
 	    		productDto.setDescription(parseProductDescription());
 				parser.reset();
 	    		productDto.setAttributesList(parseProductAttributes());
+	    		productDto.setCategId(categoryId);
 				
 	    		System.out.println(">>> "+productDto.getAttributesList().toString());
 				

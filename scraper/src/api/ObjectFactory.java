@@ -7,11 +7,14 @@ import app.dao.spider.SpiderDao;
 
 public class ObjectFactory {
 
-	public static Object getObject(Object interfaz) {
+	public ObjectFactory() {}
+	
+	@SuppressWarnings("unchecked")
+	public static Object getObject(Class interfaz) {
 
-		if (interfaz instanceof ISpiderBo) {
+		if (interfaz.equals(ISpiderBo.class)) {
 			return SpiderBo.class;
-		} else if (interfaz instanceof ISpiderDao) {
+		} else if (interfaz.equals(ISpiderDao.class)) {
 			return SpiderDao.class;
 		}
 		

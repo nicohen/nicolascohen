@@ -27,5 +27,8 @@ public interface ISpiderDao {
 	public boolean existsCategory(String categoryUrl) throws DataAccessException;
 	public boolean existsResultPage(String resultPageUrl) throws DataAccessException;
 	public boolean existsProduct(String productUrl) throws DataAccessException;
+	
+	public Integer selectCategoryId(String url) throws DataAccessException;
+	public Integer selectProductId(String url) throws DataAccessException;
 
 }
