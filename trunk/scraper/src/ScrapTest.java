@@ -12,8 +12,9 @@ public class ScrapTest {
 	public static void main(String[] args) throws BusinessException, SpiderException {
 		AbstractResultPagesSpider spider = new BuscapeResultPagesSpider();
 		
-		String categoria = "camara-fotografica-digital";
-		CategoryDto categoryDto = spider.spiderCategory(categoria);
+		CategoryDto categoryDto = new CategoryDto();
+		categoryDto.setName("camara-fotografica-digital");
+		categoryDto = spider.spiderCategory(categoryDto);
 		
 		Integer totalProductsQty = 0;
 		Integer currentProductsQty = 0;
@@ -22,7 +23,7 @@ public class ScrapTest {
 			currentProductsQty = resultPageDto.getProductList().size();
 			totalProductsQty += currentProductsQty;
 			System.out.println("");
-			System.out.println("["+categoria+"] - ["+currentProductsQty+" productos] - " +
+			System.out.println("["+categoryDto.getName()+"] - ["+currentProductsQty+" productos] - " +
 					"[pagina "+resultPageDto.getPageNumber()+"/"+totalResultPagesQty+"]");
 			for (ProductDto productDto : resultPageDto.getProductList()) {
 				System.out.println("["+productDto.getUrl()+"]");

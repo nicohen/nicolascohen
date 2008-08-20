@@ -16,8 +16,10 @@ public class ResultPagesSpiderJob {
 		AbstractResultPagesSpider spider = new BuscapeResultPagesSpider();
 		
 		
-		String categoria = "filmadora";
-		CategoryDto categoryDto = spider.spiderCategory(categoria);
+		CategoryDto categoryDto = new CategoryDto();
+		categoryDto.setName("filmadora");
+		categoryDto.setLotId(2);
+		categoryDto = spider.spiderCategory(categoryDto);
 		
 		Integer totalProductsQty = 0;
 		Integer currentProductsQty = 0;
@@ -26,7 +28,7 @@ public class ResultPagesSpiderJob {
 			currentProductsQty = resultPageDto.getProductList().size();
 			totalProductsQty += currentProductsQty;
 			System.out.println("");
-			System.out.println("["+categoria+"] - ["+currentProductsQty+" productos] - " +
+			System.out.println("["+categoryDto.getName()+"] - ["+currentProductsQty+" productos] - " +
 					"[pagina "+resultPageDto.getPageNumber()+"/"+totalResultPagesQty+"]");
 			for (ProductDto productDto : resultPageDto.getProductList()) {
 				System.out.println("["+productDto.getUrl()+"]");

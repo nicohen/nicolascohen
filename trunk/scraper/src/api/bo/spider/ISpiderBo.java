@@ -18,9 +18,9 @@ public interface ISpiderBo {
 	public Integer getNextSpideredAttributeId() throws BusinessException;
 	
 	public void storeLot(LotDto lotDto) throws BusinessException;
-	public void storeCategory(CategoryDto categoryDto) throws BusinessException;
+	public Integer storeCategory(CategoryDto categoryDto) throws BusinessException;
 	public void storeResultPage(ResultPageDto resultPageDto) throws BusinessException;
-	public void storeProduct(ProductDto productDto) throws BusinessException;
+	public Integer storeProduct(ProductDto productDto) throws BusinessException;
 	public void storeAttributes(Integer spideredProductId, List<AttributeDto> attributeDtoList) throws BusinessException;
 
 	public boolean existsLot(String lotUrl) throws BusinessException;

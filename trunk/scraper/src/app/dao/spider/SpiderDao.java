@@ -253,4 +253,38 @@ public class SpiderDao implements ISpiderDao {
 		}
 	}
 
+	@Override
+	public Integer selectCategoryId(String url) throws DataAccessException {
+		SQLCursor sql = null;
+		
+		try {
+			sql = new SQLCursor("select categ_id from spidered_categories where url = "+url);
+			if (sql.next()) {
+				return sql.getInt("categ_id");
+			}
+			return null;
+		} catch (Exception e) {
+			throw new DataAccessException("Error obteniendo categ_id para ["+url+"]",e);
+		} finally {
+			sql.close();
+		}
+	}
+
+	@Override
+	public Integer selectProductId(String url) throws DataAccessException {
+		SQLCursor sql = null;
+		
+		try {
+			sql = new SQLCursor("select categ_id from spidered_products where url = "+url);
+			if (sql.next()) {
+				return sql.getInt("product_id");
+			}
+			return null;
+		} catch (Exception e) {
+			throw new DataAccessException("Error obteniendo product_id para ["+url+"]",e);
+		} finally {
+			sql.close();
+		}
+	}
+
 }
