@@ -91,10 +91,10 @@ function addComparePhone(user_id,celu_id,chk) {
 }
 
 	function imprimir(){
-		//document.getElementById("divButtons").style.display = "none";
-		//window.print();
-		//setInterval('100000');
-		//document.getElementById("divButtons").style.display = "";
+		/*document.getElementById("divButtons").style.display = "none";
+		window.print();
+		setInterval('100000');
+		document.getElementById("divButtons").style.display = "";*/
 		w=740;
 		h=500;
 		specialSettings = "";
@@ -103,17 +103,21 @@ function addComparePhone(user_id,celu_id,chk) {
 		text = document.getElementById("divPrint").innerHTML;
 		xLeft=(screen.width)?(screen.width-w)/2:0;
 		xTop=(screen.height)?(screen.height-h)/2:0;
-		xSettings = 'height='+h+',width='+w+',top='+xTop+',left='+xLeft+',scrollbars='+scroll+specialSettings
+		xSettings = 'height='+h+',width='+w+',top='+xTop+',left='+xLeft+',scrollbars='+scroll+specialSettings;
 		hwnd = window.open(pURL,pName,xSettings);
 		if(hwnd.window.focus){hwnd.window.focus();}
+//		hwnd.document.write("<html><head><title> Resultado de la búsqueda </title></head><body onload='window.print()'>");
 		hwnd.document.write(text);
 //		hwnd.print();
 		hwnd.document.writeln("<script>");
-		hwnd.document.writeln("window.print()");
-//		hwnd.document.writeln("document.setInterval(1000)");
-		hwnd.document.writeln("window.close()");
-		hwnd.document.writeln("</"+"script>");
-		
+//		hwnd.document.writeln("function imprimir(){");
+//		hwnd.document.writeln("setInterval('1000');");
+//		hwnd.document.writeln("if (confirm('Print?'))");
+		hwnd.document.writeln("window.print();");
+//	hwnd.document.writeln("}");
+//		hwnd.document.writeln("window.close()");
+		hwnd.document.writeln("</"+"script>");	
+		hwnd.document.location.reload();
 	}
 
 </script>

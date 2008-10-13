@@ -50,6 +50,13 @@ $label=get_label($_REQUEST['lbl']);
 					</tr>
 					<tr>
 						<td>
+							<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td>
+										<?php if ($_COOKIE['user_active']!=''){ ?><a href="index.php?lbl=<?php echo MENU_OFERTAS ?>" style="font:Arial, Helvetica, sans-serif; font-size:13px;"> Ver últimas novedades <img border="0" src="imgs/nuevo.gif"> </a>
+										<?php } ?>
+									</td>
+									<td>
 							<table align="right" border="0" cellpadding="0" cellspacing="10" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 								<tr>
 									<?php 
@@ -67,6 +74,9 @@ $label=get_label($_REQUEST['lbl']);
 											echo "<td><a href='index.php?login=Y'>Soy otro usuario</a></td>";
 									?>
 								</tr>
+							</table>
+							</td>
+							</tr>
 							</table>
 						</td>
 					</tr>
@@ -90,7 +100,7 @@ $label=get_label($_REQUEST['lbl']);
 														<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/celulares.swf"/>
 													</object>
 												</td>
-												<?php if (!isPriceLoader($_COOKIE['user_active'])){ ?>
+												<?php if (!isPriceLoader($_COOKIE['user_active']) && !isCelularesViewer($_COOKIE['user_active'])){ ?>
 												<td width="20%">
 													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
 															<param value="imgs/servicios.swf" name="movie"/>

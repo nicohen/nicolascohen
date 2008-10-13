@@ -119,6 +119,8 @@ Function do_content($lang,$lbl) {
 			include("abmAtributosServicios.php");
 		else if($lbl==MENU_SERIVICIOS_RESUME)
 			include("serviciosResume.php");
+		else if($lbl==MENU_OFERTAS)
+			include("ofertas.php");
 		else
 			include("home.php");
 	} else {
@@ -184,6 +186,10 @@ function isPriceLoader($user_id){
 	return $_COOKIE['user_super_'.$user_id] == USER_PRICE;
 }
 
+function isCelularesViewer($user_id){
+	return $_COOKIE['user_super_'.$user_id] == USER_CELUS;
+}
+
 function isEmpleado($user_id){
 	return $_COOKIE['user_super_'.$user_id] == USER_NORMAL;
 }
@@ -212,15 +218,17 @@ function isCelularesSubSection($label){
 }
 
 function addCelularesOptions($label){	
-	if ($label == MENU_CELULARES_FILTROS || isCelularesSubSection($label)){
-		echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='0' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
-		if (!isPriceLoader($_COOKIE['user_active']))
-			appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
-		appendEncRow(MENU_ABM_CELULARES, "Administrar");
-		if (!isPriceLoader($_COOKIE['user_active']))
-			appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
-		echo "</tr></table></td></tr>";
-	}	
+	if (!isCelularesViewer($_COOKIE['user_active'])){
+		if ($label == MENU_CELULARES_FILTROS || isCelularesSubSection($label)){
+			echo "<tr><td><table width='100%' border='0' cellpadding='0' cellspacing='0' style='font:Arial, Helvetica, sans-serif; font-size:13px;'><tr align='center'>";
+			if (!isPriceLoader($_COOKIE['user_active']))
+				appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
+			appendEncRow(MENU_ABM_CELULARES, "Administrar");
+			if (!isPriceLoader($_COOKIE['user_active']))
+				appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
+			echo "</tr></table></td></tr>";
+		}	
+	}
 }
 
 function isServiciosSubSection($label){
