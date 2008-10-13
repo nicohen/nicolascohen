@@ -50,6 +50,7 @@ function validarCampos() {
 					<option value="0" <?php if ($super==0) echo "selected" ?>>Empleado</option>
 					<option value="1" <?php if ($super==1) echo "selected" ?>>Supervisor</option>
 					<option value="2" <?php if ($super==2) echo "selected" ?>>Cargador de precios</option>
+					<option value="3" <?php if ($super==3) echo "selected" ?>>Ver celulares</option>
 			</select> </td>
 		</tr>
 		<tr>
