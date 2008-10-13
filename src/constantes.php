@@ -13,6 +13,7 @@
 	define('INFO','info/');
 	
 	//Defino los tipos de usuario
+	define('USER_CELUS',3);
 	define('USER_PRICE',2);
 	define('USER_SUPERVISOR', 1);
 	define('USER_NORMAL', 0);
@@ -43,6 +44,7 @@
 	define('MENU_ABM_CELULARES','abmCelulares');
 	define('MENU_ABM_ATRIBUTOS_SERVICIOS','abmAtrsServicios');
 	define('MENU_SERIVICIOS_RESUME','serviciosResume');
+	define('MENU_OFERTAS','ofertas');
 		
 	//Defino las constantes para la base de datos
 	define('DB_SERVER','localhost');

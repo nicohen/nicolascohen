@@ -25,6 +25,14 @@ function searchMarca(marca){
 	document.getElementById("marcaSola").value = marca;
 	document.frmSubMarca.submit();
 }
+
+function goToCeluPage(combo){
+	var celuID = combo.options[combo.selectedIndex].value;
+	if (celuID != ""){
+		document.frmSubCelus.celu_id.value = celuID;
+		document.frmSubCelus.submit();
+	}
+}
 </script>
 
 <center><h4><u>Consulta de celulares</u></h4></center>
@@ -58,7 +66,22 @@ function searchMarca(marca){
 							<table border="0" align="center" cellpadding="3" cellspacing="0" width="400" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
 								<tr><td>
 									<table width="100%" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
-										<tr> <td> <b>Elija los criterios:</b> </td> <td align="right"> <input type="submit" name="consultar" value="Buscar"> </td> </tr>
+										<tr>
+											<td> <b> Elija un celular para acceder directamente: </b> </td>
+											<td> <select name="celu_id" onchange="javascript:goToCeluPage(this)"> 
+												<option value=""> Opciones... </option>
+											<?php 
+												$resCelus = doSelect("select celu_id, marca, modelo from celulares where status = 'A' order by marca, modelo");
+												while ($celu = mysql_fetch_array($resCelus)){
+													?>
+													<option value="<?php echo $celu['celu_id'] ?>"> <?php echo $celu['marca']." ".$celu['modelo'] ?> </option>
+													<?php
+												}
+											 ?> </select> </td>
+										</tr>
+									</table>
+									<table width="100%" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
+										<tr> <td> <b>O realice una búsqueda:</b> </td> <td align="right"> <input type="submit" name="consultar" value="Buscar"> </td> </tr>
 									</table>
 								</td></tr>
 								<tr>
@@ -211,6 +234,10 @@ function searchMarca(marca){
 <form action="index.php?lbl=<?php echo MENU_CELULARES_LISTADO ?>&list=1" name="frmSubMarca" method="post">
 	<input type="hidden" name="marcas[]" id="marcaSola" value="">
 	<input type="hidden" name="sucursal" id="sucursal" value="">
+</form>
+<form action="index.php" name="frmSubCelus" method="get" target="_blank">
+	<input type="hidden" name="lbl" value="<?php echo MENU_VPP ?>" />
+	<input type="hidden" name="celu_id" />
 </form>
 
 <script language="javascript">

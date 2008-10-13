@@ -66,8 +66,10 @@ if ($_COOKIE['user_super_'.$_COOKIE['user_active']]==USER_SUPERVISOR) { ?>
 			if ($res['super'])
 				if ($res['super'] == 1) 
 					echo "<td><i>Supervisor</i></td>";
-				else
+				else if ($res['super'] == 2)
 					echo "<td><u>Cargador de precios</u></td>";
+				else
+					echo "<td><b><i>Ver celulares</i></b></td>";
 			else
 				echo "<td>Empleado</td>";
 			if($res['status']=='A')
