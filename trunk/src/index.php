@@ -53,7 +53,7 @@ $label=get_label($_REQUEST['lbl']);
 							<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
-										<?php if ($_COOKIE['user_active']!=''){ ?><a href="index.php?lbl=<?php echo MENU_OFERTAS ?>" style="font:Arial, Helvetica, sans-serif; font-size:13px;"> Ver últimas novedades <img border="0" src="imgs/nuevo.gif"> </a>
+										<?php if ($_COOKIE['user_active']!=''){ ?><a href="index.php?lbl=<?php echo MENU_OFERTAS ?>&tipo=<?php echo NOVEDAD ?>" style="font:Arial, Helvetica, sans-serif; font-size:13px;"> Ver últimas novedades <img border="0" src="imgs/nuevo.gif"> </a>
 										<?php } ?>
 									</td>
 									<td>
@@ -136,6 +136,14 @@ $label=get_label($_REQUEST['lbl']);
 														</object>
 												</td>
 												<?php } ?>
+												<td width="20%">
+													<object width="100" height="50" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+															<param value="imgs/oferta.swf" name="movie"/>
+															<param value="high" name="quality"/>
+															<param value="transparent" name="wmode"/>
+															<embed width="100" height="50" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" quality="high" src="imgs/oferta.swf"/>
+														</object>
+												</td>
 											</tr>
 										</table>
 									</td>
