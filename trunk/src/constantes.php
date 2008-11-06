@@ -102,5 +102,13 @@
 	define('ACTIVATE_SUC','activate_suc');
 	define('MODIF_SUC','modif_suc');
 	define('UPDATE_SUC','update_suc');
+	
+	//CONSTANTES para ofertas
+	define('PASAR_A_NOV', 'toNov');
+	define('PASAR_A_OC', 'toOc');
+	
+	//Tipos de ofertas
+	define('OFERTA_COMERCIAL','OC');
+	define('NOVEDAD','NO');
 
 ?>
