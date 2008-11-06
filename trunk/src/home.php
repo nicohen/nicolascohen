@@ -25,7 +25,7 @@ if ($_COOKIE['user_active']=='' || $_REQUEST['login']=='Y') {
 								if ($_REQUEST['from'] == 'ADMIN'){
 									?>
 									<br>
-									<i><font size="-4">No se olvide que para esta sección solo puede entrar con usuarios administradores</font></i>
+									<i><font size="-4">Para entrar debe ser administrador</font></i>
 									<?
 								}
 							?>
