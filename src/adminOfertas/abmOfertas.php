@@ -16,7 +16,16 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	$tmpFoto = $_FILES['ofeFile']['tmp_name'];
 	//$dirBase = "";
 
-	$dirTo = $docRoot."/ofertas_files/";
+	$folder = $_REQUEST['folder'];
+	if ($folder == "OT"){
+		$folder = $_REQUEST['folder_other'];
+	}
+
+	$dirTo = $docRoot."/ofertas_files/".$folder."/";
+	
+	if (!file_exists($dirTo)){
+		mkdir($dirTo);
+	}
 				
 	//mkdir(dirname($dirTo),0755,true);
 	//recur_mkdirs($dirTo);
@@ -24,7 +33,7 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	$origFile = $_FILES['ofeFile']['name'];
 	$ext = substr($origFile,strpos($origFile,"."));
 	
-	$insOfe = "insert into ofertas (titulo, filename, sup_id) values ('".$_REQUEST['titulo']."','".$nameTo."',".$_COOKIE['user_active'].")";
+	$insOfe = "insert into ofertas (titulo, folder, filename, sup_id, tipo) values ('".$_REQUEST['titulo']."','".$folder."','".$nameTo."',".$_COOKIE['user_active'].",'".$_REQUEST['tipo']."')";
 	$ofeID = doInsertAndGetLast($insOfe);
 	
 	$fileTo = $dirTo.$ofeID.$ext;
@@ -42,12 +51,12 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	$qryDel = "update ofertas set status = '".($_REQUEST['act'] == INACTIVATE_SUC?"I":"A")."' where ofe_id = ".$_REQUEST['ofe_id'];
 	doInsert($qryDel);
 } else if ($_REQUEST['act'] == DELETE_SUC){
-	$qryFile = "select filename from ofertas where ofe_id = ".$_REQUEST['ofe_id'];
+	$qryFile = "select folder, filename from ofertas where ofe_id = ".$_REQUEST['ofe_id'];
 	$resFile = doSelect($qryFile);
 	$file = mysql_fetch_array($resFile);
 	
 	$docRoot	= getDocumentRoot();
-	$fileName = $docRoot."/ofertas_files/".$file['filename'];
+	$fileName = $docRoot."/ofertas_files/".$file['folder']."/".$file['filename'];
 	if (file_exists($fileName)){
 		unlink($fileName);
 	}
@@ -55,6 +64,11 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	$qryDel = "delete from ofertas where ofe_id = ".$_REQUEST['ofe_id'];
 	doInsert($qryDel);
 	
+} else if ($_REQUEST['act'] == PASAR_A_NOV || $_REQUEST['act'] == PASAR_A_OC){
+	$qryUpd = "update ofertas set tipo = '".($_REQUEST['act']==PASAR_A_NOV ? NOVEDAD : OFERTA_COMERCIAL). "' 
+			   where ofe_id = ".$_REQUEST['ofe_id'];
+			   
+	doInsert($qryUpd);
 }
 	do_header_lower("Administrador de ofertas para Claro");
 
@@ -75,6 +89,15 @@ if ($_REQUEST['act'] == SAVE_SUC){
 			return;
 		}
 		document.frmMain.submit();
+	}
+	
+	function folderChange(combo){
+		if (combo.options[combo.selectedIndex].value == "OT"){
+			document.getElementById("divOther").style.display = "";
+		} else {
+			document.getElementById("divOther").style.display = "none";
+		}
+		
 	}
 </script>
 <table align="center" border="0" width="768" cellpadding="0" cellspacing="0">
@@ -102,6 +125,49 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	</td>
 </tr>
 <tr>
+	<td> Elija una subcarpeta: </td>
+	<td>
+		<select name="folder" onChange="javascript:folderChange(this)">
+			<option> Elije una opcion </option>
+			<?php 
+				$docRoot = getDocumentRoot();	
+				$ruta = $docRoot."/ofertas_files/";
+			   // abrir un directorio y listarlo recursivo
+			   if (is_dir($ruta)) {
+				  if ($dh = opendir($ruta)) {
+					 while (($file = readdir($dh)) !== false) {
+						//esta línea la utilizaríamos si queremos listar todo lo que hay en el directorio
+						//mostraría tanto archivos como directorios
+						//echo "<br>Nombre de archivo: $file : Es un: " . filetype($ruta . $file);
+						if (is_dir($ruta . $file) && $file!="." && $file!=".."){
+						   //solo si el archivo es un directorio, distinto que "." y ".."
+						   ?>
+						   <option value="<?php echo $file ?>" > <?php echo $file ?></option>
+						   <?
+						}
+					 }
+				  closedir($dh);
+				  }
+			   }
+			 ?>
+			 <option value="OT">Otra</option>
+		</select>
+		<div style="display:none" id="divOther">
+			<font size="-3">Elija el nombre de la carpeta </font><br>
+			<input type="text" name="folder_other">
+		</div>
+	</td>
+</tr>
+<tr>
+	<td> Tipo:</td>
+	 <td>
+		<select name="tipo">
+			<option value="<?php echo NOVEDAD ?>"> Novedad </option>
+			<option value="<?php echo OFERTA_COMERCIAL ?>"> Oferta comercial </option>
+		</select>
+	</td>
+</tr>
+<tr>
 	<td colspan="2" align="center"> <input type="button" onClick="javascript:enviar();" value="Grabar"> </td>
 </tr>
 </table>
@@ -111,7 +177,7 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	<td colspan="2" align="center"> Ofertas actuales </td>
 </tr>
 <?php
-	$resOfe = doSelect("select ofe_id, titulo, status, filename from ofertas order by fecha desc");
+	$resOfe = doSelect("select ofe_id, titulo, status, filename, tipo, folder from ofertas order by fecha desc");
 	while ($ofe = mysql_fetch_array($resOfe)){
 	?>
 		<tr>
@@ -119,7 +185,12 @@ if ($_REQUEST['act'] == SAVE_SUC){
 				<?php echo $ofe['titulo'] ?>
 			</td>
 			<td>
-				<a href="../ofertas_files/<?php echo $ofe['filename']?>">Ver Archivo</a>
+				<a href="../ofertas_files/<?php echo $ofe['folder']."/".$ofe['filename']?>">Ver Archivo</a>
+				<?php if ($ofe['tipo'] == OFERTA_COMERCIAL) { ?>
+					<a href="abmOfertas.php?act=<?php echo PASAR_A_NOV ?>&ofe_id=<?php echo $ofe['ofe_id'] ?>">Pasar a Novedad</a>
+				<?php } else if($ofe['tipo'] == NOVEDAD) {?>
+				<a href="abmOfertas.php?act=<?php echo PASAR_A_OC ?>&ofe_id=<?php echo $ofe['ofe_id'] ?>">Pasar a Oferta comercial</a>		
+				<?php } ?>
 				<?php if ($ofe['status'] == 'A'){ ?>
 				<a href="abmOfertas.php?act=<?php echo INACTIVATE_SUC ?>&ofe_id=<?php echo $ofe['ofe_id'] ?>">Desactivar</a>
 				<?php } else { ?>
