@@ -87,7 +87,7 @@ function goToCeluPage(combo){
 								<tr>
 									<td>
 										<table width="100%" border="0" align="center" cellpadding="3" cellspacing="0" style="font:Arial, Helvetica, sans-serif; font-size:13px;">
-										<tr>
+										<!--tr>
 											<td align="right">
 												Elija una sucursal:
 											</td>
@@ -105,7 +105,7 @@ function goToCeluPage(combo){
 													<option value="all" <?php if ($_COOKIE['sucursal_'.$_COOKIE['user_active']] == 'all') echo "selected"; ?>> Todas </option>
 												</select>
 											</td>
-										</tr>
+										</tr-->
 										<?php
 										echo "<tr><td align='right' width='100'>Marca:</td><td align='left'><select name='marcas[]' multiple size=\"6\">";
 										for ($iMarca = 0; $iMarca < count($marcas); $iMarca++){

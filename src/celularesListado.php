@@ -219,8 +219,8 @@ if ($_REQUEST['compare']=='Y')
 
 $celQuery = 
 "SELECT DISTINCT c.celu_id, c.marca, c.modelo
-FROM celulares c, celulares_atributos ca, celulares_sucursales cs
-WHERE c.celu_id = ca.celu_id
+FROM celulares c, celulares_atributos ca "/*, celulares_sucursales cs */
+."WHERE c.celu_id = ca.celu_id
 AND c.status = 'A'
 ".((!$firstMarca && $inMarcas!='')?(" and c.marca in (".$inMarcas.")"):"")." 
 ".(($prePagoMinPrice != "") ? " and c.precio_prepago >= ".$prePagoMinPrice : "")." 
@@ -231,8 +231,8 @@ AND c.status = 'A'
 ".((isset($_COOKIE['celulares_'.$_COOKIE['user_active']]) && !($_REQUEST['compare']=='Y'))?" AND ca.celu_id in (".$_COOKIE['celulares_'.$_COOKIE['user_active']].")":"")."
 ".(($_REQUEST['compare']=='Y')?"AND ca.celu_id in (".$celCompare.")":"")."
 ".(($postAttrs!='')?"AND ca.value !=0 AND ca.value IS NOT NULL":"")."
-".getAndForSucursal($sucursal)."
-ORDER BY c.marca, c.modelo";
+".//getAndForSucursal($sucursal)."
+"ORDER BY c.marca, c.modelo";
 
 //echo $celQuery;
 $celResult = doSelect($celQuery);
