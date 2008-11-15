@@ -68,6 +68,7 @@
 	define('ATTR_TYPE_IMAGE','I');
 	define('ATTR_TYPE_MULTIPLE','SM');
 	define('ATTR_TYPE_MONEY','M');
+	define('ATTR_TYPE_SUFIX','SU');
 	
 	//Valor de configuración
 	define('ATTR_TYPE_TECNOLOGIA',0);
