@@ -24,7 +24,26 @@ if ($_REQUEST['act'] == SAVE_SUC){
 	$dirTo = $docRoot."/ofertas_files/".$folder."/";
 	
 	if (!file_exists($dirTo)){
-		mkdir($dirTo);
+		//mkdir($dirTo);
+		
+		$ftp =ftp_connect("200.110.145.5");
+		if (ftp_login($ftp,"z28030806014530","UPQLVAGE")){
+			//Me muevo al directorio correcto			
+			ftp_chdir($ftp,"/public_html/ofertas_files/");
+			
+			//Pruebo crear el directorio
+			if (ftp_mkdir($ftp, $folder)){
+				//Cambio el modo para que todos puedan modificarlo y subir archivos
+				if (ftp_site($ftp,"CHMOD 0777 /public_html/ofertas_files/".$folder."/")){
+					   echo "Se ha creado la carpeta satisfactoriamente.\n";
+				} else {
+//				   die('No se pue');
+				}
+			}
+		} else {
+//			die ("No me pude conectar");
+		}
+		
 	}
 				
 	//mkdir(dirname($dirTo),0755,true);
