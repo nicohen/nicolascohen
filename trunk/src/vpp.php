@@ -96,7 +96,7 @@ require_once("funcionesDB.php");
 		<td> $<?php echo $celular['precio_postpago']?> </td>
 	</tr>
 	<?php 
-		$qryAtribs = "select a.name, c.value, a.tipo from atributos a, celulares_atributos c
+		$qryAtribs = "select a.name, c.value, a.tipo, a.atr_id from atributos a, celulares_atributos c
 					  where a.atr_id = c.atr_id
 					  and a.tipo != '".ATTR_TYPE_IMAGE."'
 					  and a.status = 'A'
@@ -115,6 +115,8 @@ require_once("funcionesDB.php");
 							if ($atrib['tipo'] == ATTR_TYPE_MONEY)
 								echo "$"; 
 							echo $atrib['value'];
+							if ($atrib['tipo'] == ATTR_TYPE_SUFIX)
+								echo getSufijo($atrib['atr_id']);
 						} ?> </td>
 			</tr>
 		<?php

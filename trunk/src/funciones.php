@@ -1,6 +1,7 @@
 <?php
 
 include("constantes.php");
+require_once("funcionesDB.php");
 
 Function get_label($label) {
 	//Si el label no es ninguno, setea MENU_FILTROS por default
@@ -224,7 +225,7 @@ function addCelularesOptions($label){
 			if (!isPriceLoader($_COOKIE['user_active']))
 				appendEncRow(MENU_ALTA_CELULARES, "Dar de alta");
 			appendEncRow(MENU_ABM_CELULARES, "Administrar");
-			if (!isPriceLoader($_COOKIE['user_active']))
+			if (isSupervisor($_COOKIE['user_active']))
 				appendEncRow(MENU_ABM_ATRIBUTOS, "Ver atributos");
 			echo "</tr></table></td></tr>";
 		}	
@@ -265,6 +266,13 @@ function getDocumentRoot(){
 		$docRoot = $docRoot."/cti/src";
 	}
 	return $docRoot;
+}
+
+function getSufijo($attrID){
+	$qrySelSuf = "select valor from atributos_values where atr_id = ".$attrID;
+	$resSelSuf = doSelect($qrySelSuf);
+	$suf = mysql_fetch_array($resSelSuf);
+	return $suf['valor'];
 }
 
 ?>
