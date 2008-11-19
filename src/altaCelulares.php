@@ -157,7 +157,8 @@ while ($atrib = mysql_fetch_array($resAtribs)){
 	<?php
 	switch ($atrib['tipo']){
 		case ATTR_TYPE_TEXT: 
-		case ATTR_TYPE_NUMBER: 
+		case ATTR_TYPE_NUMBER:
+		case ATTR_TYPE_SUFIX: 
 		case ATTR_TYPE_MONEY: if ($atrib['tipo'] == ATTR_TYPE_MONEY) echo "$ "; 
 							  if (($atrib['tipo'] == ATTR_TYPE_MONEY && isEmpleado($_COOKIE['user_active'])) 
 							     ||($atrib['tipo'] != ATTR_TYPE_MONEY && isPriceLoader($_COOKIE['user_active']))){?> 
@@ -167,6 +168,8 @@ while ($atrib = mysql_fetch_array($resAtribs)){
 								   <?php if ($atrib['largo'] != NULL) echo "maxlength=".$atrib['largo'] ?>
 								   <?php if ($atrib['tipo'] == ATTR_TYPE_NUMBER || $atrib['tipo'] == ATTR_TYPE_MONEY) echo "onKeyDown=\"return checkForInt(event)\""; ?>> <?php 
 								}
+								
+								if ($atrib['tipo'] == ATTR_TYPE_SUFIX) echo getSufijo($atrib['atr_id']);
 								
 								break;
 		case ATTR_TYPE_SELECT: 

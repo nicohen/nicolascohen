@@ -30,6 +30,10 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 
 	if (esMultiple($_REQUEST['type'])){
 		insertAtributosValores($attrID);
+	} else if ($_REQUEST['type'] == ATTR_TYPE_SUFIX){
+		//Inserto en la tabla de los atributos el sufijo
+		$query = "insert into atributos_values (atr_id, valor) values (".$attrID.",'".$_REQUEST['sufijo']."')";
+		doInsert($query);
 	}
 } else if ($_REQUEST['act'] == INACTIVATE_ATTR || $_REQUEST['act'] == ACTIVATE_ATTR){
 	$qryDel = "update atributos set status = '".($_REQUEST['act'] == INACTIVATE_ATTR?"I":"A")."' where atr_id = ".$_REQUEST['atr_id'];
@@ -57,6 +61,8 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 			}
 			$commaValores = $commaValores.$valor['valor'];
 		} 
+	} else if ($atributo['tipo'] == ATTR_TYPE_SUFIX){
+		$sufijo = getSufijo($_REQUEST['atr_id']);
 	}
 } else if ($_REQUEST['act'] == UPDATE_ATTR){
 	$qryUpd = "update atributos 
@@ -88,6 +94,13 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 		} else {
 			document.getElementById("values").value = "";
 			document.getElementById("divVal").style.display="none";
+		}
+		
+		if (combo.options[combo.selectedIndex].value == 'SU' ){
+			document.getElementById("divSufix").style.display="";
+		} else {
+			document.getElementById("sufijo").value = "";
+			document.getElementById("divSufix").style.display="none";
 		}
 	}
 	
@@ -172,8 +185,13 @@ if ($_REQUEST['act'] == SAVE_ATTR){
 						<option value="<?php echo ATTR_TYPE_IMAGE ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_IMAGE) echo "selected" ?>> Imagen </option>
 						<option value="<?php echo ATTR_TYPE_MULTIPLE ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_MULTIPLE) echo "selected" ?>> Multiple </option>
 						<option value="<?php echo ATTR_TYPE_MONEY ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_MONEY) echo "selected" ?>> Moneda </option>
+						<option value="<?php echo ATTR_TYPE_SUFIX ?>" <?php if ($_REQUEST['act'] == MODIF_ATTR && $atributo['tipo'] == ATTR_TYPE_SUFIX) echo "selected" ?>> Sufijo </option>
 					</select> 
-					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div></td>
+					<div style=" <?php if ($_REQUEST['act'] != MODIF_ATTR || $commaValores == "") echo "display:none" ?> " id="divVal"> Ingrese los posibles valores separados por coma (,): <input type="text" name="values" id="values" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $commaValores ?>"> </div>
+					<div style=" <?php  if ($_REQUEST['act'] != MODIF_ATTR) echo "display:none" ?>" id="divSufix">
+						Ingrese el sufijo: <input type="text" name="sufijo" id="sufijo" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $sufijo ?>" />
+					</div>
+					</td>
 </tr>
 <tr>
 	<td colspan="2"> Peso: <input type="text" name="peso" value="<?php if ($_REQUEST['act'] == MODIF_ATTR) echo $atributo['peso'] ?>"></td></tr>

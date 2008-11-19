@@ -354,7 +354,7 @@ if($inCelulares!='') {
 	
 	$resultQuery = 
 	"select 
-	ca.celu_id, a.atr_id, a.name, ca.value 
+	ca.celu_id, a.atr_id, a.name, ca.value, a.tipo 
 	from atributos a, celulares_atributos ca, celulares c
 	where a.status='A' and a.tipo!='I' and a.publico=1 and a.comparable=1 and a.atr_id=ca.atr_id 
 	and ca.celu_id in (".$inCelulares.") and ca.celu_id=c.celu_id
@@ -382,7 +382,21 @@ if($inCelulares!='') {
 		}
 		if ($celCounter>=((MAX_COLS*$_REQUEST['list'])-MAX_COLS) && $celCounter<($_REQUEST['list']*MAX_COLS)) {
 			if ($res['celu_id']==$celulares[$celCounter]['celu_id']) {
-				echo "<td align='center'>".( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : $res['value'] ) )."</td>";
+				echo "<td align='center'>";
+/*					if ($res)( ($res['value']=='1') ? "Si" : ( ($res['value']=='0') ? "No" : 
+					$res['value'] ) ).
+	*/				
+					if ($res['tipo'] == ATTR_TYPE_CHECKBOX){
+						echo $res['value']?"Si":"No";
+					} else {
+						if ($res['tipo'] == ATTR_TYPE_MONEY)
+							echo "$"; 
+						echo $res['value'];
+						if ($res['tipo'] == ATTR_TYPE_SUFIX)
+							echo getSufijo($res['atr_id']);
+					}
+					
+				echo "</td>";
 			} else {
 				echo "<td></td>";
 				//$celCounter=0;
